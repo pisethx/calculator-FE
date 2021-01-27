@@ -1,0 +1,12 @@
+#footer {
+    border-top: 2px solid #dedede;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin: 0 auto 20px auto;
+    width: 95%;
+}
+
+#footer p {
+    font-size: 18px;
+    text-align: center;
+}

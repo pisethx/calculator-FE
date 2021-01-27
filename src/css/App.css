@@ -1,0 +1,28 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* not yet install */
+    font-family: 'Poppins';
+}
+
+hr {
+    border-top: 1px solid #dedede;
+    width: 85%;
+    margin: auto;
+}
+
+.blue {
+    color: #1b3b6f;
+}
+
+.yellow {
+    color: #ffc857;
+}
+
+.display-none {
+    display: none;
+}
