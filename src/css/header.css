@@ -22,7 +22,7 @@
 .link {
     font-size: 18px;
     padding: 20px 16px;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .brand {
@@ -54,7 +54,7 @@
     padding: 20px 16px;
     background-color: inherit;
     font-family: inherit;
-    margin: 8px 0 0 0;
+    margin: 10px 0 0 0;
 }
 
 .account-content {
