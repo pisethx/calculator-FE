@@ -1,0 +1,86 @@
+button:hover {
+    outline: none;
+    border: none;
+    filter: grayscale(0.5);
+    color: white;
+}
+
+button:focus {
+    outline: none;
+    border: none;
+}
+
+#scientific-calculator .scope-title {
+    margin: 50px 0;
+}
+
+#scientific-calculator .operator {
+    color: #000000 !important;
+    background-color: #ffc857;
+}
+
+#scientific-calculator .operator:hover {
+    filter: grayscale(0.5);
+    color: initial;
+}
+
+#scientific-calculator .number-btn,
+#scientific-calculator .dot-btn {
+    background-color: #1b3b6f;
+}
+
+#scientific-calculator .result {
+    height: 120px;
+    background-color: #dedede;
+    width: 98%;
+    margin: 8px 8px 5px 8px;
+    overflow-wrap: break-word;
+    overflow: auto;
+    border-radius: 5px;
+}
+
+#scientific-calculator .result p {
+    font-size: 40px;
+    margin: 5px 12px;
+}
+
+#scientific-calculator .calculator-body {
+    max-width: 850px;
+    margin: 0 auto 50px;
+    background-color: #1d3557;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#scientific-calculator .button {
+    display: block;
+    background-color: #1d3557;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#scientific-calculator .calculator-key {
+    border: none;
+    color: white;
+    margin: 4px;
+    width: 9%;
+    height: 65px;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+#scientific-calculator .zero-num {
+    width: 19%;
+}
+
+.translateY-1 {
+    transform: translateY(1px);
+}
+
+.translateY--1 {
+    transform: translateY(-1px);
+}
+
+.translateY-3 {
+    transform: translateY(3px);
+}

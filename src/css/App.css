@@ -14,14 +14,38 @@ hr {
     margin: auto;
 }
 
-.blue {
+.blue-color {
     color: #1b3b6f;
 }
 
-.yellow {
+.blue-background {
+    background-color: #1b3b6f;
+}
+
+.blue-light-color {
+    color: #577399;
+}
+
+.blue-light-background {
+    background-color: #577399;
+}
+
+.yellow-color {
     color: #ffc857;
+}
+
+.yellow-background {
+    background-color: #ffc857;
+}
+
+.black-color {
+    color: #000000 !important;
 }
 
 .display-none {
     display: none;
+}
+
+.align-center {
+    text-align: center;
 }
