@@ -14,6 +14,10 @@ hr {
     margin: auto;
 }
 
+.dark-blue-background {
+    background-color: #385070;
+}
+
 .blue-color {
     color: #1b3b6f;
 }

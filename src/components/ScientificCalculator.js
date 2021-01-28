@@ -87,6 +87,15 @@ class ScientificCalculator extends Component {
         displayValue: '0',
         operator: null,
         waitingForOperand: false,
+        shift: false,
+    };
+
+    handleShiftClick = () => {
+        this.setState((state) => {
+            return {
+                shift: !state.shift,
+            };
+        });
     };
 
     clearAll() {
@@ -276,12 +285,25 @@ class ScientificCalculator extends Component {
                             <CalculatorKey className='operator' onPress={() => this.performOperation('/')}>
                                 ÷
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
-                                1
-                                <sup>
-                                    <small>st</small>
-                                </sup>
-                            </CalculatorKey>
+                            {!this.state.shift ? (
+                                <CalculatorKey
+                                    className='blue-light-background translateY-3'
+                                    onPress={this.handleShiftClick}>
+                                    1
+                                    <sup>
+                                        <small>st</small>
+                                    </sup>
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey
+                                    className='dark-blue-background translateY-3'
+                                    onPress={this.handleShiftClick}>
+                                    2
+                                    <sup>
+                                        <small>nd</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
                             <CalculatorKey className='blue-light-background translateY-3'>
                                 x
                                 <sup>
@@ -300,18 +322,36 @@ class ScientificCalculator extends Component {
                                     <small>y</small>
                                 </sup>
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
-                                e
-                                <sup>
-                                    <small>x</small>
-                                </sup>
-                            </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
-                                10
-                                <sup>
-                                    <small>x</small>
-                                </sup>
-                            </CalculatorKey>
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-3'>
+                                    e
+                                    <sup>
+                                        <small>x</small>
+                                    </sup>
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                    y
+                                    <sup>
+                                        <small>x</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-3'>
+                                    10
+                                    <sup>
+                                        <small>x</small>
+                                    </sup>
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                    2
+                                    <sup>
+                                        <small>x</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
                             <CalculatorKey className='number-btn' onPress={() => this.inputDigit(7)}>
                                 7
                             </CalculatorKey>
@@ -343,13 +383,33 @@ class ScientificCalculator extends Component {
                                 </sup>
                                 √
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-1'>ln</CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY--1'>
-                                log
-                                <sub>
-                                    <small>10</small>
-                                </sub>
-                            </CalculatorKey>
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-1'>
+                                    ln
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY--1'>
+                                    log
+                                    <sub>
+                                        <small>y</small>
+                                    </sub>
+                                </CalculatorKey>
+                            )}
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY--1'>
+                                    log
+                                    <sub>
+                                        <small>10</small>
+                                    </sub>
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY--1'>
+                                    log
+                                    <sub>
+                                        <small>2</small>
+                                    </sub>
+                                </CalculatorKey>
+                            )}
                             <CalculatorKey className='number-btn' onPress={() => this.inputDigit(4)}>
                                 4
                             </CalculatorKey>
@@ -362,12 +422,43 @@ class ScientificCalculator extends Component {
                             <CalculatorKey className='operator' onPress={() => this.performOperation('-')}>
                                 −
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>x!</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>sin</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>cos</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>tan</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>e</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>EE</CalculatorKey>
+                            <CalculatorKey className='blue-light-background translateY-1'>x!</CalculatorKey>
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background'>sin</CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3 translateY-1'>
+                                    sin
+                                    <sup>
+                                        <small>-1</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-1'>
+                                    cos
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                    cos
+                                    <sup>
+                                        <small>-1</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-1'>
+                                    tan
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                    tan
+                                    <sup>
+                                        <small>-1</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
+                            <CalculatorKey className='blue-light-background translateY-1'>e</CalculatorKey>
+                            <CalculatorKey className='blue-light-background translateY-1'>EE</CalculatorKey>
                             <CalculatorKey className='number-btn' onPress={() => this.inputDigit(1)}>
                                 1
                             </CalculatorKey>
@@ -380,12 +471,39 @@ class ScientificCalculator extends Component {
                             <CalculatorKey className='operator' onPress={() => this.performOperation('+')}>
                                 +
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>Rad</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>sinh</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>cosh</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>tanh</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>π</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>Rand</CalculatorKey>
+                            <CalculatorKey className='blue-light-background translateY-1'>Rad</CalculatorKey>
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-1'>sinh</CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                    sinh
+                                    <sup>
+                                        <small>-1</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-1'>cosh</CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                    cosh
+                                    <sup>
+                                        <small>-1</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-1'>tanh</CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                    tanh
+                                    <sup>
+                                        <small>-1</small>
+                                    </sup>
+                                </CalculatorKey>
+                            )}
+                            <CalculatorKey className='blue-light-background translateY-1'>π</CalculatorKey>
+                            <CalculatorKey className='blue-light-background translateY-1'>Rand</CalculatorKey>
                             <CalculatorKey className='number-btn zero-num' onPress={() => this.inputDigit(0)}>
                                 0
                             </CalculatorKey>
