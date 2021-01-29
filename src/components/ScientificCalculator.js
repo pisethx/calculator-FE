@@ -192,6 +192,67 @@ class ScientificCalculator extends Component {
         });
     }
 
+    multiplicativeInverse(){
+        const { displayValue } = this.state;
+        if (displayValue === '0') return this.setState({displayValue: 'Non a number'});
+        const result = String(1/displayValue);
+        this.setState({ displayValue: result});
+    }
+
+    exponential(){
+        const { displayValue } = this.state;
+        if (displayValue === '0') return this.setState({displayValue: '1'});
+        const result = String(Math.exp(parseFloat(displayValue)));
+        this.setState({ displayValue: result});
+    }
+
+    rand(){
+        const { displayValue } = this.state;
+        // if (displayValue != '0') return ;
+        this.setState({displayValue: String(Math.random())});
+    }
+
+    sin() {
+        const { displayValue } = this.state;
+        const result = String(Math.sin(parseFloat(displayValue)* Math.PI/180));
+        this.setState({displayValue: result});
+    }
+
+
+    cos() {
+
+    }
+
+
+    tan() {
+
+    }
+
+    sinh() {}
+    cosh() {}
+    tanh() {}
+
+    sinInverse() {
+    
+    }
+    cosInverse(){
+
+    }
+    tanInverse(){}
+
+    sinhInverse(){}
+    
+    
+
+
+
+    
+
+
+
+
+
+
     handleKeyDown = (event) => {
         let { key } = event;
 
@@ -300,7 +361,7 @@ class ScientificCalculator extends Component {
                                     <small>y</small>
                                 </sup>
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
+                            <CalculatorKey className='blue-light-background translateY-3' onPress={() => this.exponential()}>
                                 e
                                 <sup>
                                     <small>x</small>
@@ -324,7 +385,7 @@ class ScientificCalculator extends Component {
                             <CalculatorKey className='operator' onPress={() => this.performOperation('*')}>
                                 ×
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-1'>1/x</CalculatorKey>
+                            <CalculatorKey className='blue-light-background translateY-1' onPress={() => this.multiplicativeInverse()}>1/x</CalculatorKey>
                             <CalculatorKey className='blue-light-background translateY-3'>
                                 <sup>
                                     <small>2</small>
@@ -363,7 +424,7 @@ class ScientificCalculator extends Component {
                                 −
                             </CalculatorKey>
                             <CalculatorKey className='blue-light-background'>x!</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>sin</CalculatorKey>
+                            <CalculatorKey className='blue-light-background' onPress={() => this.sin()>sin</CalculatorKey>
                             <CalculatorKey className='blue-light-background'>cos</CalculatorKey>
                             <CalculatorKey className='blue-light-background'>tan</CalculatorKey>
                             <CalculatorKey className='blue-light-background'>e</CalculatorKey>
@@ -385,7 +446,7 @@ class ScientificCalculator extends Component {
                             <CalculatorKey className='blue-light-background'>cosh</CalculatorKey>
                             <CalculatorKey className='blue-light-background'>tanh</CalculatorKey>
                             <CalculatorKey className='blue-light-background'>π</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>Rand</CalculatorKey>
+                            <CalculatorKey className='blue-light-background'onPress={() => this.rand()}>Rand</CalculatorKey>
                             <CalculatorKey className='number-btn zero-num' onPress={() => this.inputDigit(0)}>
                                 0
                             </CalculatorKey>
