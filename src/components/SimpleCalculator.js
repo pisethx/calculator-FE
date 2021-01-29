@@ -295,7 +295,7 @@ class SimpleCalculator extends React.Component {
             </div>          
         </div>
         <div className="button">
-          <div className="test">
+          <div className="test">        
               <CalculatorKey className="memory" style={{backgroundColor:"#577399"}} onPress={() => this.memoryClear()}>MC</CalculatorKey>
               <CalculatorKey className="memory" style={{backgroundColor:"#577399"}} onPress={() => this.memoryPlus()}>M+</CalculatorKey>
               <CalculatorKey className="memory" style={{backgroundColor:"#577399"}} onPress={() => this.memoryMinus()}>M-</CalculatorKey>
