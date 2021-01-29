@@ -1,0 +1,55 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+hr {
+    border-top: 1px solid #dedede;
+    width: 85%;
+    margin: auto;
+}
+
+.dark-blue-background {
+    background-color: #385070;
+}
+
+.blue-color {
+    color: #1b3b6f;
+}
+
+.blue-background {
+    background-color: #1b3b6f;
+}
+
+.blue-light-color {
+    color: #577399;
+}
+
+.blue-light-background {
+    background-color: #577399;
+}
+
+.yellow-color {
+    color: #ffc857;
+}
+
+.yellow-background {
+    background-color: #ffc857;
+}
+
+.black-color {
+    color: #000000 !important;
+}
+
+.display-none {
+    display: none;
+}
+
+.align-center {
+    text-align: center;
+}
