@@ -1,0 +1,128 @@
+#simple-calculator {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.result {
+  height: 120px;
+  background-color:  #DEDEDE;
+  width: 312px;
+  margin: 7px 10px 0 10px;
+  overflow-wrap: break-word;
+  overflow: auto;
+  border-radius: 5px;
+}
+.resultContainer{
+  width: 350px;
+}
+
+.operator:hover {
+  filter:   grayscale(.5);
+  color: initial;
+}
+
+.result p {
+  font-size: 40px;
+  margin: 5px;
+}
+
+button:hover{     
+  outline: none;
+  border:none;
+  filter:   grayscale(100%);
+  color: white ;
+}
+
+button:focus{
+  outline: none;
+  border:none;
+}
+
+.calculator-body {
+  max-width: 350px;
+  margin: auto;
+  background-color: #1D3557;
+  padding:10px;
+  border-radius: 5px;
+}
+
+.button {
+  display: block;
+  background-color: #1D3557;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.memory{
+  border : none;
+  color: white;
+  height: 40px !important;
+  font-size: 20px !important;
+}
+#simple-calculator button {
+  border : none;
+  color: white;
+  margin: 4px;
+  width: 22%;
+  height: 65px;
+  font-size: 30px;
+  border-radius: 5px;
+}
+
+#simple-calculator .zero{
+  width: 46%;
+}
+.test{
+  text-align: center;
+}
+@media only screen and (max-width: 495px) {
+  .calculator-body{
+    margin: auto;
+    width: 340px;
+  } 
+  .result {
+    width:307px;
+    margin-left : 6px;
+    margin-right : 5px;
+  }
+
+  button {
+    margin: 4px;
+    width: 21%;
+    height: 65px;
+    font-size: 30px;
+    border-radius: 5px;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  #simple-calculator h1 {
+    transform: translateX(8px);
+  }
+  .calculator-body {
+    transform: translateX(8px);
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  #simple-calculator h1 {
+    transform: translateX(40px);
+  }
+  .calculator-body {
+    transform: translateX(40px);
+    width: 320px;
+  }
+
+  .result{
+    width:288px;
+    margin-right: 4px;
+    margin-left: 5px;
+  }
+  button {
+    margin: 4px;
+    width: 21%;
+    height: 65px;
+    font-size: 30px;
+    border-radius: 5px;
+  }
+}
