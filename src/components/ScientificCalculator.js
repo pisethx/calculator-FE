@@ -89,6 +89,11 @@ class ScientificCalculator extends Component {
         waitingForOperand: false,
         shift: false,
         degree: false,
+        memory: {
+            memory_plus: 0,
+            memory_minus: 0,
+            memory_recall: null,
+        },
     };
 
     handleShiftClick = () => {
@@ -249,9 +254,49 @@ class ScientificCalculator extends Component {
         document.removeEventListener('keydown', this.handleKeyDown);
     }
 
+    memoryClear() {
+        this.setState((prevState) => ({
+            memory: {
+                ...prevState.memory,
+                memory_plus: 0,
+                memory_minus: 0,
+                memory_recall: null,
+            },
+        }));
+    }
+
+    memoryPlus() {
+        // let temp= this.state.memory.memory_plus
+        let temp = parseFloat(this.state.displayValue) + this.state.memory.memory_plus;
+        this.setState((prevState) => ({
+            memory: {
+                ...prevState.memory,
+                memory_plus: temp,
+            },
+        }));
+        console.log(this.state.memory.memory_plus);
+    }
+
+    memoryMinus() {
+        let temp = parseInt(this.state.displayValue) + this.state.memory.memory_minus;
+        this.setState((prevState) => ({
+            memory: {
+                ...prevState.memory,
+                memory_minus: temp,
+            },
+        }));
+    }
+
+    memoryRecall() {
+        let temp = (this.state.memory.memory_plus - this.state.memory.memory_minus).toString();
+        this.setState({
+            displayValue: temp,
+        });
+    }
+
     pi() {
         const { displayValue } = this.state;
-        this.setState({ displayValue: String(displayValue * Math.PI )});
+        this.setState({ displayValue: String(displayValue * Math.PI) });
     }
 
     exponent() {
@@ -336,10 +381,26 @@ class ScientificCalculator extends Component {
                         <div className='align-center'>
                             <CalculatorKey className='memory blue-light-background'>{'('}</CalculatorKey>
                             <CalculatorKey className='blue-light-background'>{')'}</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>MC</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>M+</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>M-</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>MR</CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryClear()}>
+                                MC
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryPlus()}>
+                                M+
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryMinus()}>
+                                M-
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryRecall()}>
+                                MR
+                            </CalculatorKey>
                             <CalculatorKey
                                 className='blue-light-background'
                                 onPress={() => (clearDisplay ? this.clearDisplay() : this.clearAll())}>
