@@ -81,6 +81,22 @@ button:focus {
     transform: translateY(-1px);
 }
 
+.translateY-2 {
+    transform: translateY(2px);
+}
+
+.translateY--2 {
+    transform: translateY(-2px);
+}
+
 .translateY-3 {
     transform: translateY(3px);
+}
+
+.translateY--3 {
+    transform: translateY(-3px);
+}
+
+.translateY-4 {
+    transform: translateY(4px);
 }

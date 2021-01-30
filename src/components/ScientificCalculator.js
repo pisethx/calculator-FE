@@ -45,7 +45,7 @@ class CalculatorDisplay extends Component {
         const language = navigator.language || 'en-US';
         let formattedValue = parseFloat(value).toLocaleString(language, {
             useGrouping: true,
-            maximumFractionDigits: 6,
+            maximumFractionDigits: 10,
         });
 
         // Add back missing .0 in e.g. 12.0
@@ -88,12 +88,26 @@ class ScientificCalculator extends Component {
         operator: null,
         waitingForOperand: false,
         shift: false,
+        degree: false,
+        memory: {
+            memory_plus: 0,
+            memory_minus: 0,
+            memory_recall: null,
+        },
     };
 
     handleShiftClick = () => {
         this.setState((state) => {
             return {
                 shift: !state.shift,
+            };
+        });
+    };
+
+    handleDegreeClick = () => {
+        this.setState((state) => {
+            return {
+                degree: !state.degree,
             };
         });
     };
@@ -329,6 +343,110 @@ class ScientificCalculator extends Component {
         document.removeEventListener('keydown', this.handleKeyDown);
     }
 
+    memoryClear() {
+        this.setState((prevState) => ({
+            memory: {
+                ...prevState.memory,
+                memory_plus: 0,
+                memory_minus: 0,
+                memory_recall: null,
+            },
+        }));
+    }
+
+    memoryPlus() {
+        // let temp= this.state.memory.memory_plus
+        let temp = parseFloat(this.state.displayValue) + this.state.memory.memory_plus;
+        this.setState((prevState) => ({
+            memory: {
+                ...prevState.memory,
+                memory_plus: temp,
+            },
+        }));
+        console.log(this.state.memory.memory_plus);
+    }
+
+    memoryMinus() {
+        let temp = parseInt(this.state.displayValue) + this.state.memory.memory_minus;
+        this.setState((prevState) => ({
+            memory: {
+                ...prevState.memory,
+                memory_minus: temp,
+            },
+        }));
+    }
+
+    memoryRecall() {
+        let temp = (this.state.memory.memory_plus - this.state.memory.memory_minus).toString();
+        this.setState({
+            displayValue: temp,
+        });
+    }
+
+    pi() {
+        const { displayValue } = this.state;
+        this.setState({ displayValue: String(displayValue * Math.PI) });
+    }
+
+    exponent() {
+        const { displayValue } = this.state;
+        this.setState({ displayValue: String(displayValue * Math.exp(1)) });
+    }
+
+    factorial() {
+        const { displayValue } = this.state;
+
+        if (displayValue === '1' || displayValue === '-1') {
+            return this.setState({ displayValue });
+        } else if (parseInt(displayValue) > 1) {
+            var result = 1;
+
+            for (var i = 1; i <= parseInt(displayValue); ++i) {
+                result *= i;
+            }
+
+            return this.setState({ displayValue: String(result) });
+        } else if (parseInt(displayValue) < -1) {
+            var resultNegative = 1;
+
+            for (var j = -1; j >= parseInt(displayValue); j--) {
+                resultNegative *= j;
+            }
+
+            return this.setState({ displayValue: String(resultNegative) });
+        }
+    }
+
+    log10() {
+        const { displayValue } = this.state;
+
+        if (parseInt(displayValue) <= 0) {
+            return this.setState({ displayValue: 'Not a Number' });
+        }
+
+        this.setState({ displayValue: String(Math.log10(parseInt(displayValue))) });
+    }
+
+    log2() {
+        const { displayValue } = this.state;
+
+        if (parseInt(displayValue) <= 0) {
+            return this.setState({ displayValue: 'Not a Number' });
+        }
+
+        this.setState({ displayValue: String(Math.log2(parseInt(displayValue))) });
+    }
+
+    log() {
+        const { displayValue } = this.state;
+
+        if (parseInt(displayValue) <= 0) {
+            return this.setState({ displayValue: 'Not a Number' });
+        }
+
+        this.setState({ displayValue: String(Math.log(parseInt(displayValue))) });
+    }
+
     render() {
         const { displayValue } = this.state;
         const clearDisplay = displayValue !== '0';
@@ -352,10 +470,26 @@ class ScientificCalculator extends Component {
                         <div className='align-center'>
                             <CalculatorKey className='memory blue-light-background'>{'('}</CalculatorKey>
                             <CalculatorKey className='blue-light-background'>{')'}</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>MC</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>M+</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>M-</CalculatorKey>
-                            <CalculatorKey className='blue-light-background'>MR</CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryClear()}>
+                                MC
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryPlus()}>
+                                M+
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryMinus()}>
+                                M-
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className='blue-light-background'
+                                onPress={() => this.memoryRecall()}>
+                                MR
+                            </CalculatorKey>
                             <CalculatorKey
                                 className='blue-light-background'
                                 onPress={() => (clearDisplay ? this.clearDisplay() : this.clearAll())}>
@@ -473,7 +607,9 @@ class ScientificCalculator extends Component {
                                 √
                             </CalculatorKey>
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-1'>
+                                <CalculatorKey
+                                    className='blue-light-background translateY-1'
+                                    onPress={() => this.log()}>
                                     ln
                                 </CalculatorKey>
                             ) : (
@@ -485,14 +621,18 @@ class ScientificCalculator extends Component {
                                 </CalculatorKey>
                             )}
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY--1'>
+                                <CalculatorKey
+                                    className='blue-light-background translateY--1'
+                                    onPress={() => this.log10()}>
                                     log
                                     <sub>
                                         <small>10</small>
                                     </sub>
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY--1'>
+                                <CalculatorKey
+                                    className='dark-blue-background translateY--1'
+                                    onPress={() => this.log2()}>
                                     log
                                     <sub>
                                         <small>2</small>
@@ -511,11 +651,15 @@ class ScientificCalculator extends Component {
                             <CalculatorKey className='operator' onPress={() => this.performOperation('-')}>
                                 −
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-1'>x!</CalculatorKey>
+                            <CalculatorKey
+                                className={'blue-light-background ' + (this.state.shift && 'translateY--3')}
+                                onPress={() => this.factorial()}>
+                                x!
+                            </CalculatorKey>
                             {!this.state.shift ? (
                                 <CalculatorKey className='blue-light-background' onPress={() => this.sin()}>sin</CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3 translateY-1'onPress={() => this.sinInverse()}>
+                                <CalculatorKey className='dark-blue-background' onPress={() => this.sinInverse()}>
                                     sin
                                     <sup>
                                         <small>-1</small>
@@ -525,7 +669,7 @@ class ScientificCalculator extends Component {
                             {!this.state.shift ? (
                                 <CalculatorKey className='blue-light-background' onPress={() => this.cos()}>cos</CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3' onPress={() => this.cosInverse()}>
+                                <CalculatorKey className='dark-blue-background' onPress={() => this.cosInverse()}>
                                     cos
                                     <sup>
                                         <small>-1</small>
@@ -533,36 +677,77 @@ class ScientificCalculator extends Component {
                                 </CalculatorKey>
                             )}
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-1' onPress={() => this.tan()}>
-                                    tan
-                                </CalculatorKey>
+                                <CalculatorKey className='blue-light-background'onPress={() => this.tan()}>tan</CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3' onPress={() => this.tanInverse()}>
+                                <CalculatorKey className='dark-blue-background'onPress={() => this.tanInverse()}>
                                     tan
                                     <sup>
                                         <small>-1</small>
                                     </sup>
                                 </CalculatorKey>
                             )}
-                            <CalculatorKey className='blue-light-background translateY-1'>e</CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-1'>EE</CalculatorKey>
-                            <CalculatorKey className='number-btn' onPress={() => this.inputDigit(1)}>
+                            <CalculatorKey
+                                className={'blue-light-background ' + (this.state.shift && 'translateY--3')}
+                                onPress={() => this.exponent()}>
+                                e
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className={'blue-light-background ' + (this.state.shift && 'translateY--3')}>
+                                EE
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className={
+                                    'number-btn ' + (!this.state.shift ? 'translateY-1' : 'translateY--2')
+                                }
+                                onPress={() => this.inputDigit(1)}>
                                 1
                             </CalculatorKey>
-                            <CalculatorKey className='number-btn' onPress={() => this.inputDigit(2)}>
+                            <CalculatorKey
+                                className={
+                                    'number-btn ' + (!this.state.shift ? 'translateY-1' : 'translateY--2')
+                                }
+                                onPress={() => this.inputDigit(2)}>
                                 2
                             </CalculatorKey>
-                            <CalculatorKey className='number-btn' onPress={() => this.inputDigit(3)}>
+                            <CalculatorKey
+                                className={
+                                    'number-btn ' + (!this.state.shift ? 'translateY-1' : 'translateY--2')
+                                }
+                                onPress={() => this.inputDigit(3)}>
                                 3
                             </CalculatorKey>
-                            <CalculatorKey className='operator' onPress={() => this.performOperation('+')}>
+                            <CalculatorKey
+                                className={
+                                    'operator ' + (!this.state.shift ? 'translateY-1' : 'translateY--2')
+                                }
+                                onPress={() => this.performOperation('+')}>
                                 +
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-1'>Rad</CalculatorKey>
-                            {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-1' onpress={() => this.sinh()}>sinh</CalculatorKey>
+                            {!this.state.degree ? (
+                                <CalculatorKey
+                                    className={
+                                        'blue-light-background ' +
+                                        (!this.state.shift ? 'translateY-3' : 'translateY--2')
+                                    }
+                                    onPress={this.handleDegreeClick}>
+                                    Rad
+                                </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3' onpress={() => this.sinhInverse()}>
+                                <CalculatorKey
+                                    className={
+                                        'blue-light-background ' +
+                                        (!this.state.shift ? 'translateY-3' : 'translateY--2')
+                                    }
+                                    onPress={this.handleDegreeClick}>
+                                    Deg
+                                </CalculatorKey>
+                            )}
+                            {!this.state.shift ? (
+                                <CalculatorKey className='blue-light-background translateY-3' onpress={() => this.sinh()}>
+                                    sinh
+                                </CalculatorKey>
+                            ) : (
+                                <CalculatorKey className='dark-blue-background' onpress={() => this.sinhInverse()}>
                                     sinh
                                     <sup>
                                         <small>-1</small>
@@ -570,9 +755,11 @@ class ScientificCalculator extends Component {
                                 </CalculatorKey>
                             )}
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-1'onpress={() => this.cosh()}>cosh</CalculatorKey>
+                                <CalculatorKey className='blue-light-background translateY-3' onpress={() => this.cosh()}>
+                                    cosh
+                                </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3'onpress={() => this.coshInverse()}>
+                                <CalculatorKey className='dark-blue-background' onpress={() => this.coshInverse()}>
                                     cosh
                                     <sup>
                                         <small>-1</small>
@@ -580,24 +767,52 @@ class ScientificCalculator extends Component {
                                 </CalculatorKey>
                             )}
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-1'onpress={() => this.tanh()}>tanh</CalculatorKey>
+                                <CalculatorKey className='blue-light-background translateY-3' onpress={() => this.tanh()}>
+                                    tanh
+                                </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3'onpress={() => this.tanInverse()}>
+                                <CalculatorKey className='dark-blue-background' onpress={() => this.tanhInverse()}>
                                     tanh
                                     <sup>
                                         <small>-1</small>
                                     </sup>
                                 </CalculatorKey>
                             )}
-                            <CalculatorKey className='blue-light-background translateY-1'>π</CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-1'>Rand</CalculatorKey>
-                            <CalculatorKey className='number-btn zero-num' onPress={() => this.inputDigit(0)}>
+                            <CalculatorKey
+                                className={
+                                    'blue-light-background ' +
+                                    (!this.state.shift ? 'translateY-3' : 'translateY--2')
+                                }
+                                onPress={() => this.pi()}>
+                                π
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className={
+                                    'blue-light-background ' +
+                                    (!this.state.shift ? 'translateY-3' : 'translateY--2')
+                                }>
+                                Rand
+                            </CalculatorKey>
+                            <CalculatorKey
+                                className={
+                                    'number-btn zero-num ' +
+                                    (!this.state.shift ? 'translateY-3' : 'translateY--2')
+                                }
+                                onPress={() => this.inputDigit(0)}>
                                 0
                             </CalculatorKey>
-                            <CalculatorKey className='dot-btn' onPress={() => this.inputDot()}>
+                            <CalculatorKey
+                                className={
+                                    'dot-btn ' + (!this.state.shift ? 'translateY-3' : 'translateY--2')
+                                }
+                                onPress={() => this.inputDot()}>
                                 .
                             </CalculatorKey>
-                            <CalculatorKey className='operator' onPress={() => this.performOperation('=')}>
+                            <CalculatorKey
+                                className={
+                                    'operator ' + (!this.state.shift ? 'translateY-3' : 'translateY--2')
+                                }
+                                onPress={() => this.performOperation('=')}>
                                 =
                             </CalculatorKey>
                         </div>
