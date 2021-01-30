@@ -4,8 +4,8 @@ import '../css/footer.css';
 const Footer = () => {
     return (
         <div id='footer'>
-            <p className='blue'>
-                Created By <span className='yellow'>Team3</span>
+            <p className='blue-color'>
+                Created By <span className='yellow-color'>Team3</span>
             </p>
         </div>
     );
