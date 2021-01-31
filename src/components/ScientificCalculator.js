@@ -253,7 +253,13 @@ class ScientificCalculator extends Component {
 
     tan() {
         const { displayValue } = this.state;
-        const result = String(Math.tan(parseFloat(displayValue)* Math.PI/180));
+
+        const input = parseFloat(displayValue)* Math.PI/180;
+
+        // if (input === 90 || input === 270) return;
+
+        const result = String(Math.tan(input));
+        
         this.setState({displayValue: result});
     }
 
@@ -275,23 +281,50 @@ class ScientificCalculator extends Component {
 
     sinInverse() {
         const { displayValue } = this.state;
-        const result = String(Math.asin(parseFloat(displayValue)));
+        const result = String(Math.asin(parseFloat(displayValue))*180/Math.PI);
         this.setState({displayValue: result});
     }
     cosInverse(){
         const { displayValue } = this.state;
-        const result = String(Math.acos(parseFloat(displayValue)));
+        const result = String(Math.acos(parseFloat(displayValue))*180/Math.PI);
         this.setState({displayValue: result});
     }
     tanInverse(){
         const { displayValue } = this.state;
-        const result = String(Math.atan(parseFloat(displayValue)));
+        const result = String(Math.atan(parseFloat(displayValue))*180/Math.PI);
         this.setState({displayValue: result});
     }
 
-    sinhInverse(){}
-    coshInverse(){}
-    tanhInverse(){}
+    sinhInverse(){
+        const { displayValue } = this.state;
+        const result = String(Math.asinh(parseFloat(displayValue)));
+        this.setState({displayValue: result});
+    }
+    coshInverse(){
+        const { displayValue } = this.state;
+        const result = String(Math.acosh(parseFloat(displayValue)));
+        this.setState({displayValue: result});
+    }
+    tanhInverse(){
+        const { displayValue } = this.state;
+        const result = String(Math.atanh(parseFloat(displayValue)));
+        this.setState({displayValue: result});
+    }
+
+    sqrt(){
+        const { displayValue } = this.state;
+        this.setState({displayValue:String(Math.sqrt(parseFloat(displayValue)))})
+    }
+
+    cbrt() {
+        const { displayValue } = this.state;
+        this.setState({displayValue:String(Math.cbrt(parseFloat(displayValue)))})
+    }
+
+    // nthRoot() {
+    //     const { displayValue } = this.state;
+    //     this.setState({displayValue: String(Math.pow(parseFloat(displayValue), 1/nextValue))})
+    // }
     
     
 
@@ -588,19 +621,19 @@ class ScientificCalculator extends Component {
                                 ×
                             </CalculatorKey>
                             <CalculatorKey className='blue-light-background translateY-1' onPress={() => this.multiplicativeInverse()}>1/x</CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
+                            <CalculatorKey className='blue-light-background translateY-3' onPress={() => this.sqrt()}>
                                 <sup>
                                     <small>2</small>
                                 </sup>
                                 √
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
+                            <CalculatorKey className='blue-light-background translateY-3' onPress={() => this.cbrt()}>
                                 <sup>
                                     <small>3</small>
                                 </sup>
                                 √
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
+                            <CalculatorKey className='blue-light-background translateY-3' onPress={() => this.nthRoot()}>
                                 <sup>
                                     <small>x</small>
                                 </sup>
@@ -743,11 +776,11 @@ class ScientificCalculator extends Component {
                                 </CalculatorKey>
                             )}
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-3' onpress={() => this.sinh()}>
+                                <CalculatorKey className='blue-light-background translateY-3' onPress={() => this.sinh()}>
                                     sinh
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background' onpress={() => this.sinhInverse()}>
+                                <CalculatorKey className='dark-blue-background' onPress={() => this.sinhInverse()}>
                                     sinh
                                     <sup>
                                         <small>-1</small>
@@ -755,11 +788,11 @@ class ScientificCalculator extends Component {
                                 </CalculatorKey>
                             )}
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-3' onpress={() => this.cosh()}>
+                                <CalculatorKey className='blue-light-background translateY-3' onPress={() => this.cosh()}>
                                     cosh
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background' onpress={() => this.coshInverse()}>
+                                <CalculatorKey className='dark-blue-background' onPress={() => this.coshInverse()}>
                                     cosh
                                     <sup>
                                         <small>-1</small>
@@ -767,11 +800,11 @@ class ScientificCalculator extends Component {
                                 </CalculatorKey>
                             )}
                             {!this.state.shift ? (
-                                <CalculatorKey className='blue-light-background translateY-3' onpress={() => this.tanh()}>
+                                <CalculatorKey className='blue-light-background translateY-3' onPress={() => this.tanh()}>
                                     tanh
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background' onpress={() => this.tanhInverse()}>
+                                <CalculatorKey className='dark-blue-background' onPress={() => this.tanhInverse()}>
                                     tanh
                                     <sup>
                                         <small>-1</small>
@@ -790,7 +823,7 @@ class ScientificCalculator extends Component {
                                 className={
                                     'blue-light-background ' +
                                     (!this.state.shift ? 'translateY-3' : 'translateY--2')
-                                }>
+                                } onPress = {() => this.rand()}>
                                 Rand
                             </CalculatorKey>
                             <CalculatorKey
