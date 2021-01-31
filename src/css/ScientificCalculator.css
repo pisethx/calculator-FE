@@ -30,6 +30,8 @@ button:focus {
 }
 
 #scientific-calculator .result {
+    font-size: 18px;
+    text-align: right;
     height: 120px;
     background-color: #dedede;
     width: 98%;
@@ -40,8 +42,8 @@ button:focus {
 }
 
 #scientific-calculator .result p {
-    font-size: 40px;
-    margin: 5px 12px;
+    font-size: 56px;
+    margin: 0 12px;
 }
 
 #scientific-calculator .calculator-body {
