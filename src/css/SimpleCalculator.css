@@ -1,128 +1,133 @@
 #simple-calculator {
-  margin-top: 30px;
-  margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.result {
-  height: 120px;
-  background-color:  #DEDEDE;
-  width: 312px;
-  margin: 7px 10px 0 10px;
-  overflow-wrap: break-word;
-  overflow: auto;
-  border-radius: 5px;
-}
-.resultContainer{
-  width: 350px;
+#simple-calculator .scope-title {
+    margin: 50px 0;
 }
 
-.operator:hover {
-  filter:   grayscale(.5);
-  color: initial;
+#simple-calculator .result {
+    height: 120px;
+    background-color: #dedede;
+    width: 312px;
+    margin: 7px 10px 0 10px;
+    overflow-wrap: break-word;
+    overflow: auto;
+    border-radius: 5px;
 }
 
-.result p {
-  font-size: 40px;
-  margin: 5px;
+#simple-calculator .operator:hover {
+    filter: grayscale(0.5);
+    color: initial;
 }
 
-button:hover{     
-  outline: none;
-  border:none;
-  filter:   grayscale(100%);
-  color: white ;
+#simple-calculator .result p {
+    text-align: right;
+    font-size: 56px;
+    margin: 0 12px;
 }
 
-button:focus{
-  outline: none;
-  border:none;
+#simple-calculator button:hover {
+    outline: none;
+    border: none;
+    filter: grayscale(0.5);
+    color: white;
 }
 
-.calculator-body {
-  max-width: 350px;
-  margin: auto;
-  background-color: #1D3557;
-  padding:10px;
-  border-radius: 5px;
+#simple-calculator button:focus {
+    outline: none;
+    border: none;
 }
 
-.button {
-  display: block;
-  background-color: #1D3557;
-  padding-top: 4px;
-  padding-bottom: 4px;
+#simple-calculator .calculator-body {
+    max-width: 350px;
+    margin: 0 auto 50px;
+    background-color: #1d3557;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.memory{
-  border : none;
-  color: white;
-  height: 40px !important;
-  font-size: 20px !important;
+#simple-calculator .button {
+    display: block;
+    background-color: #1d3557;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
+
+#simple-calculator .memory {
+    border: none;
+    color: white;
+    height: 40px !important;
+    font-size: 20px !important;
+}
+
 #simple-calculator button {
-  border : none;
-  color: white;
-  margin: 4px;
-  width: 22%;
-  height: 65px;
-  font-size: 30px;
-  border-radius: 5px;
-}
-
-#simple-calculator .zero{
-  width: 46%;
-}
-.test{
-  text-align: center;
-}
-@media only screen and (max-width: 495px) {
-  .calculator-body{
-    margin: auto;
-    width: 340px;
-  } 
-  .result {
-    width:307px;
-    margin-left : 6px;
-    margin-right : 5px;
-  }
-
-  button {
+    border: none;
+    color: white;
     margin: 4px;
-    width: 21%;
+    width: 22%;
     height: 65px;
     font-size: 30px;
     border-radius: 5px;
-  }
+}
+
+#simple-calculator .zero-num {
+    width: 46%;
+}
+
+@media only screen and (max-width: 495px) {
+    #simple-calculator .calculator-body {
+        margin: auto;
+        width: 340px;
+    }
+
+    #simple-calculator .result {
+        width: 307px;
+        margin-left: 6px;
+        margin-right: 5px;
+    }
+
+    #simple-calculator button {
+        margin: 4px;
+        width: 21%;
+        height: 65px;
+        font-size: 30px;
+        border-radius: 5px;
+    }
 }
 
 @media only screen and (max-width: 370px) {
-  #simple-calculator h1 {
-    transform: translateX(8px);
-  }
-  .calculator-body {
-    transform: translateX(8px);
-  }
+    #simple-calculator h1 {
+        transform: translateX(8px);
+    }
+
+    #simple-calculator .calculator-body {
+        transform: translateX(8px);
+    }
 }
 
 @media only screen and (max-width: 325px) {
-  #simple-calculator h1 {
-    transform: translateX(40px);
-  }
-  .calculator-body {
-    transform: translateX(40px);
-    width: 320px;
-  }
+    #simple-calculator h1 {
+        transform: translateX(40px);
+    }
 
-  .result{
-    width:288px;
-    margin-right: 4px;
-    margin-left: 5px;
-  }
-  button {
-    margin: 4px;
-    width: 21%;
-    height: 65px;
-    font-size: 30px;
-    border-radius: 5px;
-  }
+    #simple-calculator .calculator-body {
+        transform: translateX(40px);
+        width: 320px;
+    }
+
+    #simple-calculator .result {
+        width: 288px;
+        margin-right: 4px;
+        margin-left: 5px;
+    }
+
+    #simple-calculator button {
+        margin: 4px;
+        width: 21%;
+        height: 65px;
+        font-size: 30px;
+        border-radius: 5px;
+    }
 }
