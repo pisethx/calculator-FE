@@ -217,7 +217,11 @@ class ScientificCalculator extends Component {
 
     multiplicativeInverse() {
         const { displayValue } = this.state;
-        if (displayValue === '0') return this.setState({ displayValue: 'Non a number' });
+
+        if (displayValue === '0') {
+            this.setState({ displayValue: 'Not a number' });
+        }
+
         const result = String(1 / displayValue);
         this.setState({ displayValue: result });
     }
@@ -234,27 +238,40 @@ class ScientificCalculator extends Component {
     }
 
     sin() {
-        const { displayValue } = this.state;
-        const result = String(Math.sin((parseFloat(displayValue) * Math.PI) / 180));
-        this.setState({ displayValue: result });
+        const { displayValue, degree } = this.state;
+
+        if (degree === false) {
+            this.setState({ displayValue: String(Math.sin(displayValue)) });
+        } else {
+            const result = String(Math.sin((parseFloat(displayValue) * Math.PI) / 180));
+            this.setState({ displayValue: result });
+        }
     }
 
     cos() {
-        const { displayValue } = this.state;
-        const result = String(Math.cos((parseInt(displayValue) * Math.PI) / 180));
-        this.setState({ displayValue: result });
+        const { displayValue, degree } = this.state;
+
+        if (degree === false) {
+            this.setState({ displayValue: String(Math.cos(displayValue)) });
+        } else {
+            const result = String(Math.cos((parseInt(displayValue) * Math.PI) / 180));
+            this.setState({ displayValue: result });
+        }
     }
 
     tan() {
-        const { displayValue } = this.state;
+        const { displayValue, degree } = this.state;
 
-        const input = (parseFloat(displayValue) * Math.PI) / 180;
-
-        // if (input === 90 || input === 270) return;
-
-        const result = String(Math.tan(input));
-
-        this.setState({ displayValue: result });
+        if (degree === false) {
+            this.setState({ displayValue: String(Math.tan(displayValue)) });
+        } else {
+            if (displayValue === '90' || displayValue === '270') {
+                this.setState({ displayValue: 'Not a number' });
+            } else {
+                const result = String(Math.tan((parseFloat(displayValue) * Math.PI) / 180));
+                this.setState({ displayValue: result });
+            }
+        }
     }
 
     sinh() {
@@ -276,21 +293,36 @@ class ScientificCalculator extends Component {
     }
 
     sinInverse() {
-        const { displayValue } = this.state;
-        const result = String((Math.asin(parseFloat(displayValue)) * 180) / Math.PI);
-        this.setState({ displayValue: result });
+        const { displayValue, degree } = this.state;
+
+        if (degree === false) {
+            this.setState({ displayValue: String(Math.asin(displayValue)) });
+        } else {
+            const result = String((Math.asin(parseFloat(displayValue)) * 180) / Math.PI);
+            this.setState({ displayValue: result });
+        }
     }
 
     cosInverse() {
-        const { displayValue } = this.state;
-        const result = String((Math.acos(parseFloat(displayValue)) * 180) / Math.PI);
-        this.setState({ displayValue: result });
+        const { displayValue, degree } = this.state;
+
+        if (degree === false) {
+            this.setState({ displayValue: String(Math.acos(displayValue)) });
+        } else {
+            const result = String((Math.acos(parseFloat(displayValue)) * 180) / Math.PI);
+            this.setState({ displayValue: result });
+        }
     }
 
     tanInverse() {
-        const { displayValue } = this.state;
-        const result = String((Math.atan(parseFloat(displayValue)) * 180) / Math.PI);
-        this.setState({ displayValue: result });
+        const { displayValue, degree } = this.state;
+
+        if (degree === false) {
+            this.setState({ displayValue: String(Math.atan(displayValue)) });
+        } else {
+            const result = String((Math.atan(parseFloat(displayValue)) * 180) / Math.PI);
+            this.setState({ displayValue: result });
+        }
     }
 
     sinhInverse() {
@@ -406,13 +438,11 @@ class ScientificCalculator extends Component {
     }
 
     pi() {
-        const { displayValue } = this.state;
-        this.setState({ displayValue: String(displayValue * Math.PI) });
+        this.setState({ displayValue: String(Math.PI) });
     }
 
     exponent() {
-        const { displayValue } = this.state;
-        this.setState({ displayValue: String(displayValue * Math.exp(1)) });
+        this.setState({ displayValue: String(Math.exp(1)) });
     }
 
     factorial() {
