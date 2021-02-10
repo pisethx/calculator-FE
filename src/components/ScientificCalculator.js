@@ -445,8 +445,21 @@ class ScientificCalculator extends Component {
     }
 
     memoryRecall() {
+        const { displayValue } = this.state;
         let temp = (this.state.memory.memory_plus - this.state.memory.memory_minus).toString();
-        this.setState({ displayValue: temp, isMemoryActive: true });
+
+        if (displayValue !== '0') {
+            this.setState({
+                displayValue: temp,
+                isMemoryActive: true,
+            });
+        } else {
+            this.setState({
+                displayValue: temp,
+                isMemoryActive: false,
+                done: true,
+            });
+        }
     }
 
     factorial() {
