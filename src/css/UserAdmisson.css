@@ -1,0 +1,551 @@
+#reset-password-link {
+    margin-bottom: 230px;
+}
+
+#reset-password {
+    margin-bottom: 120px;
+}
+
+.user-admisson {
+    width: 35%;
+    margin: 100px auto 130px;
+}
+
+.user-admisson h1 {
+    font-size: 48px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.user-admisson p {
+    text-align: center;
+    font-size: 18px;
+}
+
+.user-admisson form {
+    margin: 50px 0;
+}
+
+.user-admisson input {
+    width: 100%;
+    padding: 12px 45px;
+    margin: 8px;
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f8f8f8;
+    color: #959595;
+}
+
+.user-admisson input:-webkit-autofill {
+    -webkit-text-fill-color: #959595;
+}
+
+.user-admisson input::placeholder {
+    color: #959595;
+    font-size: 15px;
+}
+
+.user-admisson input:focus {
+    outline: none;
+    border-color: #959595;
+    box-shadow: 0 0 0 0.15rem rgba(212, 212, 212, 0.582);
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-admisson .flex-container form {
+    margin: 0 0 0 10px;
+}
+
+.user-admisson .flex-container label {
+    font-size: 15px;
+    color: #959595;
+    position: relative;
+    top: -3px;
+}
+
+.user-admisson .flex-container a {
+    font-size: 15px;
+}
+
+.user-admisson .flex-container a:visited {
+    color: #959595;
+}
+
+.user-admisson .flex-container a:hover {
+    text-decoration: none;
+    color: #ffc857;
+}
+
+input[type='checkbox'] {
+    filter: grayscale(1);
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
+.user-admisson .suggestion {
+    font-size: 15px;
+}
+
+.user-admisson a {
+    text-decoration: none;
+}
+
+.user-admisson a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.user-admisson button {
+    font-size: 18px;
+    padding: 10px 40px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 12px;
+    border: none;
+    background-color: #1b3b6f;
+    color: #e5e5e5;
+}
+
+.user-admisson button:hover {
+    color: #ffc857;
+    cursor: pointer;
+}
+
+.user-admisson button:focus {
+    outline: none;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    color: #959595;
+}
+
+.error-container {
+    position: relative;
+}
+
+.error-icon {
+    position: absolute;
+    top: 2px;
+    left: 10px;
+    color: #ca0a04;
+}
+
+.error-message {
+    font-size: 14px !important;
+    color: #ca0a04;
+    text-align: left !important;
+    padding: 0px 30px;
+}
+
+@media only screen and (min-width: 1099px) and (max-width: 1199px) {
+    .user-admisson {
+        width: 42%;
+    }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1099px) {
+    .user-admisson {
+        width: 50%;
+    }
+
+    .user-admisson h1 {
+        font-size: 44px;
+    }
+
+    .user-admisson p {
+        font-size: 17px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 14px;
+        position: relative;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 14px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 14px;
+        height: 14px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 14px;
+    }
+
+    .user-admisson button {
+        font-size: 18px;
+        padding: 9px 30px;
+    }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 999px) {
+    .user-admisson {
+        width: 50%;
+    }
+
+    .user-admisson h1 {
+        font-size: 44px;
+    }
+
+    .user-admisson p {
+        font-size: 17px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 14px;
+        position: relative;
+        top: -2px;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 14px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 14px;
+        height: 14px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 14px;
+    }
+
+    .user-admisson button {
+        font-size: 18px;
+        padding: 9px 30px;
+    }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 899px) {
+    .user-admisson {
+        width: 55%;
+    }
+
+    .user-admisson h1 {
+        font-size: 42px;
+    }
+
+    .user-admisson p {
+        font-size: 16px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 13px;
+        position: relative;
+        top: -2px;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 13px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 13px;
+        height: 13px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 13px;
+    }
+
+    .user-admisson button {
+        font-size: 17px;
+        padding: 9px 30px;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 799px) {
+    .user-admisson {
+        width: 60%;
+    }
+
+    .user-admisson h1 {
+        font-size: 42px;
+    }
+
+    .user-admisson p {
+        font-size: 16px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 13px;
+        position: relative;
+        top: -2px;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 13px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 13px;
+        height: 13px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 13px;
+    }
+
+    .user-admisson button {
+        font-size: 17px;
+        padding: 9px 30px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 699px) {
+    .user-admisson {
+        width: 65%;
+    }
+
+    .user-admisson h1 {
+        font-size: 38px;
+    }
+
+    .user-admisson p {
+        font-size: 14px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 13px;
+        position: relative;
+        top: -2px;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 13px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 13px;
+        height: 13px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 13px;
+    }
+
+    .user-admisson button {
+        font-size: 16px;
+        padding: 9px 30px;
+    }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 599px) {
+    .user-admisson {
+        width: 70%;
+    }
+
+    .user-admisson h1 {
+        font-size: 38px;
+    }
+
+    .user-admisson p {
+        font-size: 14px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 12px;
+        position: relative;
+        top: -2px;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 12px;
+        height: 12px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 12px;
+    }
+
+    .user-admisson button {
+        font-size: 16px;
+        padding: 9px 30px;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 499px) {
+    .user-admisson {
+        width: 80%;
+    }
+
+    .user-admisson h1 {
+        font-size: 38px;
+    }
+
+    .user-admisson p {
+        font-size: 14px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 12px;
+        position: relative;
+        top: -2px;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 12px;
+        height: 12px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 12px;
+    }
+
+    .user-admisson button {
+        font-size: 16px;
+        padding: 9px 30px;
+    }
+}
+
+@media only screen and (min-width: 310px) and (max-width: 399px) {
+    .user-admisson {
+        width: 80%;
+    }
+
+    .user-admisson h1 {
+        font-size: 33px;
+    }
+
+    .user-admisson p {
+        font-size: 12px;
+    }
+
+    .user-admisson input {
+        margin: 8px 0;
+        padding: 12px 50px;
+    }
+
+    .input-icon {
+        left: 20px;
+    }
+
+    .user-admisson .flex-container label {
+        font-size: 11px;
+        position: relative;
+        top: -2.5px;
+        left: 8px;
+    }
+
+    .user-admisson .flex-container a {
+        font-size: 11px;
+        margin-top: 3px;
+    }
+
+    input[type='checkbox'] {
+        width: 11px;
+        height: 11px;
+    }
+
+    .user-admisson .suggestion {
+        font-size: 11px;
+    }
+
+    .user-admisson button {
+        font-size: 14px;
+        padding: 9px 28px;
+    }
+}

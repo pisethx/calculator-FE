@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../css/header.css';
+import '../css/Header.css';
 import { Link } from 'react-router-dom';
 import { AiFillCaretDown, AiOutlineClose } from 'react-icons/ai';
 import { MdAccountCircle, MdExpandMore } from 'react-icons/md';
@@ -102,10 +102,10 @@ const Header = () => {
                             <hr />
                         </div>
                     )} */}
-                    <Link to='/' className='link'>
+                    <Link to='/login' className='link'>
                         Login
                     </Link>
-                    <Link to='/' className='link no-pr-navbar'>
+                    <Link to='/registration' className='link no-pr-navbar'>
                         Registration
                     </Link>
                     {/* menu-side */}
@@ -150,11 +150,11 @@ const Header = () => {
                             Unit Converter
                         </Link>
                         <hr />
-                        <Link to='/' className='menu-side-link'>
+                        <Link to='/login' className='menu-side-link'>
                             Login
                         </Link>
                         <hr />
-                        <Link to='/' className='menu-side-link'>
+                        <Link to='/registration' className='menu-side-link'>
                             Registration
                         </Link>
                         <hr />
