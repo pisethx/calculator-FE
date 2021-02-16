@@ -9,6 +9,11 @@ import Login from './Login';
 import Registration from './Registration';
 import ResetPasswordLink from './ResetPasswordLink';
 import ResetPassword from './ResetPassword';
+import TeamGenerator from './TeamGenerator';
+import NamePicker from './NamePicker';
+import YesOrNo from './YesOrNo';
+import DecisionMaker from './DecisionMaker';
+import RandomPicker from './RandomPicker';
 
 const Main = () => {
     return (
@@ -22,6 +27,11 @@ const Main = () => {
                 <Route path='/registration' component={Registration} />
                 <Route path='/reset-password-link' component={ResetPasswordLink} />
                 <Route path='/reset-password' component={ResetPassword} />
+                <Route path='/team-generator' component={TeamGenerator} />
+                <Route path='/name-picker' component={NamePicker} />
+                <Route path='/yes-or-no' component={YesOrNo} />
+                <Route path='/decision-maker' component={DecisionMaker} />
+                <Route path='/random-picker' component={RandomPicker} />
             </Switch>
             <Footer />
         </div>

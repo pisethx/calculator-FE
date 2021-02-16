@@ -1,0 +1,553 @@
+#team-generator .flex-container,
+#name-picker .flex-container,
+#yes-or-no .flex-container,
+#decision-maker .flex-container,
+#random-picker .flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 50px 80px 50px;
+}
+
+#team-generator .random-result {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+#team-generator .random-result > * {
+    flex: 0 46%;
+    margin: 0 8px 30px 8px;
+}
+
+.random-result {
+    overflow: auto;
+}
+
+.random-result,
+.random-setup {
+    background-color: #f8f8f8;
+    color: #000000;
+    width: 555px;
+    height: 551px;
+    padding: 40px;
+}
+
+.random-result table,
+.random-result td {
+    border: 1px solid #1b3b6f;
+    border-collapse: collapse;
+    text-align: left;
+    padding: 5px 50px 5px 10px;
+    font-size: 14px;
+}
+
+.random-result th {
+    font-weight: normal;
+    text-align: center;
+    padding: 5px 0;
+    background-color: #1b3b6f;
+    color: #ffffff;
+}
+
+.random-result p {
+    text-align: center;
+    position: relative;
+    top: 45%;
+    font-size: 36px;
+}
+
+.random-setup {
+    position: relative;
+    padding: 40px;
+    font-size: 18px;
+}
+
+.random-setup select {
+    border-radius: 5px;
+    padding: 3px 15px 3px 3px;
+}
+
+.random-setup select:hover {
+    cursor: pointer;
+}
+
+.random-setup select:focus,
+.random-setup input[type='number']:focus,
+.randomizer-btn button:focus {
+    outline: none;
+}
+
+.random-setup textarea {
+    width: 470px;
+    height: 220px;
+    resize: none;
+    border-radius: 7px;
+    padding: 10px;
+    overflow: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.random-setup textarea:focus {
+    outline: none;
+    border-color: #959595;
+    box-shadow: 0 0 0 0.15rem rgba(173, 171, 171, 0.473);
+}
+
+.random-setup input[type='number'] {
+    width: 80px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+}
+
+.random-setup input[type='number']::placeholder {
+    color: #959595;
+}
+
+.randomizer-btn {
+    margin-top: 20px;
+}
+
+.randomizer-btn button {
+    background-color: #1b3b6f;
+    color: #e5e5e5;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 33px;
+    font-size: 18px;
+}
+
+.randomizer-btn button:hover {
+    cursor: pointer;
+    color: #ffc857;
+}
+
+.random-setup .data-input {
+    margin: 15px 0;
+}
+
+.random-setup .save-export {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.save-export button {
+    background: none;
+    border: none;
+    color: #959595;
+    font-size: 30px;
+}
+
+.save-export button:hover {
+    cursor: pointer;
+    color: #000000;
+}
+
+.save-export button:focus {
+    outline: none;
+}
+
+.save-icon {
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 1225px) {
+    .random-result,
+    .random-setup {
+        width: 500px;
+        height: 496px;
+    }
+
+    .random-setup textarea {
+        width: 410px;
+        height: 190px;
+    }
+}
+
+@media only screen and (max-width: 1125px) {
+    #team-generator .random-result > * {
+        flex: 0 45%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 450px;
+        height: 446px;
+    }
+
+    .random-setup textarea {
+        width: 365px;
+        height: 150px;
+    }
+}
+
+@media only screen and (max-width: 1035px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        margin: 0 30px 80px 30px;
+    }
+    #team-generator .random-result > * {
+        flex: 0 45%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 400px;
+        height: 396px;
+    }
+
+    .random-setup textarea {
+        width: 310px;
+        height: 120px;
+    }
+
+    .randomizer-btn button {
+        padding: 6px 30px;
+        font-size: 16px;
+    }
+
+    .random-setup .save-export {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .save-export button {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 893px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        margin: 0 30px 100px 30px;
+    }
+    #team-generator .random-result > * {
+        flex: 0 44%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 370px;
+        height: 390px;
+        padding: 30px;
+        font-size: 16px;
+    }
+
+    .random-setup textarea {
+        width: 290px;
+        height: 125px;
+    }
+
+    .random-setup .save-export {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .save-export button {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 825px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        margin: 0 25px 100px 25px;
+    }
+
+    #team-generator .random-result > * {
+        flex: 0 43%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 340px;
+        height: 384px;
+        padding: 25px;
+        font-size: 15px;
+    }
+
+    .random-setup textarea {
+        width: 290px;
+        height: 100px;
+    }
+
+    .random-setup .save-export {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .save-export button {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 755px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #team-generator .random-result > * {
+        flex: 0 46%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 555px;
+        height: 551px;
+        padding: 40px;
+        font-size: 18px;
+        margin-bottom: 50px;
+    }
+
+    .random-setup textarea {
+        width: 470px;
+        height: 220px;
+    }
+
+    .random-setup .save-export {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .randomizer-btn button {
+        padding: 5px 30px;
+        font-size: 18px;
+    }
+
+    .save-export button {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 615px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #team-generator .random-result > * {
+        flex: 0 45%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 505px;
+        height: 501px;
+        padding: 40px;
+        font-size: 18px;
+        margin-bottom: 50px;
+    }
+
+    .random-setup textarea {
+        width: 430px;
+        height: 200px;
+    }
+
+    .random-setup .save-export {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .randomizer-btn button {
+        padding: 5px 30px;
+        font-size: 18px;
+    }
+
+    .save-export button {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 545px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #team-generator .random-result > * {
+        flex: 0 44%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 450px;
+        height: 446px;
+        padding: 40px;
+        font-size: 18px;
+        margin-bottom: 50px;
+    }
+
+    .random-setup textarea {
+        width: 370px;
+        height: 160px;
+    }
+
+    .random-setup .save-export {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .randomizer-btn button {
+        padding: 5px 30px;
+        font-size: 18px;
+    }
+
+    .save-export button {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #team-generator .random-result > * {
+        flex: 0 43%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 400px;
+        height: 404px;
+        padding: 30px;
+        font-size: 16px;
+        margin-bottom: 50px;
+    }
+
+    .random-setup textarea {
+        width: 310px;
+        height: 135px;
+    }
+
+    .random-setup .save-export {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .randomizer-btn button {
+        padding: 5px 30px;
+        font-size: 16px;
+    }
+
+    .save-export button {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #team-generator .random-result > * {
+        flex: 0 43%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 350px;
+        height: 354px;
+        padding: 25px;
+        font-size: 15px;
+        margin-bottom: 50px;
+    }
+
+    .random-setup textarea {
+        width: 290px;
+        height: 110px;
+    }
+
+    .random-setup .save-export {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .randomizer-btn button {
+        padding: 5px 30px;
+        font-size: 15px;
+    }
+
+    .save-export button {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    #team-generator .flex-container,
+    #name-picker .flex-container,
+    #yes-or-no .flex-container,
+    #decision-maker .flex-container,
+    #random-picker .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #team-generator .random-result > * {
+        flex: 0 42%;
+    }
+
+    .random-result,
+    .random-setup {
+        width: 310px;
+        height: 314px;
+        padding: 25px;
+        font-size: 14px;
+        margin-bottom: 50px;
+    }
+
+    .random-setup textarea {
+        width: 260px;
+        height: 90px;
+    }
+
+    .random-setup .save-export {
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .randomizer-btn button {
+        border-radius: 7px;
+        padding: 5px 30px;
+        font-size: 14px;
+    }
+
+    .save-export button {
+        font-size: 20px;
+    }
+}
