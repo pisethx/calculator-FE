@@ -79,6 +79,10 @@ const CalculatorOperations = {
     '+': (prevValue, nextValue) => prevValue + nextValue,
     '-': (prevValue, nextValue) => prevValue - nextValue,
     '=': (prevValue, nextValue) => nextValue,
+    'nthRoot':(prevValue, nextValue) => Math.pow(parseFloat(nextValue), 1/prevValue),
+    'xPowY': (prevValue, nextValue) => Math.pow(parseFloat(prevValue), nextValue),
+    'logY': (prevValue, nextValue) => Math.log(parseFloat(nextValue))/ Math.log(parseFloat(prevValue)),
+    'yPowX': (prevValue, nextValue) =>  Math.pow(parseFloat(nextValue), prevValue),
 };
 
 class ScientificCalculator extends Component {
@@ -190,6 +194,28 @@ class ScientificCalculator extends Component {
             });
         }
     }
+
+    ee(){
+        const { displayValue } = this.state;
+
+        if (displayValue === '0') {
+            this.setState({ displayValue: 'Not a number' });
+        }
+
+        
+
+        const result = String(1 / displayValue);
+        this.setState({ displayValue: result });
+    }
+
+
+
+
+
+
+
+
+
 
     performOperation(nextOperator) {
         const { value, displayValue, operator } = this.state;
@@ -353,10 +379,6 @@ class ScientificCalculator extends Component {
         this.setState({ displayValue: String(Math.cbrt(parseFloat(displayValue))) });
     }
 
-    // nthRoot() {
-    //     const { displayValue } = this.state;
-    //     this.setState({displayValue: String(Math.pow(parseFloat(displayValue), 1/nextValue))})
-    // }
 
     handleKeyDown = (event) => {
         let { key } = event;
@@ -476,7 +498,7 @@ class ScientificCalculator extends Component {
             return this.setState({ displayValue: 'Not a Number' });
         }
 
-        this.setState({ displayValue: String(Math.log10(parseInt(displayValue))) });
+        this.setState({ displayValue: String(Math.log10(parseFloat(displayValue))) });
     }
 
     log2() {
@@ -486,7 +508,7 @@ class ScientificCalculator extends Component {
             return this.setState({ displayValue: 'Not a Number' });
         }
 
-        this.setState({ displayValue: String(Math.log2(parseInt(displayValue))) });
+        this.setState({ displayValue: String(Math.log2(parseFloat(displayValue))) });
     }
 
     log() {
@@ -496,7 +518,7 @@ class ScientificCalculator extends Component {
             return this.setState({ displayValue: 'Not a Number' });
         }
 
-        this.setState({ displayValue: String(Math.log(parseInt(displayValue))) });
+        this.setState({ displayValue: String(Math.log(parseFloat(displayValue))) });
     }
 
     pow2() {
@@ -615,7 +637,8 @@ class ScientificCalculator extends Component {
                                     <small>3</small>
                                 </sup>
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'>
+                            <CalculatorKey className='blue-light-background translateY-3'
+                            onPress={() => this.performOperation('xPowY')}>
                                 x
                                 <sup>
                                     <small>y</small>
@@ -631,7 +654,8 @@ class ScientificCalculator extends Component {
                                     </sup>
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3'>
+                                <CalculatorKey className='dark-blue-background translateY-3'
+                                onPress={() => this.performOperation('yPowX')}>
                                     y
                                     <sup>
                                         <small>x</small>
@@ -692,7 +716,7 @@ class ScientificCalculator extends Component {
                             </CalculatorKey>
                             <CalculatorKey
                                 className='blue-light-background translateY-3'
-                                onPress={() => this.nthRoot()}>
+                                onPress={() => this.performOperation('nthRoot')}>
                                 <sup>
                                     <small>x</small>
                                 </sup>
@@ -705,7 +729,8 @@ class ScientificCalculator extends Component {
                                     ln
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY--1'>
+                                <CalculatorKey className='dark-blue-background translateY--1'
+                                onPress={() => this.performOperation('logY')}>
                                     log
                                     <sub>
                                         <small>y</small>
