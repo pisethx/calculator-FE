@@ -91,8 +91,10 @@ class ScientificCalculator extends Component {
         displayValue: '0',
         operator: null,
         waitingForOperand: false,
+        done: false,
         shift: false,
         degree: false,
+        isMemoryActive: false,
         memory: {
             memory_plus: 0,
             memory_minus: 0,
@@ -122,6 +124,8 @@ class ScientificCalculator extends Component {
             displayValue: '0',
             operator: null,
             waitingForOperand: false,
+            done: false,
+            isMemoryActive: false,
         });
     }
 
@@ -159,13 +163,16 @@ class ScientificCalculator extends Component {
 
         this.setState({
             displayValue: String(newValue.toFixed(fixedDigits.length + 2)),
+            done: true,
         });
     }
 
     inputDot() {
-        const { displayValue } = this.state;
+        const { displayValue, waitingForOperand } = this.state;
 
-        if (!/\./.test(displayValue)) {
+        if (waitingForOperand === true) {
+            this.setState({ displayValue: '0.', waitingForOperand: false });
+        } else if (!/\./.test(displayValue)) {
             this.setState({
                 displayValue: displayValue + '.',
                 waitingForOperand: false,
@@ -174,7 +181,7 @@ class ScientificCalculator extends Component {
     }
 
     inputDigit(digit) {
-        const { displayValue, waitingForOperand } = this.state;
+        const { displayValue, waitingForOperand, done } = this.state;
 
         if (waitingForOperand) {
             this.setState({
@@ -185,53 +192,35 @@ class ScientificCalculator extends Component {
             const hasDot = displayValue.includes('.');
             const integer = displayValue.split('.')[0];
 
-            if (!hasDot && integer.length >= 10) {
-                return;
+            if (!hasDot && integer.length >= 10) return;
+
+            if (done === true) {
+                this.clearAll();
+                this.setState({ displayValue: String(digit) });
+            } else {
+                this.setState({
+                    displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
+                });
             }
-
-            this.setState({
-                displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
-            });
         }
     }
-
-    ee(){
-        const { displayValue } = this.state;
-
-        if (displayValue === '0') {
-            this.setState({ displayValue: 'Not a number' });
-        }
-
-        
-
-        const result = String(1 / displayValue);
-        this.setState({ displayValue: result });
-    }
-
-
-
-
-
-
-
-
-
 
     performOperation(nextOperator) {
-        const { value, displayValue, operator } = this.state;
+        const { value, displayValue, operator, waitingForOperand, isMemoryActive } = this.state;
         const inputValue = parseFloat(displayValue);
 
         if (value == null) {
             this.setState({
                 value: inputValue,
             });
-        } else if (operator) {
-            const currentValue = value || 0;
+        } else if ((operator && waitingForOperand === false) || (operator && isMemoryActive === true)) {
+            const currentValue = parseFloat(value) || 0;
             const newValue = CalculatorOperations[operator](currentValue, inputValue);
 
             this.setState({
                 value: newValue,
                 displayValue: String(newValue),
+                isMemoryActive: false,
             });
         }
 
@@ -249,14 +238,18 @@ class ScientificCalculator extends Component {
         }
 
         const result = String(1 / displayValue);
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     exponential() {
         const { displayValue } = this.state;
-        if (displayValue === '0') return this.setState({ displayValue: '1' });
+
+        if (displayValue === '0') {
+            return this.setState({ displayValue: '1' });
+        }
+
         const result = String(Math.exp(parseFloat(displayValue)));
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     rand() {
@@ -267,10 +260,10 @@ class ScientificCalculator extends Component {
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
-            this.setState({ displayValue: String(Math.sin(displayValue)) });
+            this.setState({ displayValue: String(Math.sin(displayValue)), done: true });
         } else {
             const result = String(Math.sin((parseFloat(displayValue) * Math.PI) / 180));
-            this.setState({ displayValue: result });
+            this.setState({ displayValue: result, done: true });
         }
     }
 
@@ -278,10 +271,10 @@ class ScientificCalculator extends Component {
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
-            this.setState({ displayValue: String(Math.cos(displayValue)) });
+            this.setState({ displayValue: String(Math.cos(displayValue)), done: true });
         } else {
             const result = String(Math.cos((parseInt(displayValue) * Math.PI) / 180));
-            this.setState({ displayValue: result });
+            this.setState({ displayValue: result, done: true });
         }
     }
 
@@ -289,13 +282,13 @@ class ScientificCalculator extends Component {
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
-            this.setState({ displayValue: String(Math.tan(displayValue)) });
+            this.setState({ displayValue: String(Math.tan(displayValue)), done: true });
         } else {
             if (displayValue === '90' || displayValue === '270') {
                 this.setState({ displayValue: 'Not a number' });
             } else {
                 const result = String(Math.tan((parseFloat(displayValue) * Math.PI) / 180));
-                this.setState({ displayValue: result });
+                this.setState({ displayValue: result, done: true });
             }
         }
     }
@@ -303,29 +296,29 @@ class ScientificCalculator extends Component {
     sinh() {
         const { displayValue } = this.state;
         const result = String(Math.sinh(parseFloat(displayValue)));
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     cosh() {
         const { displayValue } = this.state;
         const result = String(Math.cosh(parseFloat(displayValue)));
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     tanh() {
         const { displayValue } = this.state;
         const result = String(Math.tanh(parseFloat(displayValue)));
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     sinInverse() {
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
-            this.setState({ displayValue: String(Math.asin(displayValue)) });
+            this.setState({ displayValue: String(Math.asin(displayValue)), done: true });
         } else {
             const result = String((Math.asin(parseFloat(displayValue)) * 180) / Math.PI);
-            this.setState({ displayValue: result });
+            this.setState({ displayValue: result, done: true });
         }
     }
 
@@ -333,10 +326,10 @@ class ScientificCalculator extends Component {
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
-            this.setState({ displayValue: String(Math.acos(displayValue)) });
+            this.setState({ displayValue: String(Math.acos(displayValue)), done: true });
         } else {
             const result = String((Math.acos(parseFloat(displayValue)) * 180) / Math.PI);
-            this.setState({ displayValue: result });
+            this.setState({ displayValue: result, done: true });
         }
     }
 
@@ -344,41 +337,45 @@ class ScientificCalculator extends Component {
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
-            this.setState({ displayValue: String(Math.atan(displayValue)) });
+            this.setState({ displayValue: String(Math.atan(displayValue)), done: true });
         } else {
             const result = String((Math.atan(parseFloat(displayValue)) * 180) / Math.PI);
-            this.setState({ displayValue: result });
+            this.setState({ displayValue: result, done: true });
         }
     }
 
     sinhInverse() {
         const { displayValue } = this.state;
         const result = String(Math.asinh(parseFloat(displayValue)));
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     coshInverse() {
         const { displayValue } = this.state;
         const result = String(Math.acosh(parseFloat(displayValue)));
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     tanhInverse() {
         const { displayValue } = this.state;
         const result = String(Math.atanh(parseFloat(displayValue)));
-        this.setState({ displayValue: result });
+        this.setState({ displayValue: result, done: true });
     }
 
     sqrt() {
         const { displayValue } = this.state;
-        this.setState({ displayValue: String(Math.sqrt(parseFloat(displayValue))) });
+        this.setState({ displayValue: String(Math.sqrt(parseFloat(displayValue))), done: true });
     }
 
     cbrt() {
         const { displayValue } = this.state;
-        this.setState({ displayValue: String(Math.cbrt(parseFloat(displayValue))) });
+        this.setState({ displayValue: String(Math.cbrt(parseFloat(displayValue))), done: true });
     }
 
+    // nthRoot() {
+    //     const { displayValue } = this.state;
+    //     this.setState({displayValue: String(Math.pow(parseFloat(displayValue), 1/nextValue))})
+    // }
 
     handleKeyDown = (event) => {
         let { key } = event;
@@ -427,11 +424,11 @@ class ScientificCalculator extends Component {
                 memory_minus: 0,
                 memory_recall: null,
             },
+            isMemoryActive: false,
         }));
     }
 
     memoryPlus() {
-        // let temp= this.state.memory.memory_plus
         let temp = parseFloat(this.state.displayValue) + this.state.memory.memory_plus;
         this.setState((prevState) => ({
             memory: {
@@ -439,7 +436,6 @@ class ScientificCalculator extends Component {
                 memory_plus: temp,
             },
         }));
-        console.log(this.state.memory.memory_plus);
     }
 
     memoryMinus() {
@@ -453,18 +449,21 @@ class ScientificCalculator extends Component {
     }
 
     memoryRecall() {
+        const { displayValue } = this.state;
         let temp = (this.state.memory.memory_plus - this.state.memory.memory_minus).toString();
-        this.setState({
-            displayValue: temp,
-        });
-    }
 
-    pi() {
-        this.setState({ displayValue: String(Math.PI) });
-    }
-
-    exponent() {
-        this.setState({ displayValue: String(Math.exp(1)) });
+        if (displayValue !== '0') {
+            this.setState({
+                displayValue: temp,
+                isMemoryActive: true,
+            });
+        } else {
+            this.setState({
+                displayValue: temp,
+                isMemoryActive: false,
+                done: true,
+            });
+        }
     }
 
     factorial() {
@@ -479,7 +478,7 @@ class ScientificCalculator extends Component {
                 result *= i;
             }
 
-            return this.setState({ displayValue: String(result) });
+            return this.setState({ displayValue: String(result), done: true });
         } else if (parseInt(displayValue) < -1) {
             var resultNegative = 1;
 
@@ -487,7 +486,7 @@ class ScientificCalculator extends Component {
                 resultNegative *= j;
             }
 
-            return this.setState({ displayValue: String(resultNegative) });
+            return this.setState({ displayValue: String(resultNegative), done: true });
         }
     }
 
@@ -498,7 +497,7 @@ class ScientificCalculator extends Component {
             return this.setState({ displayValue: 'Not a Number' });
         }
 
-        this.setState({ displayValue: String(Math.log10(parseFloat(displayValue))) });
+        this.setState({ displayValue: String(Math.log10(parseFloat(displayValue))), done: true });
     }
 
     log2() {
@@ -508,7 +507,7 @@ class ScientificCalculator extends Component {
             return this.setState({ displayValue: 'Not a Number' });
         }
 
-        this.setState({ displayValue: String(Math.log2(parseFloat(displayValue))) });
+        this.setState({ displayValue: String(Math.log2(parseFloat(displayValue))), done: true });
     }
 
     log() {
@@ -518,27 +517,27 @@ class ScientificCalculator extends Component {
             return this.setState({ displayValue: 'Not a Number' });
         }
 
-        this.setState({ displayValue: String(Math.log(parseFloat(displayValue))) });
+        this.setState({ displayValue: String(Math.log(parseFloat(displayValue))), done: true });
     }
 
     pow2() {
         const { displayValue } = this.state;
-        this.setState({ displayValue: String(Math.pow(parseFloat(displayValue), 2)) });
+        this.setState({ displayValue: String(Math.pow(parseFloat(displayValue), 2)), done: true });
     }
 
     pow3() {
         const { displayValue } = this.state;
-        this.setState({ displayValue: String(Math.pow(parseFloat(displayValue), 3)) });
+        this.setState({ displayValue: String(Math.pow(parseFloat(displayValue), 3)), done: true });
     }
 
     tenPowX() {
         const { displayValue } = this.state;
-        this.setState({ displayValue: String(Math.pow(10, parseFloat(displayValue))) });
+        this.setState({ displayValue: String(Math.pow(10, parseFloat(displayValue))), done: true });
     }
 
     twoPowX() {
         const { displayValue } = this.state;
-        this.setState({ displayValue: String(Math.pow(2, parseFloat(displayValue))) });
+        this.setState({ displayValue: String(Math.pow(2, parseFloat(displayValue))), done: true });
     }
 
     render() {
@@ -554,7 +553,7 @@ class ScientificCalculator extends Component {
                 </h1>
                 <div className='calculator-body'>
                     <div>
-                        <div class='result'>
+                        <div className='result'>
                             <p>
                                 <CalculatorDisplay value={displayValue} />
                             </p>
@@ -817,7 +816,7 @@ class ScientificCalculator extends Component {
                             )}
                             <CalculatorKey
                                 className={'blue-light-background ' + (this.state.shift && 'translateY--3')}
-                                onPress={() => this.exponent()}>
+                                onPress={() => this.inputDigit(Math.exp(1))}>
                                 e
                             </CalculatorKey>
                             <CalculatorKey
@@ -864,7 +863,7 @@ class ScientificCalculator extends Component {
                             ) : (
                                 <CalculatorKey
                                     className={
-                                        'blue-light-background ' +
+                                        'dark-blue-background ' +
                                         (!this.state.shift ? 'translateY-3' : 'translateY--2')
                                     }
                                     onPress={this.handleDegreeClick}>
@@ -924,7 +923,7 @@ class ScientificCalculator extends Component {
                                     'blue-light-background ' +
                                     (!this.state.shift ? 'translateY-3' : 'translateY--2')
                                 }
-                                onPress={() => this.pi()}>
+                                onPress={() => this.inputDigit(Math.PI)}>
                                 π
                             </CalculatorKey>
                             <CalculatorKey
