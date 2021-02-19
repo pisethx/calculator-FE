@@ -1,0 +1,124 @@
+#test {
+    margin: 30px auto;
+    /* text-align: center; */
+}
+
+#test .resultContainer{
+    width: 65%;
+    height: 400px;
+    /* margin-bottom: 20px; */
+    display: block;
+    padding: 4px;
+}
+
+#test .first-input{
+    margin: 0;
+    margin-bottom: 20px;
+    height: 183px;
+    background-color: #DEDEDE;
+}
+#test .second-input{
+    margin: 0;
+    height: 183px;
+    background-color: #DEDEDE;
+}
+#test .scope-title {
+    margin: 50px 0;
+}
+
+#test .operator:hover {
+    filter: grayscale(0.5);
+    color: initial;
+}
+
+#test .resultContainer p {
+    text-align: right;
+    font-size: 56px;
+    margin: 0 12px;
+}
+
+#test button:hover {
+    outline: none;
+    border: none;
+    filter: grayscale(0.5);
+    color: white;
+}
+
+#test button:focus {
+    outline: none;
+    border: none;
+}
+
+#test .calculator-body {
+    max-width: 90%;
+    margin: 0 auto 50px;
+    background-color: #1d3557;
+    padding: 30px 10px 30px 10px;
+    border-radius: 0px 5px 5px 5px;
+    display: flex;
+}
+#measurement button{
+    width: 10%;
+    height:46px;
+    background-color: #FFC857;
+    border: none;
+    color: #1B3B6F;
+    font-weight: 600;
+}
+
+#measurement button:hover{
+    background-color: #1B3B6F;
+    color: #FFC857;
+}
+#measurement button:active{
+    background-color: #1B3B6F;
+    color: #FFC857;
+    border: none;
+    outline: none;
+}
+#measurement{
+    text-align: center;
+}
+#test select{
+    outline: none;
+    border: none;
+    background-color: #DEDEDE;
+}
+#measurement button:focus{
+    border: none;
+    outline: none;
+    color: #FFC857;
+    background-color: #1B3B6F;
+}
+#test .button {
+    width: 40%;
+    background-color: #1d3557;
+    text-align: center;
+}
+
+#test .memory {
+    border: none;
+    color: white;
+    height: 40px !important;
+    font-size: 20px !important;
+}
+
+.measurement button {
+    border: none;
+    color: white;
+    margin: 4px;
+    width: 22%;
+    height: 65px;
+    font-size: 30px;
+    border-radius: 5px;
+}
+.calculator-body button {
+    border: none;
+    color: white;
+    margin: 4px;
+    width: 90px;
+    height: 90px;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
