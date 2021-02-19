@@ -42,7 +42,7 @@
 
 #simple-calculator .calculator-body {
     max-width: 350px;
-    margin: 0 auto 50px;
+    margin: 0 auto 70px;
     background-color: #1d3557;
     padding: 10px;
     border-radius: 5px;
@@ -57,14 +57,14 @@
 
 #simple-calculator .memory {
     border: none;
-    color: white;
+    color: #e5e5e5;
     height: 40px !important;
     font-size: 20px !important;
 }
 
 #simple-calculator button {
     border: none;
-    color: white;
+    color: #e5e5e5;
     margin: 4px;
     width: 22%;
     height: 65px;
@@ -74,6 +74,10 @@
 
 #simple-calculator .zero-num {
     width: 46%;
+}
+
+#simple-calculator .clear-btn {
+    font-size: 27px;
 }
 
 @media only screen and (max-width: 495px) {

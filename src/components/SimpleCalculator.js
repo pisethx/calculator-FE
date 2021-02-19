@@ -87,6 +87,8 @@ class SimpleCalculator extends Component {
         displayValue: '0',
         operator: null,
         waitingForOperand: false,
+        done: false,
+        isMemoryActive: false,
         memory: {
             memory_plus: 0,
             memory_minus: 0,
@@ -102,6 +104,7 @@ class SimpleCalculator extends Component {
                 memory_minus: 0,
                 memory_recall: null,
             },
+            isMemoryActive: false,
         }));
     }
 
@@ -117,6 +120,7 @@ class SimpleCalculator extends Component {
 
         console.log(this.state.memory.memory_plus);
     }
+
     memoryMinus() {
         let temp = parseInt(this.state.displayValue) + this.state.memory.memory_minus;
         this.setState((prevState) => ({
@@ -128,10 +132,21 @@ class SimpleCalculator extends Component {
     }
 
     memoryRecall() {
+        const { displayValue } = this.state;
         let temp = (this.state.memory.memory_plus - this.state.memory.memory_minus).toString();
-        this.setState({
-            displayValue: temp,
-        });
+
+        if (displayValue !== '0') {
+            this.setState({
+                displayValue: temp,
+                isMemoryActive: true,
+            });
+        } else {
+            this.setState({
+                displayValue: temp,
+                isMemoryActive: false,
+                done: true,
+            });
+        }
     }
 
     clearAll() {
@@ -140,6 +155,8 @@ class SimpleCalculator extends Component {
             displayValue: '0',
             operator: null,
             waitingForOperand: false,
+            done: false,
+            isMemoryActive: false,
         });
     }
 
@@ -151,7 +168,7 @@ class SimpleCalculator extends Component {
 
     clearLastChar() {
         const { displayValue } = this.state;
-        
+
         this.setState({
             displayValue: displayValue.substring(0, displayValue.length - 1) || '0',
         });
@@ -177,13 +194,16 @@ class SimpleCalculator extends Component {
 
         this.setState({
             displayValue: String(newValue.toFixed(fixedDigits.length + 2)),
+            done: true,
         });
     }
 
     inputDot() {
-        const { displayValue } = this.state;
+        const { displayValue, waitingForOperand } = this.state;
 
-        if (!/\./.test(displayValue)) {
+        if (waitingForOperand === true) {
+            this.setState({ displayValue: '0.', waitingForOperand: false });
+        } else if (!/\./.test(displayValue)) {
             this.setState({
                 displayValue: displayValue + '.',
                 waitingForOperand: false,
@@ -192,7 +212,7 @@ class SimpleCalculator extends Component {
     }
 
     inputDigit(digit) {
-        const { displayValue, waitingForOperand } = this.state;
+        const { displayValue, waitingForOperand, done } = this.state;
 
         if (waitingForOperand) {
             this.setState({
@@ -203,30 +223,35 @@ class SimpleCalculator extends Component {
             const hasDot = displayValue.includes('.');
             const integer = displayValue.split('.')[0];
 
-            if (!hasDot && integer.length >= 10) {
-                return;
+            if (!hasDot && integer.length >= 10) return;
+
+            if (done === true) {
+                this.clearAll();
+                this.setState({ displayValue: String(digit) });
+            } else {
+                this.setState({
+                    displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
+                });
             }
-            this.setState({
-                displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
-            });
         }
     }
 
     performOperation(nextOperator) {
-        const { value, displayValue, operator } = this.state;
+        const { value, displayValue, operator, waitingForOperand, isMemoryActive } = this.state;
         const inputValue = parseFloat(displayValue);
 
         if (value == null) {
             this.setState({
                 value: inputValue,
             });
-        } else if (operator) {
-            const currentValue = value || 0;
+        } else if ((operator && waitingForOperand === false) || (operator && isMemoryActive === true)) {
+            const currentValue = parseFloat(value) || 0;
             const newValue = CalculatorOperations[operator](currentValue, inputValue);
 
             this.setState({
                 value: newValue,
                 displayValue: String(newValue),
+                isMemoryActive: false,
             });
         }
 
@@ -315,7 +340,7 @@ class SimpleCalculator extends Component {
                                 MR
                             </CalculatorKey>
                             <CalculatorKey
-                                className='blue-light-background'
+                                className='blue-light-background clear-btn'
                                 onPress={() => (clearDisplay ? this.clearDisplay() : this.clearAll())}>
                                 {clearText}
                             </CalculatorKey>
@@ -334,19 +359,13 @@ class SimpleCalculator extends Component {
                                 onPress={() => this.performOperation('/')}>
                                 ÷
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(7)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(7)}>
                                 7
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(8)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(8)}>
                                 8
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(9)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(9)}>
                                 9
                             </CalculatorKey>
                             <CalculatorKey
@@ -354,19 +373,13 @@ class SimpleCalculator extends Component {
                                 onPress={() => this.performOperation('*')}>
                                 ×
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(4)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(4)}>
                                 4
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(5)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(5)}>
                                 5
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(6)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(6)}>
                                 6
                             </CalculatorKey>
                             <CalculatorKey
@@ -374,19 +387,13 @@ class SimpleCalculator extends Component {
                                 onPress={() => this.performOperation('-')}>
                                 −
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(1)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(1)}>
                                 1
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(2)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(2)}>
                                 2
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(3)}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDigit(3)}>
                                 3
                             </CalculatorKey>
                             <CalculatorKey
@@ -399,9 +406,7 @@ class SimpleCalculator extends Component {
                                 onPress={() => this.inputDigit(0)}>
                                 0
                             </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDot()}>
+                            <CalculatorKey className='blue-background' onPress={() => this.inputDot()}>
                                 .
                             </CalculatorKey>
                             <CalculatorKey
