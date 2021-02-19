@@ -102,3 +102,390 @@ button:focus {
 .translateY-4 {
     transform: translateY(4px);
 }
+
+@media only screen and (max-width: 949px) {
+    #scientific-calculator .scope-title {
+        font-size: 30px;
+    }
+
+    #scientific-calculator {
+        width: 90%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 110px;
+        width: 97.5%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 50px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 90%;
+        margin: 0 auto 90px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.7%;
+        height: 52px;
+        font-size: 18px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18.5%;
+    }
+}
+
+@media only screen and (max-width: 782px) {
+    #scientific-calculator .scope-title {
+        font-size: 27px;
+        margin-bottom: 65px;
+    }
+
+    #scientific-calculator {
+        width: 90%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 110px;
+        width: 97%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 50px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 90%;
+        margin: 0 auto 90px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.5%;
+        height: 50px;
+        font-size: 16px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18.3%;
+    }
+}
+
+@media only screen and (max-width: 682px) {
+    #scientific-calculator .scope-title {
+        font-size: 27px;
+        margin-bottom: 65px;
+    }
+
+    #scientific-calculator {
+        width: 85%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 110px;
+        width: 97.5%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 50px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 100px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.4%;
+        height: 50px;
+        font-size: 15px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18.3%;
+    }
+}
+
+@media only screen and (max-width: 611px) {
+    #scientific-calculator .scope-title {
+        font-size: 27px;
+        margin-bottom: 65px;
+    }
+
+    #scientific-calculator {
+        width: 85%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 110px;
+        width: 97.5%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 50px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 110px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.2%;
+        height: 50px;
+        font-size: 14px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18.2%;
+    }
+}
+
+@media only screen and (max-width: 545px) {
+    #scientific-calculator .scope-title {
+        font-size: 27px;
+        margin-bottom: 70px;
+    }
+
+    #scientific-calculator {
+        width: 85%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 100px;
+        width: 98.5%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 50px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 110px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.5%;
+        height: 50px;
+        font-size: 12px;
+        margin: 3px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18%;
+    }
+}
+
+@media only screen and (max-width: 492px) {
+    #scientific-calculator .scope-title {
+        font-size: 27px;
+        margin-bottom: 70px;
+    }
+
+    #scientific-calculator {
+        width: 90%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 100px;
+        width: 98.5%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 50px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 110px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.5%;
+        height: 50px;
+        font-size: 12px;
+        margin: 3px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18%;
+    }
+}
+
+@media only screen and (max-width: 465px) {
+    #scientific-calculator .scope-title {
+        font-size: 27px;
+        margin-top: 60px;
+        margin-bottom: 70px;
+    }
+
+    #scientific-calculator {
+        width: 90%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 100px;
+        width: 98.5%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 45px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 120px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.4%;
+        height: 45px;
+        font-size: 10px;
+        margin: 3px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18.2%;
+    }
+}
+
+@media only screen and (max-width: 439px) {
+    #scientific-calculator .scope-title {
+        font-size: 25px;
+        margin-top: 60px;
+        margin-bottom: 70px;
+    }
+
+    #scientific-calculator {
+        width: 90%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 100px;
+        width: 97%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 45px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 120px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 8.1%;
+        height: 45px;
+        font-size: 10px;
+        margin: 3px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 18.1%;
+    }
+}
+
+@media only screen and (max-width: 372px) {
+    #scientific-calculator .scope-title {
+        font-size: 23px;
+        margin-bottom: 70px;
+    }
+
+    #scientific-calculator {
+        width: 85%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 100px;
+        width: 97%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 42px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 120px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 7.8%;
+        height: 40px;
+        font-size: 8px;
+        margin: 3px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 17.8%;
+    }
+}
+
+@media only screen and (max-width: 343px) {
+    #scientific-calculator .scope-title {
+        font-size: 20px;
+        margin-bottom: 70px;
+    }
+
+    #scientific-calculator {
+        width: 85%;
+        margin: auto;
+    }
+
+    #scientific-calculator .result {
+        font-size: 17px;
+        height: 100px;
+        width: 97%;
+        margin: 8px auto;
+    }
+
+    #scientific-calculator .result p {
+        font-size: 40px;
+    }
+
+    #scientific-calculator .calculator-body {
+        max-width: 100%;
+        margin: 0 auto 120px;
+    }
+
+    #scientific-calculator .calculator-key {
+        width: 7.5%;
+        height: 40px;
+        font-size: 7px;
+        margin: 3px;
+    }
+
+    #scientific-calculator .zero-num {
+        width: 17.5%;
+    }
+}

@@ -41,17 +41,20 @@ class AutoScalingText extends Component {
 class CalculatorDisplay extends Component {
     render() {
         const { value, ...props } = this.props;
-
         const language = navigator.language || 'en-US';
-        let formattedValue = parseFloat(value).toLocaleString(language, {
+        const escapedKeys = [' e ', '(', ')'];
+        let isNumeric = true;
+
+        escapedKeys.map((key) => {
+            if (value.includes(key)) isNumeric = false;
+        });
+
+        const parsedValue = isNumeric ? parseFloat(value) : value;
+
+        let formattedValue = parsedValue.toLocaleString(language, {
             useGrouping: true,
             maximumFractionDigits: 10,
         });
-
-        // Add back missing .0 in e.g. 12.0
-        const match = value.match(/\.\d*?(0*)$/);
-
-        if (match) formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
 
         return (
             <div {...props}>
@@ -79,12 +82,10 @@ const CalculatorOperations = {
     '+': (prevValue, nextValue) => prevValue + nextValue,
     '-': (prevValue, nextValue) => prevValue - nextValue,
     '=': (prevValue, nextValue) => nextValue,
-    'nthRoot':(prevValue, nextValue) => Math.pow(nextValue, 1/prevValue),
-    'xPowY': (prevValue, nextValue) => Math.pow(prevValue, nextValue),
-    'logY': (prevValue, nextValue) => Math.log(nextValue)/ Math.log(prevValue),
-    'yPowX': (prevValue, nextValue) =>  Math.pow(nextValue, prevValue),
-    'ee': (prevValue, nextValue) => prevValue * Math.pow(10,nextValue),
-    
+    nthRoot: (prevValue, nextValue) => Math.pow(parseFloat(nextValue), 1 / prevValue),
+    xPowY: (prevValue, nextValue) => Math.pow(parseFloat(prevValue), nextValue),
+    logY: (prevValue, nextValue) => Math.log(parseFloat(nextValue)) / Math.log(parseFloat(prevValue)),
+    yPowX: (prevValue, nextValue) => Math.pow(parseFloat(nextValue), prevValue),
 };
 
 
@@ -411,11 +412,6 @@ class ScientificCalculator extends Component {
         this.setState({ displayValue: String(Math.cbrt(parseFloat(displayValue))), done: true });
     }
 
-    // nthRoot() {
-    //     const { displayValue } = this.state;
-    //     this.setState({displayValue: String(Math.pow(parseFloat(displayValue), 1/nextValue))})
-    // }
-
     handleKeyDown = (event) => {
         let { key } = event;
 
@@ -675,8 +671,9 @@ class ScientificCalculator extends Component {
                                     <small>3</small>
                                 </sup>
                             </CalculatorKey>
-                            <CalculatorKey className='blue-light-background translateY-3'
-                            onPress={() => this.performOperation('xPowY')}>
+                            <CalculatorKey
+                                className='blue-light-background translateY-3'
+                                onPress={() => this.performOperation('xPowY')}>
                                 x
                                 <sup>
                                     <small>y</small>
@@ -692,8 +689,9 @@ class ScientificCalculator extends Component {
                                     </sup>
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY-3'
-                                onPress={() => this.performOperation('yPowX')}>
+                                <CalculatorKey
+                                    className='dark-blue-background translateY-3'
+                                    onPress={() => this.performOperation('yPowX')}>
                                     y
                                     <sup>
                                         <small>x</small>
@@ -767,8 +765,9 @@ class ScientificCalculator extends Component {
                                     ln
                                 </CalculatorKey>
                             ) : (
-                                <CalculatorKey className='dark-blue-background translateY--1'
-                                onPress={() => this.performOperation('logY')}>
+                                <CalculatorKey
+                                    className='dark-blue-background translateY--1'
+                                    onPress={() => this.performOperation('logY')}>
                                     log
                                     <sub>
                                         <small>y</small>
