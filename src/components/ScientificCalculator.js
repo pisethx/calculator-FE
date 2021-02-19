@@ -79,11 +79,14 @@ const CalculatorOperations = {
     '+': (prevValue, nextValue) => prevValue + nextValue,
     '-': (prevValue, nextValue) => prevValue - nextValue,
     '=': (prevValue, nextValue) => nextValue,
-    'nthRoot':(prevValue, nextValue) => Math.pow(parseFloat(nextValue), 1/prevValue),
-    'xPowY': (prevValue, nextValue) => Math.pow(parseFloat(prevValue), nextValue),
-    'logY': (prevValue, nextValue) => Math.log(parseFloat(nextValue))/ Math.log(parseFloat(prevValue)),
-    'yPowX': (prevValue, nextValue) =>  Math.pow(parseFloat(nextValue), prevValue),
+    'nthRoot':(prevValue, nextValue) => Math.pow(nextValue, 1/prevValue),
+    'xPowY': (prevValue, nextValue) => Math.pow(prevValue, nextValue),
+    'logY': (prevValue, nextValue) => Math.log(nextValue)/ Math.log(prevValue),
+    'yPowX': (prevValue, nextValue) =>  Math.pow(nextValue, prevValue),
+    'ee': (prevValue, nextValue) => prevValue * Math.pow(10,nextValue),
+    
 };
+
 
 class ScientificCalculator extends Component {
     state = {
@@ -230,6 +233,41 @@ class ScientificCalculator extends Component {
         });
     }
 
+
+    ee(){
+
+
+        const { displayValue } = this.state;
+        
+
+
+        let result;
+        if (displayValue === '0'){
+            result = displayValue;
+            console.log(displayValue);
+        }
+        else {
+            result = displayValue + 'e';
+            console.log(displayValue+'e');
+        }
+        this.setState({
+            displayValue: 'result',
+        });
+        
+        
+
+
+        // const splitted =  displayValue.split("e");
+
+        
+
+
+        // const result = String(1 / displayValue);
+        // this.setState({ displayValue: result, done: true });
+    }
+
+
+
     multiplicativeInverse() {
         const { displayValue } = this.state;
 
@@ -334,6 +372,7 @@ class ScientificCalculator extends Component {
     }
 
     tanInverse() {
+        console.log('hello');   
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
@@ -820,7 +859,8 @@ class ScientificCalculator extends Component {
                                 e
                             </CalculatorKey>
                             <CalculatorKey
-                                className={'blue-light-background ' + (this.state.shift && 'translateY--3')}>
+                                className={'blue-light-background ' + (this.state.shift && 'translateY--3')}
+                                onPress={() => this.ee()}>
                                 EE
                             </CalculatorKey>
                             <CalculatorKey
