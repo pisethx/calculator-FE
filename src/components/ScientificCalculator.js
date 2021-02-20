@@ -82,10 +82,10 @@ const CalculatorOperations = {
     '+': (prevValue, nextValue) => prevValue + nextValue,
     '-': (prevValue, nextValue) => prevValue - nextValue,
     '=': (prevValue, nextValue) => nextValue,
-    nthRoot: (prevValue, nextValue) => Math.pow(parseFloat(nextValue), 1 / prevValue),
-    xPowY: (prevValue, nextValue) => Math.pow(parseFloat(prevValue), nextValue),
-    logY: (prevValue, nextValue) => Math.log(parseFloat(nextValue)) / Math.log(parseFloat(prevValue)),
-    yPowX: (prevValue, nextValue) => Math.pow(parseFloat(nextValue), prevValue),
+    nthRoot: (prevValue, nextValue) => Math.pow(nextValue, 1 / prevValue),
+    xPowY: (prevValue, nextValue) => Math.pow(prevValue, nextValue),
+    yPowX: (prevValue, nextValue) => Math.pow(nextValue, prevValue),
+    logY: (prevValue, nextValue) => Math.log(nextValue) / Math.log(prevValue),
 };
 
 class ScientificCalculator extends Component {
@@ -97,6 +97,7 @@ class ScientificCalculator extends Component {
         done: false,
         shift: false,
         degree: false,
+        ee: false,
         isMemoryActive: false,
         memory: {
             memory_plus: 0,
@@ -128,6 +129,7 @@ class ScientificCalculator extends Component {
             operator: null,
             waitingForOperand: false,
             done: false,
+            ee: false,
             isMemoryActive: false,
         });
     }
@@ -209,8 +211,18 @@ class ScientificCalculator extends Component {
     }
 
     performOperation(nextOperator) {
-        const { value, displayValue, operator, waitingForOperand, isMemoryActive } = this.state;
+        const { value, displayValue, operator, waitingForOperand, isMemoryActive, ee } = this.state;
         const inputValue = parseFloat(displayValue);
+
+        // ee calculation
+        if (ee === true) {
+            const currentValue = displayValue.replace(/\s/g, '');
+            return this.setState({
+                displayValue: parseFloat(currentValue).toPrecision(),
+                done: true,
+                ee: false,
+            });
+        }
 
         if (value == null) {
             this.setState({
@@ -538,6 +550,18 @@ class ScientificCalculator extends Component {
         this.setState({ displayValue: String(Math.pow(2, parseFloat(displayValue))), done: true });
     }
 
+    ee() {
+        const { displayValue, done, ee } = this.state;
+
+        if (done === false) {
+            if (ee === true) {
+                this.setState({ displayValue });
+            } else {
+                this.setState({ displayValue: displayValue + ' e ', ee: true });
+            }
+        }
+    }
+
     render() {
         const { displayValue } = this.state;
         const clearDisplay = displayValue !== '0';
@@ -821,7 +845,8 @@ class ScientificCalculator extends Component {
                                 e
                             </CalculatorKey>
                             <CalculatorKey
-                                className={'blue-light-background ' + (this.state.shift && 'translateY--3')}>
+                                className={'blue-light-background ' + (this.state.shift && 'translateY--3')}
+                                onPress={() => this.ee()}>
                                 EE
                             </CalculatorKey>
                             <CalculatorKey
