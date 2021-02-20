@@ -29,6 +29,7 @@ const RandomPicker = () => {
                             <option value='random-picker' selected>
                                 Random Picker
                             </option>
+                            <option value='custom-list'>Custom List</option>
                         </select>
                     </div>
                     <form className='data-input'>

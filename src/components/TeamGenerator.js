@@ -73,6 +73,7 @@ const TeamGenerator = () => {
                             <option value='yes-or-no'>Yes or No</option>
                             <option value='decision-maker'>Decision Maker</option>
                             <option value='random-picker'>Random Picker</option>
+                            <option value='custom-list'>Custom List</option>
                         </select>
                     </div>
                     <form className='data-input'>
@@ -82,7 +83,7 @@ const TeamGenerator = () => {
                         <br />
                         <label>Groups</label>
                         <br />
-                        <input type='number' name='numOfGroup' min='1' max='10' placeholder='1' required />
+                        <input type='number' name='numOfGroup' min='1' max='100' placeholder='1' required />
                         <div className='randomizer-btn'>
                             <button type='submit'>Start</button>
                         </div>

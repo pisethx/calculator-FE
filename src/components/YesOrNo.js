@@ -29,6 +29,7 @@ const YesOrNo = () => {
                             </option>
                             <option value='decision-maker'>Decision Maker</option>
                             <option value='random-picker'>Random Picker</option>
+                            <option value='custom-list'>Custom List</option>
                         </select>
                     </div>
                     <form className='data-input'>

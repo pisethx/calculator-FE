@@ -2,7 +2,8 @@
 #name-picker .flex-container,
 #yes-or-no .flex-container,
 #decision-maker .flex-container,
-#random-picker .flex-container {
+#random-picker .flex-container,
+#custom-list .flex-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -51,11 +52,33 @@
     color: #ffffff;
 }
 
-.random-result p {
+#name-picker .random-result p,
+#yes-or-no .random-result p,
+#decision-maker .random-result p,
+#random-picker .random-result p {
     text-align: center;
     position: relative;
     top: 45%;
     font-size: 36px;
+}
+
+#custom-list .random-result ol {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    transform: translateX(8%);
+    line-height: 3.5em;
+}
+
+#custom-list .random-result li::marker {
+    font-size: 16px;
+}
+
+#custom-list .random-result li {
+    min-width: 24%;
+    margin-right: 40px;
+    font-size: 27px;
 }
 
 .random-setup {
@@ -106,8 +129,23 @@
     color: #959595;
 }
 
+.check-duplicate label {
+    font-size: 14px;
+    position: absolute;
+    left: 60px;
+    bottom: 103px;
+}
+
+.check-duplicate input {
+    margin-top: 10px;
+}
+
 .randomizer-btn {
     margin-top: 20px;
+}
+
+#custom-list .randomizer-btn {
+    margin-top: 10px;
 }
 
 .randomizer-btn button {
@@ -165,6 +203,15 @@
         width: 410px;
         height: 190px;
     }
+
+    .check-duplicate label {
+        bottom: 78px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 38px;
+        font-size: 25px;
+    }
 }
 
 @media only screen and (max-width: 1125px) {
@@ -178,6 +225,20 @@
         height: 446px;
     }
 
+    #custom-list .random-result li::marker {
+        font-size: 16px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 34px;
+        font-size: 25px;
+    }
+
+    .check-duplicate label {
+        font-size: 13px;
+        bottom: 68px;
+    }
+
     .random-setup textarea {
         width: 365px;
         height: 150px;
@@ -189,9 +250,11 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         margin: 0 30px 80px 30px;
     }
+
     #team-generator .random-result > * {
         flex: 0 45%;
     }
@@ -200,6 +263,29 @@
     .random-setup {
         width: 400px;
         height: 396px;
+    }
+
+    .random-setup {
+        padding: 30px;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 15px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 29px;
+        font-size: 23px;
+    }
+
+    .check-duplicate label {
+        font-size: 13px;
+        left: 50px;
+        bottom: 68px;
+    }
+
+    #custom-list textarea {
+        height: 110px;
     }
 
     .random-setup textarea {
@@ -227,7 +313,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         margin: 0 30px 100px 30px;
     }
     #team-generator .random-result > * {
@@ -240,6 +327,25 @@
         height: 390px;
         padding: 30px;
         font-size: 16px;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 15px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 28px;
+        font-size: 21px;
+    }
+
+    .check-duplicate label {
+        font-size: 12px;
+        left: 49px;
+        bottom: 74px;
+    }
+
+    #custom-list textarea {
+        height: 110px;
     }
 
     .random-setup textarea {
@@ -262,7 +368,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         margin: 0 25px 100px 25px;
     }
 
@@ -276,6 +383,25 @@
         height: 384px;
         padding: 25px;
         font-size: 15px;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 14px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 27px;
+        font-size: 19px;
+    }
+
+    .check-duplicate label {
+        font-size: 12px;
+        left: 45px;
+        bottom: 81px;
+    }
+
+    #custom-list textarea {
+        height: 110px;
     }
 
     .random-setup textarea {
@@ -298,7 +424,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         flex-direction: column;
         align-items: center;
     }
@@ -314,6 +441,29 @@
         padding: 40px;
         font-size: 18px;
         margin-bottom: 50px;
+    }
+
+    #custom-list .random-result ol {
+        line-height: 3.5em;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 16px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 40px;
+        font-size: 27px;
+    }
+
+    .check-duplicate label {
+        font-size: 14px;
+        left: 60px;
+        bottom: 103px;
+    }
+
+    #custom-list textarea {
+        height: 220px;
     }
 
     .random-setup textarea {
@@ -341,7 +491,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         flex-direction: column;
         align-items: center;
     }
@@ -357,6 +508,28 @@
         padding: 40px;
         font-size: 18px;
         margin-bottom: 50px;
+    }
+
+    #custom-list .random-result ol {
+        line-height: 3.5em;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 15px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 39px;
+        font-size: 25px;
+    }
+
+    .check-duplicate label {
+        font-size: 13px;
+        bottom: 94px;
+    }
+
+    #custom-list textarea {
+        height: 180px;
     }
 
     .random-setup textarea {
@@ -384,7 +557,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         flex-direction: column;
         align-items: center;
     }
@@ -400,6 +574,28 @@
         padding: 40px;
         font-size: 18px;
         margin-bottom: 50px;
+    }
+
+    #custom-list .random-result ol {
+        line-height: 3.5em;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 15px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 34px;
+        font-size: 23px;
+    }
+
+    .check-duplicate label {
+        font-size: 13px;
+        bottom: 79px;
+    }
+
+    #custom-list textarea {
+        height: 140px;
     }
 
     .random-setup textarea {
@@ -427,7 +623,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         flex-direction: column;
         align-items: center;
     }
@@ -443,6 +640,29 @@
         padding: 30px;
         font-size: 16px;
         margin-bottom: 50px;
+    }
+
+    #custom-list .random-result ol {
+        line-height: 3.5em;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 14px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 31px;
+        font-size: 21px;
+    }
+
+    .check-duplicate label {
+        font-size: 12px;
+        left: 48px;
+        bottom: 83px;
+    }
+
+    #custom-list textarea {
+        height: 115px;
     }
 
     .random-setup textarea {
@@ -470,7 +690,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         flex-direction: column;
         align-items: center;
     }
@@ -486,6 +707,29 @@
         padding: 25px;
         font-size: 15px;
         margin-bottom: 50px;
+    }
+
+    #custom-list .random-result ol {
+        line-height: 3em;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 14px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 28px;
+        font-size: 19px;
+    }
+
+    .check-duplicate label {
+        font-size: 12px;
+        left: 44px;
+        bottom: 72px;
+    }
+
+    #custom-list textarea {
+        height: 90px;
     }
 
     .random-setup textarea {
@@ -513,7 +757,8 @@
     #name-picker .flex-container,
     #yes-or-no .flex-container,
     #decision-maker .flex-container,
-    #random-picker .flex-container {
+    #random-picker .flex-container,
+    #custom-list .flex-container {
         flex-direction: column;
         align-items: center;
     }
@@ -529,6 +774,29 @@
         padding: 25px;
         font-size: 14px;
         margin-bottom: 50px;
+    }
+
+    #custom-list .random-result ol {
+        line-height: 2.8em;
+    }
+
+    #custom-list .random-result li::marker {
+        font-size: 14px;
+    }
+
+    #custom-list .random-result li {
+        margin-right: 24px;
+        font-size: 18px;
+    }
+
+    .check-duplicate label {
+        font-size: 12px;
+        left: 44px;
+        bottom: 58px;
+    }
+
+    #custom-list textarea {
+        height: 70px;
     }
 
     .random-setup textarea {

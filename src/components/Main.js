@@ -14,6 +14,7 @@ import NamePicker from './NamePicker';
 import YesOrNo from './YesOrNo';
 import DecisionMaker from './DecisionMaker';
 import RandomPicker from './RandomPicker';
+import CustomList from './CustomList';
 
 const Main = () => {
     return (
@@ -32,6 +33,7 @@ const Main = () => {
                 <Route path='/yes-or-no' component={YesOrNo} />
                 <Route path='/decision-maker' component={DecisionMaker} />
                 <Route path='/random-picker' component={RandomPicker} />
+                <Route path='/custom-list' component={CustomList} />
             </Switch>
             <Footer />
         </div>
