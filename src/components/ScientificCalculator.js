@@ -270,8 +270,13 @@ class ScientificCalculator extends Component {
         } else if (isbracketsActive === true) {
             if (isLeftBracket === true && isDigit === false && isOperator === true) {
                 if (nextOperator === '/' || nextOperator === '*') {
-                    this.setState({ displayValue: displayValue });
-                } else this.setState({ displayValue: displayValue + nextOperator, isOperator: false });
+                    this.setState({ displayValue });
+                } else {
+                    this.setState({
+                        displayValue: displayValue + nextOperator,
+                        isOperator: false,
+                    });
+                }
             }
         } else {
             const inputValue = parseFloat(displayValue);
@@ -310,11 +315,11 @@ class ScientificCalculator extends Component {
     }
 
     leftBracket() {
-        const { displayValue, isDigit, isOperator, done } = this.state;
+        const { displayValue, isDigit, isOperator } = this.state;
 
         this.setState({
             displayValue:
-                done || displayValue === '0'
+                displayValue === '0' || displayValue === 'Error'
                     ? '('
                     : isDigit === true && isOperator === false
                     ? displayValue + '*('
@@ -324,7 +329,6 @@ class ScientificCalculator extends Component {
             isLeftBracket: true,
             isDigit: false,
         });
-        // }
     }
 
     rightBracket() {
