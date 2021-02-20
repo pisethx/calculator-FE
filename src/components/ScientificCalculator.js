@@ -214,14 +214,20 @@ class ScientificCalculator extends Component {
 
             if (done === true) {
                 this.clearAll();
-                this.setState({ displayValue: String(digit), isDigit: true,  isOperator: false});
+                this.setState({ displayValue: String(digit), 
+                    isDigit: true,  
+                    isOperator: false});
             } else if (isRightBracket === true){
                 this.setState({
-                    displayValue: displayValue+ '*' + digit, isRightBracket: false,isDigit: true, isOperator: false
+                    displayValue: displayValue+ '*' + digit, isRightBracket: false,
+                    isDigit: true, 
+                    isOperator: false
                 });
                 } else {
                 this.setState({
-                    displayValue: displayValue === '0' ? String(digit) : displayValue + digit,isDigit: true, isOperator: false
+                    displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
+                    isDigit: true, 
+                    isOperator: false
                 });
             }
         }
@@ -293,6 +299,7 @@ class ScientificCalculator extends Component {
     }
 
 
+    
     
 
 
