@@ -46,7 +46,7 @@ const Header = () => {
                             <hr />
                         </div>
                     </div>
-                    <Link to='/' className='link'>
+                    <Link to='/unit-converter' className='link'>
                         Unit Converter
                     </Link>
                     {/* <div className='dropdown'>
@@ -55,24 +55,28 @@ const Header = () => {
                         <AiFillCaretDown className='caret-icon' />
                     </button>
                     <div className='dropdown-content display-none'>
-                        <Link to='/' className='dropdown-link'>
+                        <Link to='/team-generator' className='dropdown-link'>
                             Team Generator
                         </Link>
                         <hr />
-                        <Link to='/' className='dropdown-link'>
+                        <Link to='/name-picker' className='dropdown-link'>
                             Name Picker
                         </Link>
                         <hr />
-                        <Link to='/' className='dropdown-link'>
+                        <Link to='/yes-or-no' className='dropdown-link'>
                             Yes or No
                         </Link>
                         <hr />
-                        <Link to='/' className='dropdown-link'>
+                        <Link to='/decison-maker' className='dropdown-link'>
                             Decision Maker
                         </Link>
                         <hr />
-                        <Link to='/' className='dropdown-link'>
+                        <Link to='/random-picker' className='dropdown-link'>
                             Random Picker
+                        </Link>
+                        <hr />
+                        <Link to='/custom-list' className='dropdown-link'>
+                            Custom List
                         </Link>
                         <hr />
                     </div>
@@ -146,7 +150,7 @@ const Header = () => {
                             </div>
                         </div>
                         <hr />
-                        <Link to='/' className='menu-side-link'>
+                        <Link to='/unit-converter' className='menu-side-link'>
                             Unit Converter
                         </Link>
                         <hr />
@@ -164,20 +168,23 @@ const Header = () => {
                                 <MdExpandMore className='expand-icon' />
                             </button>
                             <div className='sub-menu display-none'>
-                                <Link to='/' className='menu-side-link no-mt-menu-side'>
+                                <Link to='/team-generator' className='menu-side-link no-mt-menu-side'>
                                     Team Generator
                                 </Link>
-                                <Link to='/' className='menu-side-link'>
+                                <Link to='/name-picker' className='menu-side-link'>
                                     Name Picker
                                 </Link>
-                                <Link to='/' className='menu-side-link'>
+                                <Link to='/yes-or-no' className='menu-side-link'>
                                     Yes or No
                                 </Link>
-                                <Link to='/' className='menu-side-link'>
+                                <Link to='/decision-maker' className='menu-side-link'>
                                     Decision Maker
                                 </Link>
-                                <Link to='/' className='menu-side-link'>
+                                <Link to='/random-picker' className='menu-side-link'>
                                     Random Picker
+                                </Link>
+                                <Link to='/custom-list' className='menu-side-link'>
+                                    Custom List
                                 </Link>
                             </div>
                             <hr />
