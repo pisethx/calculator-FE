@@ -426,7 +426,7 @@
     #decision-maker .flex-container,
     #random-picker .flex-container,
     #custom-list .flex-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
     }
 
@@ -493,7 +493,7 @@
     #decision-maker .flex-container,
     #random-picker .flex-container,
     #custom-list .flex-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
     }
 
@@ -543,6 +543,7 @@
     }
 
     .randomizer-btn button {
+        border-radius: 7px;
         padding: 5px 30px;
         font-size: 18px;
     }
@@ -559,7 +560,7 @@
     #decision-maker .flex-container,
     #random-picker .flex-container,
     #custom-list .flex-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
     }
 
@@ -609,6 +610,7 @@
     }
 
     .randomizer-btn button {
+        border-radius: 7px;
         padding: 5px 30px;
         font-size: 18px;
     }
@@ -625,7 +627,7 @@
     #decision-maker .flex-container,
     #random-picker .flex-container,
     #custom-list .flex-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
     }
 
@@ -676,6 +678,7 @@
     }
 
     .randomizer-btn button {
+        border-radius: 7px;
         padding: 5px 30px;
         font-size: 16px;
     }
@@ -692,7 +695,7 @@
     #decision-maker .flex-container,
     #random-picker .flex-container,
     #custom-list .flex-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
     }
 
@@ -743,6 +746,7 @@
     }
 
     .randomizer-btn button {
+        border-radius: 7px;
         padding: 5px 30px;
         font-size: 15px;
     }
@@ -759,7 +763,7 @@
     #decision-maker .flex-container,
     #random-picker .flex-container,
     #custom-list .flex-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
     }
 
@@ -810,7 +814,7 @@
     }
 
     .randomizer-btn button {
-        border-radius: 7px;
+        border-radius: 5px;
         padding: 5px 30px;
         font-size: 14px;
     }
