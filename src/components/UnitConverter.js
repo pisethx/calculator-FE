@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/UnitConverter.css';
 import PointTarget from 'react-point';
 import axios from 'axios';
+import { HiSwitchVertical } from 'react-icons/hi';
 
 class AutoScalingText extends Component {
     state = {
@@ -43,19 +44,24 @@ class CalculatorDisplay extends Component {
     render() {
         const { value, ...props } = this.props;
         const language = navigator.language || 'en-US';
+        const escapedKeys = ['e'];
+        let isNumeric = true;
 
-        let formattedValue = parseFloat(value).toLocaleString(language, {
-            useGrouping: true,
-            maximumFractionDigits: 6,
+        escapedKeys.forEach((key) => {
+            if (value.includes(key)) isNumeric = false;
         });
 
-        // Add back missing .0 in e.g. 12.0
-        const match = value.match(/\.\d*?(0*)$/);
+        const parsedValue = isNumeric ? parseFloat(value) : value;
 
-        if (match) formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
+        let formattedValue = parsedValue.toLocaleString(language, {
+            useGrouping: true,
+            maximumFractionDigits: 10,
+        });
+
+        if (value.endsWith('.')) formattedValue += '.';
 
         return (
-            <div {...props} className='calculator-display'>
+            <div {...props}>
                 <AutoScalingText>{formattedValue}</AutoScalingText>
             </div>
         );
@@ -74,59 +80,49 @@ class CalculatorKey extends Component {
     }
 }
 
-
 class SimpleCalculator extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-    this.state = {
-        value: null,
-        displayValue1: '0',
-        displayValue2: '0',
-        operator: null,
-        waitingForOperand: false,
-        selectedType: "area",  
-        unit1: "mm2",
-        unit2: "mm2",
-        type:null,
-        types: 
-        {
-            area: ["mm2","cm2", "m2", "km2","in2", "ft2"],
-            length: ["mm", "cm", "m", "in", "ft", "mi"],
-            temperature: ["C", "K", "F", "R"],
-            volume: ["l", "ml", "kl", "mm3", "cm3","km3"],
-            mass: ["mg", "kg", "g" ,"oz", "lb", "t"],
-            data : ["b", "Kb", "Mb" ],
-            speed: ["m/s", "km/h", "m/h", "knot", "ft/s"],
-            time: ["ms", "s", "h", "d", "week", "month", "year"],
-        }
-    };
-    this.changeSelectOptionHandler = this.changeSelectOptionHandler.bind(this);
-}
+        this.state = {
+            value: null,
+            displayValue1: '0',
+            displayValue2: '0',
+            operator: null,
+            waitingForOperand: false,
+            selectedType: 'area',
+            unit1: 'mm2',
+            unit2: 'mm2',
+            type: null,
+            types: {
+                area: ['mm2', 'cm2', 'm2', 'km2', 'in2', 'ft2'],
+                length: ['mm', 'cm', 'km', 'm', 'in', 'ft', 'mi'],
+                temperature: ['C', 'K', 'F', 'R'],
+                volume: ['l', 'ml', 'kl', 'mm3', 'cm3', 'km3'],
+                mass: ['mg', 'kg', 'g', 'oz', 'lb', 't'],
+                data: ['b', 'Kb', 'Mb'],
+                speed: ['m/s', 'km/h', 'm/h', 'knot', 'ft/s'],
+                time: ['ms', 's', 'h', 'd', 'week', 'month', 'year'],
+            },
+        };
+        this.changeSelectOptionHandler = this.changeSelectOptionHandler.bind(this);
+    }
 
-    changeSelectOptionHandler(event){ 
-        // axios.get(`https://converter.doxxie.live/possible/${event.target.value}`)
-        // .then(res => {
-        //   this.setState({
-        //       types: res.data.possibles,
-        //       selectedType: event.target.value,
-        //   });
-        // })
+    changeSelectOptionHandler(event) {
         this.setState({
             selectedType: event.target.value,
             unit1: this.state.types[event.target.value][0],
             unit2: this.state.types[event.target.value][0],
             displayValue1: '0',
-            displayValue2: '0'
+            displayValue2: '0',
         });
-        // event.target.className="active"
-        console.log(event.target.className)
-        event.preventDefault(); 
-    }; 
+        event.preventDefault();
+    }
 
     clearAll() {
         this.setState({
             value: null,
             displayValue1: '0',
+            displayValue2: '0',
             operator: null,
             waitingForOperand: false,
         });
@@ -135,13 +131,12 @@ class SimpleCalculator extends Component {
     clearDisplay() {
         this.setState({
             displayValue1: '0',
+            displayValue2: '0',
         });
     }
 
     clearLastChar() {
-
         const { displayValue1 } = this.state;
-        
         this.setState({
             displayValue1: displayValue1.substring(0, displayValue1.length - 1) || '0',
         });
@@ -179,9 +174,8 @@ class SimpleCalculator extends Component {
             const hasDot = displayValue1.includes('.');
             const integer = displayValue1.split('.')[0];
 
-            if (!hasDot && integer.length >= 10) {
-                return;
-            }
+            if (!hasDot && integer.length >= 10) return;
+
             this.setState({
                 displayValue1: displayValue1 === '0' ? String(digit) : displayValue1 + digit,
             });
@@ -194,27 +188,20 @@ class SimpleCalculator extends Component {
         if (/\d/.test(key)) {
             event.preventDefault();
             this.inputDigit(parseInt(key, 10));
-        }else if (key === '.') {
+        } else if (key === '.') {
             event.preventDefault();
             this.inputDot();
-        }
-        else if (key === 'Backspace') {
+        } else if (key === 'Backspace') {
             event.preventDefault();
             this.clearLastChar();
-
-            // if (this.state.displayValue1 !== '0') {
-            //     this.clearDisplay();
-            // } else {
-            //     this.clearAll();
-            // }
         }
     };
 
     componentDidMount() {
         document.addEventListener('keydown', this.handleKeyDown);
-        if(this.state.selectedType === ""){
+        if (this.state.selectedType === '') {
             this.setState({
-                selectedType: "area"
+                selectedType: 'area',
             });
         }
     }
@@ -223,171 +210,163 @@ class SimpleCalculator extends Component {
         document.removeEventListener('keydown', this.handleKeyDown);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate() {}
 
-    }
-
-    render() { 
-    console.log(this.state.displayValue1)
-        let options = null; 
+    render() {
+        let options = null;
         const { displayValue1, displayValue2, unit1, unit2 } = this.state;
         const clearDisplay = displayValue1 !== '0';
         const clearText = clearDisplay ? 'C' : 'AC';
 
-        const handleChange = (event) => {   
+        const handleChange = (event) => {
             this.setState({
-                unit1: event.target.value
+                unit1: event.target.value,
+                displayValue2: '0',
             });
-            event.preventDefault(); 
-        }; 
-        const handleChange2 = (event) => {   
+            event.preventDefault();
+        };
+
+        const handleChange2 = (event) => {
             this.setState({
-                unit2: event.target.value
+                unit2: event.target.value,
+                displayValue2: '0',
             });
-            event.preventDefault(); 
-        }; 
-        const getResult = ()=>{
-            axios.get(`https://converter.doxxie.live/convert?from=${this.state.unit1}&to=${this.state.unit2}&amount=${this.state.displayValue1}`)
-      .then(res => {
-        this.setState({
-            displayValue2: res.data.converted
-        });
-      })
-        }
-        const getSwitch = ()=>{  
-        var displayTmp = displayValue1     
-        var unitTmp = unit1  
-        this.setState({
+            event.preventDefault();
+        };
+
+        const getResult = () => {
+            axios
+                .get(
+                    `https://converter.doxxie.live/convert?from=${this.state.unit1}&to=${this.state.unit2}&amount=${this.state.displayValue1}`
+                )
+                .then((res) => {
+                    this.setState({
+                        displayValue2: res.data.converted,
+                    });
+                });
+        };
+
+        const getSwitch = () => {
+            var displayTmp = displayValue1;
+            var unitTmp = unit1;
+            this.setState({
                 displayValue1: displayValue2,
                 displayValue2: displayTmp,
-                unit1 : unit2,
-                unit2 : unitTmp
-        });
+                unit1: unit2,
+                unit2: unitTmp,
+            });
+        };
+
+        this.state.type = this.state.types[this.state.selectedType];
+
+        if (this.state.type) {
+            options = this.state.type.map((el) => <option key={el}>{el}</option>);
         }
 
-        this.state.type = this.state.types[this.state.selectedType]
-
-        if (this.state.type) { 
-            options = this.state.type.map((el) => <option key={el}>{el}</option>); 
-        } 
-
         return (
-         <div id='test'>
-            <div id="measurement">
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="area">Area</button>
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="length">Length</button>
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="temperature" style={{"width":"20%"}}>Temperature</button>
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="volume">Volume</button>
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="mass">Mass</button>
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="data">Data</button>
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="speed">Speed</button>
-                <button onClick={this.changeSelectOptionHandler} className="btn"value="time">Time</button>
-            </div> 
-                  {/* <select>{options}</select>  */}
+            <div id='test'>
+                <div id='measurement'>
+                    <button onClick={this.changeSelectOptionHandler} className='btn' value='area'>
+                        Area
+                    </button>
+                    <button onClick={this.changeSelectOptionHandler} className='btn' value='length'>
+                        Length
+                    </button>
+                    <button
+                        onClick={this.changeSelectOptionHandler}
+                        className='btn'
+                        value='temperature'
+                        style={{ width: '20%' }}>
+                        Temperature
+                    </button>
+                    <button onClick={this.changeSelectOptionHandler} className='btn' value='volume'>
+                        Volume
+                    </button>
+                    <button onClick={this.changeSelectOptionHandler} className='btn' value='mass'>
+                        Mass
+                    </button>
+                    <button onClick={this.changeSelectOptionHandler} className='btn' value='data'>
+                        Data
+                    </button>
+                    <button onClick={this.changeSelectOptionHandler} className='btn' value='speed'>
+                        Speed
+                    </button>
+                    <button onClick={this.changeSelectOptionHandler} className='btn' value='time'>
+                        Time
+                    </button>
+                </div>
                 <div className='calculator-body'>
                     <div className='resultContainer'>
-                            <div className="first-input">
-                            <select value={this.state.unit1} onChange={handleChange}>{options}</select> 
+                        <div className='first-input'>
+                            <select value={this.state.unit1} onChange={handleChange}>
+                                {options}
+                            </select>
                             <p>
                                 <CalculatorDisplay value={displayValue1} />
-                            </p> 
-                            </div>
-                            <div className="second-input">
-                            <select value={this.state.unit2} onChange={handleChange2}>{options}</select> 
-                              <p> 
-                                <CalculatorDisplay value={displayValue2} />
-                               </p>
-                            </div>
+                            </p>
                         </div>
-             
+                        <div className='second-input'>
+                            <select value={this.state.unit2} onChange={handleChange2}>
+                                {options}
+                            </select>
+                            <p>
+                                <CalculatorDisplay value={displayValue2} />
+                            </p>
+                        </div>
+                    </div>
                     <div className='button'>
-                      
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(7)}>
-                                7
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(8)}>
-                                8
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(9)}>
-                                9
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-light-background'
-                                onPress={() => this.clearLastChar()}
-                                >                           
-                               <i class="fas fa-backspace"></i>
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(4)}>
-                                4
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(5)}>
-                                5
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(6)}>
-                                6
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-light-background'
-                                onPress={() => (clearDisplay ? this.clearDisplay() : this.clearAll())}>
-                                {clearText}
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(1)}>
-                                1
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(2)}>
-                                2
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(3)}>
-                                3
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-light-background'
-                                onPress={getSwitch}
-                                >Switch
-                                
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.toggleSign()}>
-                                ±
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDigit(0)}>
-                                0
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='blue-background'
-                                onPress={() => this.inputDot()}>
-                                .
-                            </CalculatorKey>
-                            <CalculatorKey
-                                className='operator black-color yellow-background'
-                                onPress={getResult}>
-                                =
-                            </CalculatorKey>
-                     
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(7)}>
+                            7
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(8)}>
+                            8
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(9)}>
+                            9
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-light-background' onPress={() => this.clearLastChar()}>
+                            <i class='fas fa-backspace'></i>
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(4)}>
+                            4
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(5)}>
+                            5
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(6)}>
+                            6
+                        </CalculatorKey>
+                        <CalculatorKey
+                            className='blue-light-background'
+                            onPress={() => (clearDisplay ? this.clearDisplay() : this.clearAll())}>
+                            {clearText}
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(1)}>
+                            1
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(2)}>
+                            2
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(3)}>
+                            3
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-light-background' onPress={getSwitch}>
+                            <HiSwitchVertical className='switch-icon' />
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.toggleSign()}>
+                            ±
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDigit(0)}>
+                            0
+                        </CalculatorKey>
+                        <CalculatorKey className='blue-background' onPress={() => this.inputDot()}>
+                            .
+                        </CalculatorKey>
+                        <CalculatorKey className='operator black-color yellow-background' onPress={getResult}>
+                            =
+                        </CalculatorKey>
                     </div>
                 </div>
-
             </div>
         );
     }

@@ -1,28 +1,30 @@
 #test {
     margin: 30px auto;
-    /* text-align: center; */
 }
 
-#test .resultContainer{
+#test .resultContainer {
     width: 65%;
     height: 400px;
-    /* margin-bottom: 20px; */
     display: block;
     padding: 4px;
     padding-left: 10px;
 }
 
-#test .first-input{
+#test .first-input {
     margin: 0;
     margin-bottom: 10px;
     height: 189px;
-    background-color: #DEDEDE;
+    background-color: #dedede;
+    overflow: auto;
 }
-#test .second-input{
+
+#test .second-input {
     margin: 0;
     height: 189px;
-    background-color: #DEDEDE;
+    background-color: #dedede;
+    overflow: auto;
 }
+
 #test .scope-title {
     margin: 50px 0;
 }
@@ -58,44 +60,55 @@
     border-radius: 0px 5px 5px 5px;
     display: flex;
 }
-#measurement button{
+
+#mesurement {
+    overflow: auto;
+}
+
+#measurement button {
     width: 10%;
-    height:46px;
-    background-color: #FFC857;
+    height: 46px;
+    background-color: #ffc857;
     border: none;
-    color: #1B3B6F;
+    color: #1b3b6f;
     font-weight: 600;
 }
 
-#measurement button:hover{
-    background-color: #1B3B6F;
-    color: #FFC857;
+#measurement button:hover {
+    background-color: #1b3b6f;
+    color: #ffc857;
 }
-#measurement button:active{
-    background-color: #1B3B6F;
-    color: #FFC857;
+
+#measurement button:active {
+    background-color: #1b3b6f;
+    color: #ffc857;
     border: none;
     outline: none;
 }
-#measurement{
+
+#measurement {
     text-align: center;
 }
-#test select{
+
+#test select {
     outline: none;
     border: none;
-    background-color: #DEDEDE;
+    background-color: #dedede;
 }
-#measurement button:focus{
+
+#measurement button:focus {
     border: none;
     outline: none;
 }
+
 #test .button {
     width: 40%;
     background-color: #1d3557;
     text-align: center;
 }
-.active{
-    background-color:red !important;
+
+.active {
+    background-color: red !important;
 }
 
 #test .memory {
@@ -114,6 +127,7 @@
     font-size: 30px;
     border-radius: 5px;
 }
+
 .calculator-body button {
     border: none;
     color: white;
@@ -124,53 +138,65 @@
     border-radius: 5px;
 }
 
-  @media only screen and (max-width: 900px) {
-    #test .resultContainer{
+@media only screen and (max-width: 900px) {
+    #test .resultContainer {
         width: 55%;
     }
+
     #test .button {
         width: 45%;
     }
-  }
-  @media only screen and (max-width: 800px) {
-    #test .resultContainer{
+}
+
+@media only screen and (max-width: 800px) {
+    #test .resultContainer {
         width: 50%;
     }
+
     #test .button {
         width: 50%;
     }
-  }
-  @media only screen and (max-width: 700px) {
-    #test .resultContainer{
+}
+@media only screen and (max-width: 700px) {
+    #test .resultContainer {
         width: 100%;
     }
+
     #test .button {
         width: 100%;
     }
-    #test .calculator-body{
+
+    #test .calculator-body {
         display: block;
     }
-    #test div.button{
+
+    #test div.button {
         margin-left: 3px;
     }
-    #test .calculator-body button{
+
+    #test .calculator-body button {
         width: 23%;
     }
-  }
-  @media only screen and (max-width: 500px) {
-    #test .resultContainer{
+}
+
+@media only screen and (max-width: 500px) {
+    #test .resultContainer {
         width: 100%;
     }
+
     #test .button {
         width: 100%;
     }
-    #test .calculator-body{
+
+    #test .calculator-body {
         display: block;
     }
-    #test div.button{
+
+    #test div.button {
         margin-left: 3px;
     }
-    #test .calculator-body button{
+
+    #test .calculator-body button {
         width: 22%;
     }
-  }
+}
