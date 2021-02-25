@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../css/Header.css';
+import '../css/header.css';
 import { Link } from 'react-router-dom';
 import { AiFillCaretDown, AiOutlineClose } from 'react-icons/ai';
 import { MdAccountCircle, MdExpandMore } from 'react-icons/md';

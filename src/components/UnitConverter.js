@@ -156,12 +156,11 @@ class SimpleCalculator extends Component {
     }
 
     inputDot() {
-        const { displayValue1, waitingForOperand} = this.state;
-        if (waitingForOperand === true) {
-            this.setState({ displayValue1: '0.', waitingForOperand: false });
-        } else if (!/\./.test(displayValue1)) {
+        const { displayValue1 } = this.state;
+
+        if (!/\./.test(displayValue1)) {
             this.setState({
-                displayValue: displayValue1 + '.',
+                displayValue1: displayValue1 + '.',
                 waitingForOperand: false,
             });
         }
