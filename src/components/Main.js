@@ -31,9 +31,7 @@ const Main = () => {
             <Route path="/login" component={Login} />
             <Route path="/registration" component={Registration} />
             <Route path="/reset-password-link" component={ResetPasswordLink} />
-            {state.isAuthenticated && (
-              <Route path="/reset-password" component={ResetPassword} />
-            )}
+            {<Route path="/reset-password" component={ResetPassword} />}
             {state.isAuthenticated && (
               <Route path="/team-generator" component={TeamGenerator} />
             )}

@@ -67,8 +67,10 @@ export const forgotPassword = async (form) => {
   } // set success message
 };
 
-export const resetPassword = async (form) => {
-  const res = await tryCatch(axios.post("/auth/reset-password", form));
+export const resetPassword = async ({ query, password }) => {
+  const res = await tryCatch(
+    axios.post("/auth/reset-password" + query, { password })
+  );
   if (!hasError(res)) {
   } // set success message
 };
