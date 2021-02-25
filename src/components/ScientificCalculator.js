@@ -184,9 +184,12 @@ class ScientificCalculator extends Component {
     }
 
     inputDot() {
-        const { displayValue, waitingForOperand, isRightBracket } = this.state;
+        const { displayValue, waitingForOperand, isRightBracket, done } = this.state;
 
-        if (isRightBracket === true) {
+        if (done === true) {
+            this.clearAll();
+            this.setState({ displayValue: '0.' });
+        } else if (isRightBracket === true) {
             this.setState({ displayValue: `${displayValue}*0.`, isRightBracket: false });
         } else if (waitingForOperand === true) {
             this.setState({ displayValue: '0.', waitingForOperand: false });
@@ -361,7 +364,7 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
 
         if (displayValue === '0') {
-            this.setState({ displayValue: 'Not a number' });
+            return this.setState({ displayValue: 'NaN', done: true });
         }
 
         const result = String(1 / displayValue);
@@ -412,7 +415,7 @@ class ScientificCalculator extends Component {
             this.setState({ displayValue: String(Math.tan(displayValue)), done: true });
         } else {
             if (displayValue === '90' || displayValue === '270') {
-                this.setState({ displayValue: 'Not a number' });
+                this.setState({ displayValue: 'NaN', done: true });
             } else {
                 const result = String(Math.tan((parseFloat(displayValue) * Math.PI) / 180));
                 this.setState({ displayValue: result, done: true });
@@ -593,7 +596,7 @@ class ScientificCalculator extends Component {
 
         // if there is a dot, return NaN
         if (displayValue.indexOf('.') !== -1) {
-            return this.setState({ displayValue: 'NaN' });
+            return this.setState({ displayValue: 'NaN', done: true });
         }
 
         if (displayValue === '1' || displayValue === '-1') {
@@ -621,7 +624,7 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
 
         if (parseInt(displayValue) <= 0) {
-            return this.setState({ displayValue: 'Not a Number' });
+            return this.setState({ displayValue: 'NaN', done: true });
         }
 
         this.setState({ displayValue: String(Math.log10(parseFloat(displayValue))), done: true });
@@ -631,7 +634,7 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
 
         if (parseInt(displayValue) <= 0) {
-            return this.setState({ displayValue: 'Not a Number' });
+            return this.setState({ displayValue: 'NaN', done: true });
         }
 
         this.setState({ displayValue: String(Math.log2(parseFloat(displayValue))), done: true });
@@ -641,7 +644,7 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
 
         if (parseInt(displayValue) <= 0) {
-            return this.setState({ displayValue: 'Not a Number' });
+            return this.setState({ displayValue: 'NaN', done: true });
         }
 
         this.setState({ displayValue: String(Math.log(parseFloat(displayValue))), done: true });
