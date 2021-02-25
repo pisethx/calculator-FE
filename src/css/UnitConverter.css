@@ -9,17 +9,18 @@
     /* margin-bottom: 20px; */
     display: block;
     padding: 4px;
+    padding-left: 10px;
 }
 
 #test .first-input{
     margin: 0;
-    margin-bottom: 20px;
-    height: 183px;
+    margin-bottom: 10px;
+    height: 189px;
     background-color: #DEDEDE;
 }
 #test .second-input{
     margin: 0;
-    height: 183px;
+    height: 189px;
     background-color: #DEDEDE;
 }
 #test .scope-title {
@@ -87,13 +88,14 @@
 #measurement button:focus{
     border: none;
     outline: none;
-    color: #FFC857;
-    background-color: #1B3B6F;
 }
 #test .button {
     width: 40%;
     background-color: #1d3557;
     text-align: center;
+}
+.active{
+    background-color:red !important;
 }
 
 #test .memory {
@@ -116,9 +118,59 @@
     border: none;
     color: white;
     margin: 4px;
-    width: 90px;
-    height: 90px;
+    width: 22%;
+    height: 91px;
     font-size: 30px;
     border-radius: 5px;
 }
 
+  @media only screen and (max-width: 900px) {
+    #test .resultContainer{
+        width: 55%;
+    }
+    #test .button {
+        width: 45%;
+    }
+  }
+  @media only screen and (max-width: 800px) {
+    #test .resultContainer{
+        width: 50%;
+    }
+    #test .button {
+        width: 50%;
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    #test .resultContainer{
+        width: 100%;
+    }
+    #test .button {
+        width: 100%;
+    }
+    #test .calculator-body{
+        display: block;
+    }
+    #test div.button{
+        margin-left: 3px;
+    }
+    #test .calculator-body button{
+        width: 23%;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    #test .resultContainer{
+        width: 100%;
+    }
+    #test .button {
+        width: 100%;
+    }
+    #test .calculator-body{
+        display: block;
+    }
+    #test div.button{
+        margin-left: 3px;
+    }
+    #test .calculator-body button{
+        width: 22%;
+    }
+  }

@@ -74,27 +74,22 @@ class CalculatorKey extends Component {
     }
 }
 
-const CalculatorOperations = {
-    '/': (prevValue, nextValue) => prevValue / nextValue,
-    '*': (prevValue, nextValue) => prevValue * nextValue,
-    '+': (prevValue, nextValue) => prevValue + nextValue,
-    '-': (prevValue, nextValue) => prevValue - nextValue,
-    '=': (prevValue, nextValue) => nextValue,
-};
 
 class SimpleCalculator extends Component {
     constructor(props){
         super(props);
     this.state = {
         value: null,
-        displayValue: '0',
+        displayValue1: '0',
+        displayValue2: '0',
         operator: null,
         waitingForOperand: false,
         selectedType: "area",  
         unit1: "mm2",
         unit2: "mm2",
-        result: "0", 
-        types: {
+        type:null,
+        types: 
+        {
             area: ["mm2","cm2", "m2", "km2","in2", "ft2"],
             length: ["mm", "cm", "m", "in", "ft", "mi"],
             temperature: ["C", "K", "F", "R"],
@@ -109,18 +104,29 @@ class SimpleCalculator extends Component {
 }
 
     changeSelectOptionHandler(event){ 
+        // axios.get(`https://converter.doxxie.live/possible/${event.target.value}`)
+        // .then(res => {
+        //   this.setState({
+        //       types: res.data.possibles,
+        //       selectedType: event.target.value,
+        //   });
+        // })
         this.setState({
             selectedType: event.target.value,
             unit1: this.state.types[event.target.value][0],
-            unit2: this.state.types[event.target.value][0]
+            unit2: this.state.types[event.target.value][0],
+            displayValue1: '0',
+            displayValue2: '0'
         });
+        // event.target.className="active"
+        console.log(event.target.className)
         event.preventDefault(); 
     }; 
 
     clearAll() {
         this.setState({
             value: null,
-            displayValue: '0',
+            displayValue1: '0',
             operator: null,
             waitingForOperand: false,
         });
@@ -128,55 +134,56 @@ class SimpleCalculator extends Component {
 
     clearDisplay() {
         this.setState({
-            displayValue: '0',
+            displayValue1: '0',
         });
     }
 
     clearLastChar() {
-        const { displayValue } = this.state;
+        const { displayValue1 } = this.state;
         
         this.setState({
-            displayValue: displayValue.substring(0, displayValue.length - 1) || '0',
+            displayValue1: displayValue1.substring(0, displayValue1.length - 1) || '0',
         });
     }
 
     toggleSign() {
-        const { displayValue } = this.state;
-        const newValue = parseFloat(displayValue) * -1;
+        const { displayValue1 } = this.state;
+        const newValue = parseFloat(displayValue1) * -1;
 
         this.setState({
-            displayValue: String(newValue),
+            displayValue1: String(newValue),
         });
     }
 
     inputDot() {
-        const { displayValue } = this.state;
-
-        if (!/\./.test(displayValue)) {
+        const { displayValue1, waitingForOperand} = this.state;
+        if (waitingForOperand === true) {
+            this.setState({ displayValue1: '0.', waitingForOperand: false });
+        } else if (!/\./.test(displayValue1)) {
             this.setState({
-                displayValue: displayValue + '.',
+                displayValue: displayValue1 + '.',
                 waitingForOperand: false,
             });
         }
     }
 
     inputDigit(digit) {
-        const { displayValue, waitingForOperand } = this.state;
+        const { displayValue1, waitingForOperand } = this.state;
 
         if (waitingForOperand) {
             this.setState({
-                displayValue: String(digit),
+                displayValue1: String(digit),
                 waitingForOperand: false,
             });
         } else {
-            const hasDot = displayValue.includes('.');
-            const integer = displayValue.split('.')[0];
+            const hasDot = displayValue1.includes('.');
+            const integer = displayValue1.split('.')[0];
 
             if (!hasDot && integer.length >= 10) {
                 return;
             }
             this.setState({
-                displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
+                displayValue1: displayValue1 === '0' ? String(digit) : displayValue1 + digit,
             });
         }
     }
@@ -195,11 +202,11 @@ class SimpleCalculator extends Component {
             event.preventDefault();
             this.clearLastChar();
 
-            if (this.state.displayValue !== '0') {
-                this.clearDisplay();
-            } else {
-                this.clearAll();
-            }
+            // if (this.state.displayValue1 !== '0') {
+            //     this.clearDisplay();
+            // } else {
+            //     this.clearAll();
+            // }
         }
     };
 
@@ -217,15 +224,14 @@ class SimpleCalculator extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state.unit1)
-        console.log(this.state.unit2)
+
     }
 
     render() { 
     
         let options = null; 
-        const { displayValue } = this.state;
-        const clearDisplay = displayValue !== '0';
+        const { displayValue1, displayValue2, unit1, unit2 } = this.state;
+        const clearDisplay = displayValue1 !== '0';
         const clearText = clearDisplay ? 'C' : 'AC';
 
         const handleChange = (event) => {   
@@ -241,13 +247,22 @@ class SimpleCalculator extends Component {
             event.preventDefault(); 
         }; 
         const getResult = ()=>{
-            axios.get(`https://converter.doxxie.live/convert?from=${this.state.unit1}&to=${this.state.unit2}&amount=${this.state.displayValue}`)
+            axios.get(`https://converter.doxxie.live/convert?from=${this.state.unit1}&to=${this.state.unit2}&amount=${this.state.displayValue1}`)
       .then(res => {
         this.setState({
-            result: res.data.converted
+            displayValue2: res.data.converted
         });
       })
-
+        }
+        const getSwitch = ()=>{  
+        var displayTmp = displayValue1     
+        var unitTmp = unit1  
+        this.setState({
+                displayValue1: displayValue2,
+                displayValue2: displayTmp,
+                unit1 : unit2,
+                unit2 : unitTmp
+        });
         }
 
         this.state.type = this.state.types[this.state.selectedType]
@@ -259,14 +274,14 @@ class SimpleCalculator extends Component {
         return (
          <div id='test'>
             <div id="measurement">
-                <button onClick={this.changeSelectOptionHandler} value="area">Area</button>
-                <button onClick={this.changeSelectOptionHandler} value="length">Length</button>
-                <button onClick={this.changeSelectOptionHandler} value="temperature" style={{"width":"20%"}}>Temperature</button>
-                <button onClick={this.changeSelectOptionHandler} value="volume">Volume</button>
-                <button onClick={this.changeSelectOptionHandler} value="mass">Mass</button>
-                <button onClick={this.changeSelectOptionHandler} value="data">Data</button>
-                <button onClick={this.changeSelectOptionHandler} value="speed">Speed</button>
-                <button onClick={this.changeSelectOptionHandler} value="time">Time</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="area">Area</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="length">Length</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="temperature" style={{"width":"20%"}}>Temperature</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="volume">Volume</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="mass">Mass</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="data">Data</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="speed">Speed</button>
+                <button onClick={this.changeSelectOptionHandler} className="btn"value="time">Time</button>
             </div> 
                   {/* <select>{options}</select>  */}
                 <div className='calculator-body'>
@@ -274,13 +289,13 @@ class SimpleCalculator extends Component {
                             <div className="first-input">
                             <select value={this.state.unit1} onChange={handleChange}>{options}</select> 
                             <p>
-                                <CalculatorDisplay value={displayValue} />
+                                <CalculatorDisplay value={displayValue1} />
                             </p> 
                             </div>
                             <div className="second-input">
                             <select value={this.state.unit2} onChange={handleChange2}>{options}</select> 
                               <p> 
-                                   {this.state.result}
+                                <CalculatorDisplay value={displayValue2} />
                                </p>
                             </div>
                         </div>
@@ -304,8 +319,9 @@ class SimpleCalculator extends Component {
                             </CalculatorKey>
                             <CalculatorKey
                                 className='blue-light-background'
+                                onPress={getSwitch}
                                 >
-                                .
+                                switch 
                             </CalculatorKey>
                             <CalculatorKey
                                 className='blue-background'
