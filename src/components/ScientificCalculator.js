@@ -213,9 +213,22 @@ class ScientificCalculator extends Component {
 
             if (!hasDot && integer.length >= 10) return;
 
+            if (digit === Math.PI || digit === Math.exp(1)) {
+                this.clearDisplay();
+                return this.setState({
+                    displayValue: String(digit),
+                    isDigit: true,
+                    isOperator: false,
+                });
+            }
+
             if (done === true) {
                 this.clearAll();
-                this.setState({ displayValue: String(digit), isDigit: true, isOperator: false });
+                this.setState({
+                    displayValue: String(digit),
+                    isDigit: true,
+                    isOperator: false,
+                });
             } else if (isRightBracket === true) {
                 this.setState({
                     displayValue: displayValue + '*' + digit,
@@ -248,7 +261,8 @@ class ScientificCalculator extends Component {
             ee,
         } = this.state;
 
-        this.setState({ isOperator: true, isDigit: false }); //left brackets with *( and (
+        // left brackets with *( and (
+        this.setState({ isOperator: true, isDigit: false });
 
         if (isRightBracket === false && nextOperator === '=' && isbracketsActive === true) {
             return this.setState({
@@ -332,7 +346,7 @@ class ScientificCalculator extends Component {
     }
 
     rightBracket() {
-        const { displayValue, isLeftBracket, isDigit, done } = this.state;
+        const { displayValue, isLeftBracket, isDigit } = this.state;
 
         if (isLeftBracket && isDigit) {
             this.setState({
@@ -447,7 +461,6 @@ class ScientificCalculator extends Component {
     }
 
     tanInverse() {
-        console.log('hello');
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
@@ -577,6 +590,11 @@ class ScientificCalculator extends Component {
 
     factorial() {
         const { displayValue } = this.state;
+
+        // if there is a dot, return NaN
+        if (displayValue.indexOf('.') !== -1) {
+            return this.setState({ displayValue: 'NaN' });
+        }
 
         if (displayValue === '1' || displayValue === '-1') {
             return this.setState({ displayValue });
