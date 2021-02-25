@@ -163,6 +163,10 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
         const newValue = parseFloat(displayValue) * -1;
 
+        if(this.state.isbracketsActive){
+            return this.setState({ displayValue: "-" + displayValue})
+        }
+
         this.setState({
             displayValue: String(newValue),
         });
@@ -538,6 +542,7 @@ class ScientificCalculator extends Component {
     }
 
     memoryPlus() {
+        
         let temp = parseFloat(this.state.displayValue) + this.state.memory.memory_plus;
         this.setState((prevState) => ({
             memory: {
