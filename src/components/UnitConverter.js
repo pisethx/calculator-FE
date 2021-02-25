@@ -139,6 +139,7 @@ class SimpleCalculator extends Component {
     }
 
     clearLastChar() {
+
         const { displayValue1 } = this.state;
         
         this.setState({
@@ -227,7 +228,7 @@ class SimpleCalculator extends Component {
     }
 
     render() { 
-    
+    console.log(this.state.displayValue1)
         let options = null; 
         const { displayValue1, displayValue2, unit1, unit2 } = this.state;
         const clearDisplay = displayValue1 !== '0';
@@ -318,9 +319,9 @@ class SimpleCalculator extends Component {
                             </CalculatorKey>
                             <CalculatorKey
                                 className='blue-light-background'
-                                onPress={getSwitch}
-                                >
-                                switch 
+                                onPress={() => this.clearLastChar()}
+                                >                           
+                               <i class="fas fa-backspace"></i>
                             </CalculatorKey>
                             <CalculatorKey
                                 className='blue-background'
@@ -359,7 +360,8 @@ class SimpleCalculator extends Component {
                             </CalculatorKey>
                             <CalculatorKey
                                 className='blue-light-background'
-                                >.
+                                onPress={getSwitch}
+                                >Switch
                                 
                             </CalculatorKey>
                             <CalculatorKey
@@ -382,8 +384,6 @@ class SimpleCalculator extends Component {
                                 onPress={getResult}>
                                 =
                             </CalculatorKey>
-
-
                      
                     </div>
                 </div>
