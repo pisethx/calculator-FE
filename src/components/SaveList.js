@@ -40,7 +40,7 @@ const SaveList = () => {
                   <td>{dataset.join(", ")}</td>
                   <td>
                     {type === "individual" ? (
-                      { result }
+                      <span>{result}</span>
                     ) : (
                       <ol>
                         {result.map((res) => (
@@ -56,9 +56,7 @@ const SaveList = () => {
         </table>
       </div>
       <div>
-        <button onClick={() => exportRandomzier()} type="submit">
-          Export
-        </button>
+        <button onClick={() => exportRandomzier()}>Export</button>
       </div>
     </div>
   );
