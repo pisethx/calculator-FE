@@ -4,6 +4,7 @@ import PointTarget from 'react-point';
 import axios from 'axios';
 import { HiSwitchVertical } from 'react-icons/hi';
 import { IoMdReturnLeft } from 'react-icons/io';
+import { CgBackspace } from 'react-icons/cg';
 
 class AutoScalingText extends Component {
     state = {
@@ -324,7 +325,7 @@ class SimpleCalculator extends Component {
                             9
                         </CalculatorKey>
                         <CalculatorKey className='blue-light-background' onPress={() => this.clearLastChar()}>
-                            <i class='fas fa-backspace'></i>
+                            <CgBackspace />
                         </CalculatorKey>
                         <CalculatorKey className='blue-background' onPress={() => this.inputDigit(4)}>
                             4
