@@ -9,15 +9,16 @@ import Login from './Login';
 import Registration from './Registration';
 import ResetPasswordLink from './ResetPasswordLink';
 import ResetPassword from './ResetPassword';
+import SimpleCalculator from './SimpleCalculator';
 
 const Main = () => {
     return (
         <div>
             <Header />
             <Switch>
-                {/* <Route exact path='/' component={SimpleCalculator} />
+                <Route exact path='/' component={SimpleCalculator} />
                 <Route path='/simple-calculator' component={SimpleCalculator} />
-                <Route path='/scientific-calculator' component={ScientificCalculator} /> */}
+                <Route path='/scientific-calculator' component={ScientificCalculator} />
                 <Route path='/login' component={Login} />
                 <Route path='/registration' component={Registration} />
                 <Route path='/reset-password-link' component={ResetPasswordLink} />
