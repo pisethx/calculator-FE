@@ -6,7 +6,10 @@
 #unit-converter .scope-title {
     margin: 50px 0;
 }
-
+#measurement .active{
+    background-color: #1b3b6f;
+    color: #FFC857;
+}
 #unit-converter .resultContainer {
     width: 65%;
     height: 400px;
