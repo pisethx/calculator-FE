@@ -103,17 +103,15 @@ const Header = ({ user }) => {
               </button>
               {showMenu && (
                 <div className="account-content">
-                  <Link to="/" className="dropdown-link">
-                    {user.name}
-                  </Link>
+                  <div className="dropdown-link">{user.name}</div>
                   <hr />
-                  <Link to="/" className="dropdown-link">
+                  <Link to="/save-list" className="dropdown-link">
                     Save List
                   </Link>
                   <hr />
-                  <Link onClick={onLogout} className="dropdown-link">
+                  <div onClick={onLogout} className="dropdown-link">
                     Logout
-                  </Link>
+                  </div>
                 </div>
               )}
             </div>

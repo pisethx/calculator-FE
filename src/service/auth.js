@@ -109,6 +109,7 @@ export const onSubmitRandomizer = async (randomizer) => {
     type: getRandomizerType(type),
     dataset: dataset.split("\n").filter((ds) => ds !== ""),
     quantity,
+    name: type,
   };
 
   return await randomize(payload);
@@ -121,7 +122,9 @@ export const saveRandomizer = async (randomizerId) => {
 };
 
 export const getRandomizer = async () => {
-  return await tryCatch(axios.get("/randomizer/me"));
+  const res = await tryCatch(axios.get("/randomizer/me"));
+
+  if (!hasError(res)) return res?.results;
 };
 
 export const exportRandomzier = async () => {

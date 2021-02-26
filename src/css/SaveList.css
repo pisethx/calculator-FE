@@ -9,9 +9,16 @@
 
 #save-list table {
     width: 90%;
+    overflow-x: auto;
+    min-width: 1000px;
     margin: 0 auto 80px;
     border-collapse: collapse;
 }
+
+#save-list #wrapper {
+    overflow-x: auto;
+}
+ 
 
 #save-list th,
 #save-list td {
@@ -26,7 +33,7 @@
 }
 
 #save-list td {
-    padding: 20px 0;
+    padding: 20px 12px;
 }
 
 #save-list ol {

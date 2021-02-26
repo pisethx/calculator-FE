@@ -4,8 +4,7 @@ import { MdSave, MdFileDownload } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { onSubmitRandomizer, saveRandomizer } from "../service/auth";
-import { formatName } from "../service/helper";
-import { randomizers } from "../service/helper";
+import { formatName, randomizers } from "../service/helper";
 
 const Picker = ({ name, label = "Dataset", quantityLabel, type = 1 }) => {
   const history = useHistory();
