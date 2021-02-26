@@ -10,6 +10,12 @@ import ResetPassword from './ResetPassword';
 import SimpleCalculator from './SimpleCalculator';
 import ScientificCalculator from './ScientificCalculator';
 import UnitConverter from './UnitConverter';
+import TeamGenerator from './TeamGenerator';
+import NamePicker from './NamePicker';
+import YesOrNo from './YesOrNo';
+import DecisionMaker from './DecisionMaker';
+import RandomPicker from './RandomPicker';
+import CustomList from './CustomList';
 
 const Main = () => {
     return (
@@ -24,6 +30,12 @@ const Main = () => {
                 <Route path='/reset-password-link' component={ResetPasswordLink} />
                 <Route path='/reset-password' component={ResetPassword} />
                 <Route path='/unit-converter' component={UnitConverter} />
+                <Route path='/team-generator' component={TeamGenerator} />
+                <Route path='/name-picker' component={NamePicker} />
+                <Route path='/yes-or-no' component={YesOrNo} />
+                <Route path='/decision-maker' component={DecisionMaker} />
+                <Route path='/random-picker' component={RandomPicker} />
+                <Route path='/custom-list' component={CustomList} />
             </Switch>
             <Footer />
         </div>
