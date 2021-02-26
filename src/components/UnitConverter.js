@@ -4,6 +4,7 @@ import PointTarget from 'react-point';
 import axios from 'axios';
 import { HiSwitchVertical } from 'react-icons/hi';
 import { IoMdReturnLeft } from 'react-icons/io';
+import { CgBackspace } from 'react-icons/cg';
 
 class AutoScalingText extends Component {
     state = {
@@ -53,7 +54,7 @@ class CalculatorDisplay extends Component {
         });
 
         const parsedValue = isNumeric ? parseFloat(value) : value;
-        
+
         let formattedValue = parsedValue.toLocaleString(language, {
             useGrouping: true,
             maximumFractionDigits: 10,
@@ -61,8 +62,7 @@ class CalculatorDisplay extends Component {
 
         const match = value.match(/\.\d*?(0*)$/);
 
-        if (match) 
-        formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
+        if (match) formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
         // if (value.endsWith('.')) formattedValue += '.';
 
         return (
@@ -120,9 +120,9 @@ class SimpleCalculator extends Component {
             unit2: this.state.types[event.target.value][0],
             displayValue1: '0',
             displayValue2: '0',
-            active: event.target.value
+            active: event.target.value,
         });
-        console.log(event.target.value)
+        console.log(event.target.value);
         event.preventDefault();
     }
 
@@ -160,11 +160,11 @@ class SimpleCalculator extends Component {
     }
 
     inputDot() {
-        const { displayValue1, waitingForOperand} = this.state;
+        const { displayValue1, waitingForOperand } = this.state;
+        
         if (waitingForOperand === true) {
             this.setState({ displayValue: '0.', waitingForOperand: false });
-        } else 
-        if (!/\./.test(displayValue1)) {
+        } else if (!/\./.test(displayValue1)) {
             this.setState({
                 displayValue1: displayValue1 + '.',
                 waitingForOperand: false,
@@ -254,13 +254,16 @@ class SimpleCalculator extends Component {
                     });
                 });
         };
-        const buttons =["area", "length","temperature", "volume", "mass", "data","speed","time"];
-        const formatted_buttons = buttons.map((name) => 
-        <button  key={ name }  onClick={this.changeSelectOptionHandler} value={name} className={this.state.active === name ? 'active' : ''}>
-                {name.charAt(0).toUpperCase() + 
-           name.slice(1)}
-    </button>
-        );
+        const buttons = ['area', 'length', 'temperature', 'volume', 'mass', 'data', 'speed', 'time'];
+        const formatted_buttons = buttons.map((name) => (
+            <button
+                key={name}
+                onClick={this.changeSelectOptionHandler}
+                value={name}
+                className={this.state.active === name ? 'active' : ''}>
+                {name.charAt(0).toUpperCase() + name.slice(1)}
+            </button>
+        ));
         const getSwitch = () => {
             var displayTmp = displayValue1;
             var unitTmp = unit1;
@@ -284,9 +287,7 @@ class SimpleCalculator extends Component {
                     <span className='yellow-color'>{'[ '}</span>Unit Converter
                     <span className='yellow-color'>{' ]'}</span>
                 </h1>
-                <div id='measurement'>
-                    {formatted_buttons}
-                </div>
+                <div id='measurement'>{formatted_buttons}</div>
                 <div className='calculator-body'>
                     <div className='resultContainer'>
                         <div className='first-input'>
@@ -317,7 +318,7 @@ class SimpleCalculator extends Component {
                             9
                         </CalculatorKey>
                         <CalculatorKey className='blue-light-background' onPress={() => this.clearLastChar()}>
-                            <i class='fas fa-backspace'></i>
+                            <CgBackspace />
                         </CalculatorKey>
                         <CalculatorKey className='blue-background' onPress={() => this.inputDigit(4)}>
                             4
