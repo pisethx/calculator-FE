@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import "../css/UserAdmisson.css";
-import { MdEmail, MdLock } from "react-icons/md";
+import { MdLock } from "react-icons/md";
 import { BiErrorCircle } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";

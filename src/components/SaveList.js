@@ -6,11 +6,16 @@ import { getRandomizer, exportRandomzier } from "../service/auth";
 const SaveList = () => {
   const [randomizerList, setRandomizerList] = useState([]);
 
-  useEffect(async () => {
+  const init = async () => {
     const list = await getRandomizer();
 
     if (list) setRandomizerList(list);
+  };
+
+  useEffect(async () => {
+    init();
   }, []);
+
   return (
     <div id="save-list">
       <h1 className="blue-color align-center scope-title">

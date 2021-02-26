@@ -65,7 +65,7 @@ export const signup = async (form) => {
 };
 
 export const logout = async (form) => {
-  const res = await tryCatch(
+  await tryCatch(
     axios.post("/auth/logout", {
       refreshToken: localStorage.getItem("REFRESH_TOKEN"),
     })

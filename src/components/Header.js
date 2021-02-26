@@ -19,7 +19,7 @@ const Header = ({ user }) => {
   const drop = useRef(null);
 
   const onLogout = async () => {
-    const res = await logout();
+    await logout();
     history.push("/");
     dispatch({ type: "SET_USER" });
   };
@@ -29,11 +29,11 @@ const Header = ({ user }) => {
     setShowMenuSide(false);
   }, [location]);
 
-  const handleClick = (e) => {
-    if (!e.target.closest(`.${drop.current.className}`) && showMenu) {
-      setShowMenu(false);
-    }
-  };
+  // const handleClick = (e) => {
+  //   if (!e.target.closest(`.${drop.current.className}`) && showMenu) {
+  //     setShowMenu(false);
+  //   }
+  // };
 
   return (
     <>

@@ -6,7 +6,7 @@
         {
             "src": "/favicon.ico",
             "sizes": "192x192",
-            "type": "image/x-icon"
+            "type": "image/x-icon" 
         }
     ],
     "background-color": "#1b3b6f",

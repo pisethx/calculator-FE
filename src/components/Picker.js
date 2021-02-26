@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "../css/Randomizer.css";
-import { MdSave, MdFileDownload } from "react-icons/md";
-import { useHistory } from "react-router-dom";
+import { MdSave } from "react-icons/md";
+import { useHistory, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { onSubmitRandomizer, saveRandomizer } from "../service/auth";
 import { formatName, randomizers } from "../service/helper";
 
 const Picker = ({ name, label = "Dataset", quantityLabel, type = 1 }) => {
   const history = useHistory();
+  const location = useLocation();
   const handleCategories = (value) => history.push(`/${value}`);
 
   const [result, setResult] = useState(null);
   const [randomizerId, setRandomizerId] = useState(null);
-  const { register, errors, reset, handleSubmit } = useForm({
+  const { register, reset, handleSubmit } = useForm({
     dataset: "",
     criteriaMode: "all",
   });
@@ -21,7 +22,7 @@ const Picker = ({ name, label = "Dataset", quantityLabel, type = 1 }) => {
     setResult(null);
     setRandomizerId(null);
     reset();
-  }, [name]);
+  }, [location]);
 
   const onSubmit = async (data) => {
     const { id, result } = await onSubmitRandomizer(data);
