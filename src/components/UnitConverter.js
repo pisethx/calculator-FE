@@ -85,7 +85,7 @@ class CalculatorKey extends Component {
   }
 }
 
-class UnitConverter extends Component {
+class SimpleCalculator extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -424,4 +424,4 @@ class UnitConverter extends Component {
   }
 }
 
-export default UnitConverter;
+export default SimpleCalculator;
