@@ -9,6 +9,7 @@ import ResetPasswordLink from './ResetPasswordLink';
 import ResetPassword from './ResetPassword';
 import SimpleCalculator from './SimpleCalculator';
 import ScientificCalculator from './ScientificCalculator';
+import UnitConverter from './UnitConverter';
 
 const Main = () => {
     return (
@@ -22,6 +23,7 @@ const Main = () => {
                 <Route path='/registration' component={Registration} />
                 <Route path='/reset-password-link' component={ResetPasswordLink} />
                 <Route path='/reset-password' component={ResetPassword} />
+                <Route path='/unit-converter' component={UnitConverter} />
             </Switch>
             <Footer />
         </div>
