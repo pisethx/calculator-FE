@@ -2,14 +2,13 @@ import React from 'react';
 import '../css/App.css';
 import Header from './Header';
 import Footer from './Footer';
-// import SimpleCalculator from './SimpleCalculator';
-// import ScientificCalculator from './ScientificCalculator';
 import { Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import Registration from './Registration';
 import ResetPasswordLink from './ResetPasswordLink';
 import ResetPassword from './ResetPassword';
 import SimpleCalculator from './SimpleCalculator';
+import ScientificCalculator from './ScientificCalculator';
 
 const Main = () => {
     return (
