@@ -144,6 +144,7 @@ class SimpleCalculator extends Component {
       this.setState({
         displayValue: temp,
         isMemoryActive: true,
+        done: true,
       });
     } else {
       this.setState({
@@ -321,7 +322,7 @@ class SimpleCalculator extends Component {
     return (
       <div id="simple-calculator">
         <h1 className="blue-color align-center scope-title">
-          <span className="yellow-color">{"[ "}</span>Simple Calculator
+          <span className="yellow-color">{"[ "}</span>Simple Claculator
           <span className="yellow-color">{" ]"}</span>
         </h1>
         <div className="calculator-body">
