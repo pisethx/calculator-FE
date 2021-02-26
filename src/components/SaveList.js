@@ -26,8 +26,8 @@ const SaveList = () => {
         <table>
           <tr>
             <th>#</th>
-            <th>Type</th>
             <th>Dataset</th>
+            <th>Items</th>
             <th>Result</th>
             <th>Created Date</th>
           </tr>

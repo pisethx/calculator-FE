@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { onSubmitRandomizer, saveRandomizer } from "../service/auth";
 import { formatName, randomizers } from "../service/helper";
 
-const Picker = ({ name, label = "Dataset", quantityLabel, type = 1 }) => {
+const Picker = ({ name, label = "Items", quantityLabel, type = 1 }) => {
   const history = useHistory();
   const location = useLocation();
   const handleCategories = (value) => history.push(`/${value}`);
@@ -77,7 +77,7 @@ const Picker = ({ name, label = "Dataset", quantityLabel, type = 1 }) => {
 
         <div className="random-setup">
           <div className="dataset">
-            <label>Randomizer</label>
+            <label>Dataset</label>
             <br />
             <select
               name="type"

@@ -11,13 +11,11 @@ export const randomizers = [
   {
     name: "team-generator",
     type: 2,
-    label: "Dataset",
-    quantityLabel: "Group",
+    quantityLabel: "Groups",
   },
   {
     name: "custom-list",
     type: 3,
-    label: "Dataset",
     quantityLabel: "Quantity",
   },
   { name: "name-picker" },

@@ -61,7 +61,11 @@ export const login = async (form) => {
 
 export const signup = async (form) => {
   const res = await tryCatch(axios.post("/auth/register", form));
-  if (!hasError(res)) setToken(res);
+  if (!hasError(res)) {
+    setToken(res);
+
+    return res;
+  }
 };
 
 export const logout = async (form) => {

@@ -123,7 +123,6 @@ class SimpleCalculator extends Component {
       displayValue2: "0",
       active: event.target.value,
     });
-    console.log(event.target.value);
     event.preventDefault();
   }
 
@@ -233,7 +232,6 @@ class SimpleCalculator extends Component {
       this.setState({
         unit1: event.target.value,
         displayValue2: "0",
-        displayValue1: "0",
       });
       event.preventDefault();
     };

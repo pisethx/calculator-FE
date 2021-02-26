@@ -20,7 +20,7 @@ const Header = ({ user }) => {
 
   const onLogout = async () => {
     await logout();
-    history.push("/");
+    history.push("/login");
     dispatch({ type: "SET_USER" });
   };
 
@@ -85,6 +85,10 @@ const Header = ({ user }) => {
                 <hr />
                 <Link to="/random-picker" className="dropdown-link">
                   Random Picker
+                </Link>
+                <hr />
+                <Link to="/custom-list" className="dropdown-link">
+                  Custom List
                 </Link>
               </div>
             </div>

@@ -6,17 +6,28 @@ import { MdEmail, MdLock } from "react-icons/md";
 import { BiErrorCircle } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { signup } from "../service/auth";
+import { signup, getUser } from "../service/auth";
+import { AuthContext } from "../App";
+import { useHistory } from "react-router-dom";
 
 const Registration = () => {
+  const history = useHistory();
+  const { dispatch } = React.useContext(AuthContext);
   const { register, errors, handleSubmit, watch } = useForm({
     criteriaMode: "all",
   });
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { name, email, password, confirmPassword } = data;
+
     if (password && password !== confirmPassword) return;
 
-    return signup({ name, email, password });
+    const res = await signup({ name, email, password });
+    if (res) {
+      const user = await getUser();
+      if (user) dispatch({ type: "SET_USER", payload: user });
+
+      return history.push("/");
+    }
   };
   const password = useRef({});
   password.current = watch("password", "");
@@ -94,13 +105,13 @@ const Registration = () => {
             ref={register({
               required: "This is required",
               minLength: {
-                value: 6,
-                message: "Password must have at least 6 characters",
+                value: 8,
+                message: "Password must have at least 8 characters",
               },
-              maxLength: {
-                value: 20,
-                message: "Password must have less than 20 characters",
-              },
+              // maxLength: {
+              //   value: 20,
+              //   message: "Password must have less than 20 characters",
+              // },
             })}
           />
           <MdLock className="input-icon" />
