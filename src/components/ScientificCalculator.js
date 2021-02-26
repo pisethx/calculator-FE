@@ -106,6 +106,8 @@ class ScientificCalculator extends Component {
         isRightBracket: false,
         isDigit: false,
         isOperator: false,
+        countBracket: 0,
+        checkLeftBracket: false,
         memory: {
             memory_plus: 0,
             memory_minus: 0,
@@ -140,8 +142,11 @@ class ScientificCalculator extends Component {
             isMemoryActive: false,
             isBracketsActive: false,
             isRightBracket: false,
+            isLeftBracket: false,
             isDigit: false,
             isOperator: false,
+            countBracket: 0,
+            checkLeftBracket: false,
         });
     }
 
@@ -163,9 +168,9 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
         const newValue = parseFloat(displayValue) * -1;
 
-        if(this.state.isbracketsActive){
-            return this.setState({ displayValue: "-" + displayValue})
-        }
+        // if(this.state.isbracketsActive){
+        //     return this.setState({ displayValue: "-" + displayValue})
+        // }
 
         this.setState({
             displayValue: String(newValue),
@@ -188,14 +193,12 @@ class ScientificCalculator extends Component {
     }
 
     inputDot() {
-        const { displayValue, waitingForOperand, isRightBracket, done } = this.state;
+        const { displayValue, waitingForOperand, isRightBracket } = this.state;
 
-        if (done === true) {
-            this.clearAll();
-            this.setState({ displayValue: '0.' });
-        } else if (isRightBracket === true) {
-            this.setState({ displayValue: `${displayValue}*0.`, isRightBracket: false });
-        } else if (waitingForOperand === true) {
+        // if (isRightBracket === true) {
+        //     this.setState({ displayValue: `${displayValue}*0.`, isRightBracket: false });
+        // }
+         if (waitingForOperand === true) {
             this.setState({ displayValue: '0.', waitingForOperand: false });
         } else if (!/\./.test(displayValue)) {
             this.setState({
@@ -220,34 +223,23 @@ class ScientificCalculator extends Component {
 
             if (!hasDot && integer.length >= 10) return;
 
-            if (digit === Math.PI || digit === Math.exp(1)) {
-                this.clearDisplay();
-                return this.setState({
-                    displayValue: String(digit),
-                    isDigit: true,
-                    isOperator: false,
-                });
-            }
-
             if (done === true) {
                 this.clearAll();
-                this.setState({
-                    displayValue: String(digit),
-                    isDigit: true,
-                    isOperator: false,
-                });
-            } else if (isRightBracket === true) {
-                this.setState({
-                    displayValue: displayValue + '*' + digit,
-                    isRightBracket: false,
-                    isDigit: true,
-                    isOperator: false,
-                });
-            } else {
+                this.setState({ displayValue: String(digit), isDigit: true, isOperator: false });
+            } 
+            // else if (isRightBracket === true) {
+            //     this.setState({
+            //         displayValue: displayValue + '*' + digit,
+            //         isRightBracket: false,
+            //         isDigit: true,
+            //         isOperator: false,
+            //     });
+             else {
                 this.setState({
                     displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
                     isDigit: true,
-                    isOperator: false,
+                    isOperator: true,
+                    checkLeftBracket: false
                 });
             }
         }
@@ -266,12 +258,12 @@ class ScientificCalculator extends Component {
             isDigit,
             isOperator,
             ee,
+            countBracket
         } = this.state;
 
-        // left brackets with *( and (
-        this.setState({ isOperator: true, isDigit: false });
+        // this.setState({ isOperator: true, isDigit: false }); //left brackets with *( and (
 
-        if (isRightBracket === false && nextOperator === '=' && isbracketsActive === true) {
+        if (nextOperator === '=' && countBracket !== 0) {
             return this.setState({
                 displayValue: 'Error',
                 isbracketsActive: false,
@@ -279,26 +271,42 @@ class ScientificCalculator extends Component {
             });
         }
 
-        if (isRightBracket === true) {
-            this.setState({ isRightBracket: false });
+        // if (isRightBracket === true) {
+        //     this.setState({ isRightBracket: false });
+        // }
+
+
+    
+
+        if(isOperator === false){
+            return this.setState({displayValue,})
         }
 
+
+
         if (isbracketsActive === true && nextOperator === '=') {
-            this.setState({
+            return this.setState({
                 displayValue: String(eval(displayValue)),
                 isbracketsActive: false,
+                done: true,
             });
         } else if (isbracketsActive === true) {
-            if (isLeftBracket === true && isDigit === false && isOperator === true) {
-                if (nextOperator === '/' || nextOperator === '*') {
-                    this.setState({ displayValue });
-                } else {
+            // if (isLeftBracket === true && isDigit === false && isOperator === true) {
+                // if (nextOperator === '/' || nextOperator === '*') {
+                //     this.setState({ displayValue });
+                // } else {
+
+                if(isDigit){
                     this.setState({
                         displayValue: displayValue + nextOperator,
                         isOperator: false,
+                        isDigit: false,
+                        checkLeftBracket: false,
                     });
                 }
-            }
+                
+                // }
+            // }
         } else {
             const inputValue = parseFloat(displayValue);
 
@@ -324,7 +332,7 @@ class ScientificCalculator extends Component {
                     value: newValue,
                     displayValue: String(newValue),
                     isMemoryActive: false,
-                    isRightBracket: false,
+                    // isRightBracket: false,
                 });
             }
 
@@ -336,39 +344,115 @@ class ScientificCalculator extends Component {
     }
 
     leftBracket() {
-        const { displayValue, isDigit, isOperator } = this.state;
+        const { displayValue, isDigit, isOperator, countBracket, checkLeftBracket } = this.state;
 
-        this.setState({
-            displayValue:
-                displayValue === '0' || displayValue === 'Error'
-                    ? '('
-                    : isDigit === true && isOperator === false
-                    ? displayValue + '*('
-                    : displayValue + '(',
-            isbracketsActive: true,
-            isRightBracket: false,
-            isLeftBracket: true,
-            isDigit: false,
+
+        if (displayValue === '0' || displayValue === 'Error') 
+        {
+            this.setState({
+                displayValue: '(',
+                isbracketsActive: true,
+                isLeftBracket: true,
+                isOperator: true,
+                countBracket: countBracket +1,
+                checkLeftBracket: true,
+            });
+        }
+        else if ( isOperator === false || checkLeftBracket === true){
+            this.setState({
+                displayValue: displayValue + '(',
+                isbracketsActive: true,
+                isLeftBracket: true,
+                isOperator: true,
+                countBracket: countBracket +1,
+                checkLeftBracket: true,
+            });
+            
+        }
+        else{
+            this.setState({
+                displayValue: displayValue + '*(',
+                isbracketsActive: true,
+                isLeftBracket: true,
+                isOperator: true,
+                countBracket: countBracket +1,
+                checkLeftBracket: true,
         });
+        }
+
+
+
+        // this.setState({ 
+        //     displayValue: displayValue === '0' ? '(' : displayValue + isOperator === 'true' ? displayValue + '(' : '*(',
+        //     isbracketsActive: true
+        // })
+
+        
+
+
+
+
+
+
+        // this.setState({
+        //     displayValue:
+        //         displayValue === '0' || displayValue === 'Error'
+        //             ? '('
+        //             : isDigit === true && isOperator === false
+        //             ? displayValue + '*('
+        //             : displayValue + '(',
+        //     isbracketsActive: true,
+        //     isRightBracket: false,
+        //     isLeftBracket: true,
+        //     isDigit: false,
+        // });
     }
 
     rightBracket() {
-        const { displayValue, isLeftBracket, isDigit } = this.state;
+        const { displayValue, isLeftBracket, isDigit, done, countBracket } = this.state;
 
-        if (isLeftBracket && isDigit) {
+        if ( isLeftBracket && isDigit ){
             this.setState({
-                displayValue: displayValue === '0' ? ')' : displayValue + ')',
-                isbracketsActive: true,
-                isRightBracket: true,
+                displayValue: displayValue + ')',
+                countBracket: countBracket -1,
             });
+            
         }
+        // else if (isLeftBracket) 
+        // {
+        //     this.setState({
+        //         displayValue: displayValue + ')',
+        //     });
+        // }
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // if (isLeftBracket && isDigit) {
+        //     this.setState({
+        //         displayValue: displayValue === '0' ? ')' : displayValue + ')',
+        //         isbracketsActive: true,
+        //         isRightBracket: true,
+        //     });
+        // }
     }
 
     multiplicativeInverse() {
         const { displayValue } = this.state;
 
         if (displayValue === '0') {
-            return this.setState({ displayValue: 'NaN', done: true });
+            this.setState({ displayValue: 'Not a number' });
         }
 
         const result = String(1 / displayValue);
@@ -419,7 +503,7 @@ class ScientificCalculator extends Component {
             this.setState({ displayValue: String(Math.tan(displayValue)), done: true });
         } else {
             if (displayValue === '90' || displayValue === '270') {
-                this.setState({ displayValue: 'NaN', done: true });
+                this.setState({ displayValue: 'Not a number' });
             } else {
                 const result = String(Math.tan((parseFloat(displayValue) * Math.PI) / 180));
                 this.setState({ displayValue: result, done: true });
@@ -468,6 +552,7 @@ class ScientificCalculator extends Component {
     }
 
     tanInverse() {
+        console.log('hello');
         const { displayValue, degree } = this.state;
 
         if (degree === false) {
@@ -599,11 +684,6 @@ class ScientificCalculator extends Component {
     factorial() {
         const { displayValue } = this.state;
 
-        // if there is a dot, return NaN
-        if (displayValue.indexOf('.') !== -1) {
-            return this.setState({ displayValue: 'NaN', done: true });
-        }
-
         if (displayValue === '1' || displayValue === '-1') {
             return this.setState({ displayValue });
         } else if (parseInt(displayValue) > 1) {
@@ -629,7 +709,7 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
 
         if (parseInt(displayValue) <= 0) {
-            return this.setState({ displayValue: 'NaN', done: true });
+            return this.setState({ displayValue: 'Not a Number' });
         }
 
         this.setState({ displayValue: String(Math.log10(parseFloat(displayValue))), done: true });
@@ -639,7 +719,7 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
 
         if (parseInt(displayValue) <= 0) {
-            return this.setState({ displayValue: 'NaN', done: true });
+            return this.setState({ displayValue: 'Not a Number' });
         }
 
         this.setState({ displayValue: String(Math.log2(parseFloat(displayValue))), done: true });
@@ -649,7 +729,7 @@ class ScientificCalculator extends Component {
         const { displayValue } = this.state;
 
         if (parseInt(displayValue) <= 0) {
-            return this.setState({ displayValue: 'NaN', done: true });
+            return this.setState({ displayValue: 'Not a Number' });
         }
 
         this.setState({ displayValue: String(Math.log(parseFloat(displayValue))), done: true });
