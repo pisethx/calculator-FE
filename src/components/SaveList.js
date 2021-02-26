@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../css/SaveList.css";
 
 import { getRandomizer, exportRandomzier } from "../service/auth";
-import { formatName } from "../service/helper";
 
 const SaveList = () => {
   const [randomizerList, setRandomizerList] = useState([]);
@@ -31,8 +30,8 @@ const SaveList = () => {
             randomizerList.map(
               ({ name, dataset, type, createdAt, result }, idx) => (
                 <tr>
-                  <td>{idx}</td>
-                  <td>{formatName(name)}</td>
+                  <td>{idx + 1}</td>
+                  <td>{name}</td>
                   <td>{dataset.join(", ")}</td>
                   <td>
                     {type === "individual" ? (

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { formatName } from "../service/helper";
 import { toast } from "react-toastify";
 
 const baseUrl = "https://api.piseth.me/v1";
@@ -124,7 +125,14 @@ export const saveRandomizer = async (randomizerId) => {
 export const getRandomizer = async () => {
   const res = await tryCatch(axios.get("/randomizer/me"));
 
-  if (!hasError(res)) return res?.results;
+  if (!hasError(res))
+    return res?.results
+      ?.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+      .map((res) => ({
+        ...res,
+        name: formatName(res.name),
+        createdAt: new Date(res.createdAt).toLocaleString(),
+      }));
 };
 
 export const exportRandomzier = async () => {
