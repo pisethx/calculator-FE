@@ -1,8 +1,13 @@
-#test {
-    margin: 30px auto;
+#unit-converter {
+    margin: 50px auto 70px;
+    width: 70%;
 }
 
-#test .resultContainer {
+#unit-converter .scope-title {
+    margin: 50px 0;
+}
+
+#unit-converter .resultContainer {
     width: 65%;
     height: 400px;
     display: block;
@@ -10,127 +15,92 @@
     padding-left: 10px;
 }
 
-#test .first-input {
-    margin: 0;
-    margin-bottom: 10px;
+#unit-converter .first-input {
+    margin: 0 0 12px 0;
     height: 189px;
     background-color: #dedede;
+    border-radius: 5px;
     overflow: auto;
 }
 
-#test .second-input {
+#unit-converter .second-input {
     margin: 0;
     height: 189px;
     background-color: #dedede;
+    border-radius: 5px;
     overflow: auto;
 }
 
-#test .scope-title {
-    margin: 50px 0;
+#unit-converter select {
+    outline: none;
+    border: none;
+    background-color: #dedede;
+    margin: 15px 0 0 10px;
+    font-size: 18px;
 }
 
-#test .operator:hover {
-    filter: grayscale(0.5);
-    color: initial;
-}
-
-#test .resultContainer p {
+#unit-converter .resultContainer p {
     text-align: right;
-    font-size: 56px;
-    margin: 0 12px;
+    font-size: 52px;
+    margin: 60px 20px 0 0;
 }
 
-#test button:hover {
-    outline: none;
-    border: none;
-    filter: grayscale(0.5);
-    color: white;
-}
-
-#test button:focus {
+#unit-converter button:hover {
     outline: none;
     border: none;
 }
 
-#test .calculator-body {
-    max-width: 90%;
+#unit-converter button:focus {
+    outline: none;
+    border: none;
+}
+
+#unit-converter .calculator-body {
     margin: 0 auto 50px;
     background-color: #1d3557;
-    padding: 30px 10px 30px 10px;
+    padding: 30px 10px;
     border-radius: 0px 5px 5px 5px;
     display: flex;
 }
 
-#mesurement {
+#measurement {
+    max-width: 90%;
+    text-align: center;
     overflow: auto;
+    display: flex;
+    justify-content: flex-start;
 }
 
 #measurement button {
-    width: 10%;
-    height: 46px;
     background-color: #ffc857;
-    border: none;
     color: #1b3b6f;
     font-weight: 600;
+    border: none;
+    height: 46px;
+    padding: 8px 35px;
 }
 
 #measurement button:hover {
-    background-color: #1b3b6f;
+    background-color: #1b3557;
     color: #ffc857;
 }
 
 #measurement button:active {
-    background-color: #1b3b6f;
+    background-color: #1b3557;
     color: #ffc857;
     border: none;
     outline: none;
 }
 
-#measurement {
-    text-align: center;
-}
-
-#test select {
-    outline: none;
-    border: none;
-    background-color: #dedede;
-}
-
-#measurement button:focus {
-    border: none;
-    outline: none;
-}
-
-#test .button {
+#unit-converter .unit-converter-btn {
     width: 40%;
     background-color: #1d3557;
     text-align: center;
 }
 
-.active {
-    background-color: red !important;
-}
-
-#test .memory {
-    border: none;
-    color: white;
-    height: 40px !important;
-    font-size: 20px !important;
-}
-
-.measurement button {
-    border: none;
-    color: white;
-    margin: 4px;
-    width: 22%;
-    height: 65px;
-    font-size: 30px;
-    border-radius: 5px;
-}
-
 .calculator-body button {
     border: none;
-    color: white;
+    color: #e5e5e5;
     margin: 4px;
     width: 22%;
     height: 91px;
@@ -138,65 +108,195 @@
     border-radius: 5px;
 }
 
-@media only screen and (max-width: 900px) {
-    #test .resultContainer {
-        width: 55%;
-    }
+.calculator-body button:hover {
+    filter: grayscale(0.5);
+}
 
-    #test .button {
-        width: 45%;
+@media only screen and (max-width: 1168px) {
+    #unit-converter {
+        width: 70%;
     }
 }
 
-@media only screen and (max-width: 800px) {
-    #test .resultContainer {
-        width: 50%;
-    }
-
-    #test .button {
-        width: 50%;
+@media only screen and (max-width: 1030px) {
+    #unit-converter {
+        width: 75%;
     }
 }
-@media only screen and (max-width: 700px) {
-    #test .resultContainer {
-        width: 100%;
+
+@media only screen and (max-width: 961px) {
+    #unit-converter {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 902px) {
+    #unit-converter {
+        width: 80%;
     }
 
-    #test .button {
-        width: 100%;
+    #unit-converter .resultContainer {
+        width: 58%;
     }
 
-    #test .calculator-body {
+    #unit-converter .unit-converter-btn {
+        width: 42%;
+    }
+}
+
+@media only screen and (max-width: 818px) {
+    #unit-converter {
+        width: 90%;
+    }
+
+    #unit-converter .resultContainer {
+        width: 58%;
+    }
+
+    #unit-converter .unit-converter-btn {
+        width: 42%;
+    }
+
+    .calculator-body button {
+        font-size: 26px;
+    }
+}
+
+@media only screen and (max-width: 729px) {
+    #unit-converter {
+        width: 85%;
+    }
+
+    #unit-converter .resultContainer {
+        width: 60%;
+    }
+
+    #unit-converter .unit-converter-btn {
+        width: 40%;
+    }
+
+    .calculator-body button {
+        width: 21%;
+        font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #unit-converter {
+        width: 80%;
+    }
+
+    #unit-converter .resultContainer {
+        width: 57%;
+    }
+
+    #unit-converter .unit-converter-btn {
+        width: 43%;
+    }
+
+    .calculator-body button {
+        width: 20%;
+        font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #unit-converter {
+        width: 90%;
+    }
+
+    #unit-converter {
+        width: 80%;
+    }
+
+    #unit-converter .calculator-body {
         display: block;
     }
 
-    #test div.button {
-        margin-left: 3px;
+    #unit-converter .resultContainer {
+        width: 99%;
+        height: 365px;
     }
 
-    #test .calculator-body button {
+    #unit-converter .resultContainer p {
+        font-size: 52px;
+        margin: 45px 20px 0 0;
+    }
+
+    #unit-converter .first-input {
+        height: 168px;
+    }
+
+    #unit-converter .second-input {
+        height: 168px;
+    }
+
+    #unit-converter .unit-converter-btn {
+        width: 100%;
+    }
+
+    .calculator-body button {
         width: 23%;
+        font-size: 30px;
     }
 }
 
-@media only screen and (max-width: 500px) {
-    #test .resultContainer {
-        width: 100%;
+@media only screen and (max-width: 532px) {
+    #unit-converter {
+        width: 85%;
     }
 
-    #test .button {
-        width: 100%;
+    #unit-converter .resultContainer {
+        width: 99%;
+        height: 300px;
     }
 
-    #test .calculator-body {
-        display: block;
+    #unit-converter .resultContainer p {
+        font-size: 52px;
+        margin: 25px 20px 0 0;
     }
 
-    #test div.button {
-        margin-left: 3px;
+    #unit-converter .first-input {
+        height: 138px;
     }
 
-    #test .calculator-body button {
-        width: 22%;
+    #unit-converter .second-input {
+        height: 138px;
+    }
+
+    .calculator-body button {
+        width: 22.5%;
+        height: 80px;
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 432px) {
+    #unit-converter {
+        width: 85%;
+    }
+
+    #unit-converter .resultContainer {
+        width: 99%;
+        height: 300px;
+    }
+
+    #unit-converter .resultContainer p {
+        font-size: 50px;
+        margin: 25px 20px 0 0;
+    }
+
+    #unit-converter .first-input {
+        height: 138px;
+    }
+
+    #unit-converter .second-input {
+        height: 138px;
+    }
+
+    .calculator-body button {
+        width: 21.5%;
+        height: 70px;
+        font-size: 26px;
     }
 }

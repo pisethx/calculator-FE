@@ -3,6 +3,7 @@ import '../css/UnitConverter.css';
 import PointTarget from 'react-point';
 import axios from 'axios';
 import { HiSwitchVertical } from 'react-icons/hi';
+import { IoMdReturnLeft } from 'react-icons/io';
 
 class AutoScalingText extends Component {
     state = {
@@ -210,8 +211,6 @@ class SimpleCalculator extends Component {
         document.removeEventListener('keydown', this.handleKeyDown);
     }
 
-    componentDidUpdate() {}
-
     render() {
         let options = null;
         const { displayValue1, displayValue2, unit1, unit2 } = this.state;
@@ -264,34 +263,34 @@ class SimpleCalculator extends Component {
         }
 
         return (
-            <div id='test'>
+            <div id='unit-converter'>
+                <h1 className='blue-color align-center scope-title'>
+                    <span className='yellow-color'>{'[ '}</span>Unit Converter
+                    <span className='yellow-color'>{' ]'}</span>
+                </h1>
                 <div id='measurement'>
-                    <button onClick={this.changeSelectOptionHandler} className='btn' value='area'>
+                    <button onClick={this.changeSelectOptionHandler} value='area'>
                         Area
                     </button>
-                    <button onClick={this.changeSelectOptionHandler} className='btn' value='length'>
+                    <button onClick={this.changeSelectOptionHandler} value='length'>
                         Length
                     </button>
-                    <button
-                        onClick={this.changeSelectOptionHandler}
-                        className='btn'
-                        value='temperature'
-                        style={{ width: '20%' }}>
+                    <button onClick={this.changeSelectOptionHandler} value='temperature'>
                         Temperature
                     </button>
-                    <button onClick={this.changeSelectOptionHandler} className='btn' value='volume'>
+                    <button onClick={this.changeSelectOptionHandler} value='volume'>
                         Volume
                     </button>
-                    <button onClick={this.changeSelectOptionHandler} className='btn' value='mass'>
+                    <button onClick={this.changeSelectOptionHandler} value='mass'>
                         Mass
                     </button>
-                    <button onClick={this.changeSelectOptionHandler} className='btn' value='data'>
+                    <button onClick={this.changeSelectOptionHandler} value='data'>
                         Data
                     </button>
-                    <button onClick={this.changeSelectOptionHandler} className='btn' value='speed'>
+                    <button onClick={this.changeSelectOptionHandler} value='speed'>
                         Speed
                     </button>
-                    <button onClick={this.changeSelectOptionHandler} className='btn' value='time'>
+                    <button onClick={this.changeSelectOptionHandler} value='time'>
                         Time
                     </button>
                 </div>
@@ -314,7 +313,7 @@ class SimpleCalculator extends Component {
                             </p>
                         </div>
                     </div>
-                    <div className='button'>
+                    <div className='unit-converter-btn'>
                         <CalculatorKey className='blue-background' onPress={() => this.inputDigit(7)}>
                             7
                         </CalculatorKey>
@@ -362,8 +361,8 @@ class SimpleCalculator extends Component {
                         <CalculatorKey className='blue-background' onPress={() => this.inputDot()}>
                             .
                         </CalculatorKey>
-                        <CalculatorKey className='operator black-color yellow-background' onPress={getResult}>
-                            =
+                        <CalculatorKey className='black-color yellow-background' onPress={getResult}>
+                            <IoMdReturnLeft />
                         </CalculatorKey>
                     </div>
                 </div>
