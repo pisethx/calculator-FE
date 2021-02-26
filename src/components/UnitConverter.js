@@ -211,8 +211,6 @@ class SimpleCalculator extends Component {
         document.removeEventListener('keydown', this.handleKeyDown);
     }
 
-    componentDidUpdate() {}
-
     render() {
         let options = null;
         const { displayValue1, displayValue2, unit1, unit2 } = this.state;
