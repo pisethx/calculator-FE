@@ -9,6 +9,7 @@ import Login from './Login';
 import Registration from './Registration';
 import ResetPasswordLink from './ResetPasswordLink';
 import ResetPassword from './ResetPassword';
+import SaveList from './SaveList';
 
 const Main = () => {
     return (
@@ -22,6 +23,7 @@ const Main = () => {
                 <Route path='/registration' component={Registration} />
                 <Route path='/reset-password-link' component={ResetPasswordLink} />
                 <Route path='/reset-password' component={ResetPassword} />
+                <Route path='/save-list' component={SaveList} />
             </Switch>
             <Footer />
         </div>

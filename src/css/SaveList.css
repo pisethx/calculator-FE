@@ -1,0 +1,64 @@
+#save-list {
+    width: 90%;
+    margin: auto;
+}
+
+#save-list .scope-title {
+    margin: 50px 0 70px;
+}
+
+#save-list table {
+    width: 90%;
+    margin: 0 auto 80px;
+    border-collapse: collapse;
+}
+
+#save-list th,
+#save-list td {
+    border-bottom: 2px solid #dedede;
+    text-align: center;
+    list-style-position: inside;
+    padding: 8px;
+}
+
+#save-list th {
+    color: #1b3b6f;
+}
+
+#save-list td {
+    padding: 20px 0;
+}
+
+#save-list ol {
+    margin: auto;
+}
+
+#save-list button {
+    font-size: 18px;
+    padding: 10px 40px;
+    margin: 0 auto 80px;
+    display: flex;
+    justify-content: center;
+    border-radius: 12px;
+    border: none;
+    background-color: #1b3b6f;
+    color: #e5e5e5;
+}
+
+#save-list button:hover {
+    color: #ffc857;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1075px) {
+    #save-list table {
+        font-size: 15px;
+        margin-bottom: 90px;
+    }
+}
+
+@media only screen and (max-width: 775px) {
+    #save-list table {
+        font-size: 14px;
+    }
+}
