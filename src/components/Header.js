@@ -8,10 +8,11 @@ import { FiMenu } from "react-icons/fi";
 import { logout } from "../service/auth";
 import { AuthContext } from "../App";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Header = ({ user }) => {
   const history = useHistory();
+  const location = useLocation();
   const { dispatch } = React.useContext(AuthContext);
   const [showMenu, setShowMenu] = useState(false);
   const [showMenuSide, setShowMenuSide] = useState(false);
@@ -19,11 +20,14 @@ const Header = ({ user }) => {
 
   const onLogout = async () => {
     const res = await logout();
-
     history.push("/");
-
     dispatch({ type: "SET_USER" });
   };
+
+  useEffect(() => {
+    setShowMenu(false);
+    setShowMenuSide(false);
+  }, [location]);
 
   const handleClick = (e) => {
     if (!e.target.closest(`.${drop.current.className}`) && showMenu) {
@@ -123,7 +127,7 @@ const Header = ({ user }) => {
               </Link>
             </div>
           )}
-          {/* menu-side */}
+
           <button
             type="button"
             id="menu-icon"
@@ -160,18 +164,64 @@ const Header = ({ user }) => {
               </div>
             </div>
             <hr />
-            <Link to="/unit-coverter" className="menu-side-link">
+            <Link to="/unit-converter" className="menu-side-link">
               Unit Converter
             </Link>
             <hr />
-            <Link to="/login" className="menu-side-link">
-              Login
-            </Link>
-            <hr />
-            <Link to="/registration" className="menu-side-link">
-              Registration
-            </Link>
-            <hr />
+            {user.isAuthenticated ? (
+              <div className="menu-dropdown">
+                <button type="button" className="menu-side-btn">
+                  Randomizer
+                  <MdExpandMore className="expand-icon" />
+                </button>
+                <div className="sub-menu display-none">
+                  <Link
+                    to="/team-generator"
+                    className="menu-side-link no-mt-menu-side"
+                  >
+                    Team Generator
+                  </Link>
+
+                  <Link
+                    to="/name-picker"
+                    className="menu-side-link no-mt-menu-side"
+                  >
+                    Name Picker
+                  </Link>
+
+                  <Link
+                    to="/yes-or-no"
+                    className="menu-side-link no-mt-menu-side"
+                  >
+                    Yes or No
+                  </Link>
+
+                  <Link
+                    to="/decision-maker"
+                    className="menu-side-link no-mt-menu-side"
+                  >
+                    Decision Maker
+                  </Link>
+
+                  <Link
+                    to="/random-picker"
+                    className="menu-side-link no-mt-menu-side"
+                  >
+                    Random Picker
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Link to="/login" className="menu-side-link">
+                  Login
+                </Link>
+                <hr />
+                <Link to="/registration" className="menu-side-link">
+                  Registration
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

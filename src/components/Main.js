@@ -30,19 +30,24 @@ const Main = () => {
           <Header user={state} />
           <Switch>
             <Route exact path="/" component={SimpleCalculator} />
-            <Route path="/unit-converter" component={UnitConverter} />
+            <Route exact path="/unit-converter" component={UnitConverter} />
             <Route
               path="/scientific-calculator"
               component={ScientificCalculator}
             />
-            <Route path="/login" component={Login} />
-            <Route path="/registration" component={Registration} />
-            <Route path="/reset-password-link" component={ResetPasswordLink} />
-            {<Route path="/reset-password" component={ResetPassword} />}
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/registration" component={Registration} />
+            <Route
+              exact
+              path="/reset-password-link"
+              component={ResetPasswordLink}
+            />
+            {<Route exact path="/reset-password" component={ResetPassword} />}
 
             {state.isAuthenticated &&
               randomizers.map((randomizer) => (
                 <Route
+                  exact
                   key={randomizer.name}
                   path={`/${randomizer.name}`}
                   render={() => <Picker {...randomizer} />}

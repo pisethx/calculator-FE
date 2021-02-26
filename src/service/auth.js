@@ -120,9 +120,13 @@ export const saveRandomizer = async (randomizerId) => {
   if (!hasError(res)) handleSuccess("Randomizer Saved Successfully.");
 };
 
+export const getRandomizer = async () => {
+  return await tryCatch(axios.get("/randomizer/me"));
+};
+
 export const exportRandomzier = async () => {
   axios
-    .get(`/randomizer/export `, {
+    .get(`/randomizer/me/export `, {
       responseType: "blob",
     })
     .then((response) => {
