@@ -44,7 +44,7 @@ const SaveList = () => {
                     ) : (
                       <ol>
                         {result.map((res) => (
-                          <li>{res}</li>
+                          <li>{Array.isArray(res) ? res.join(", ") : res}</li>
                         ))}
                       </ol>
                     )}
