@@ -56,7 +56,15 @@ class CalculatorDisplay extends Component {
             maximumFractionDigits: 10,
         });
 
-        if (value.endsWith('.')) formattedValue += '.';
+        // if (this.isBracketsActive === false) {
+        //     const match = value.match(/\.\d*?(0*)$/);
+
+        // if (match) 
+        // formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
+        // }
+        
+
+        // if (value.endsWith('.')) formattedValue += '.';
 
         return (
             <div {...props}>
@@ -193,12 +201,13 @@ class ScientificCalculator extends Component {
     }
 
     inputDot() {
-        const { displayValue, waitingForOperand, isRightBracket } = this.state;
+        const { displayValue, waitingForOperand, isRightBracket, isBracketsActive, countBracket } = this.state;
 
-        // if (isRightBracket === true) {
-        //     this.setState({ displayValue: `${displayValue}*0.`, isRightBracket: false });
-        // }
-         if (waitingForOperand === true) {
+        if (isBracketsActive === true && countBracket === 0) {
+            return this.setState({ displayValue: displayValue + "*0.", waitingForOperand: false});
+        }
+
+        if (waitingForOperand === true) {
             this.setState({ displayValue: '0.', waitingForOperand: false });
         } else if (!/\./.test(displayValue)) {
             this.setState({
@@ -252,7 +261,7 @@ class ScientificCalculator extends Component {
             operator,
             waitingForOperand,
             isMemoryActive,
-            isbracketsActive,
+            isBracketsActive,
             isRightBracket,
             isLeftBracket,
             isDigit,
@@ -266,7 +275,7 @@ class ScientificCalculator extends Component {
         if (nextOperator === '=' && countBracket !== 0) {
             return this.setState({
                 displayValue: 'Error',
-                isbracketsActive: false,
+                isBracketsActive: false,
                 done: true,
             });
         }
@@ -284,13 +293,13 @@ class ScientificCalculator extends Component {
 
 
 
-        if (isbracketsActive === true && nextOperator === '=') {
+        if (isBracketsActive === true && nextOperator === '=') {
             return this.setState({
                 displayValue: String(eval(displayValue)),
-                isbracketsActive: false,
+                isBracketsActive: false,
                 done: true,
             });
-        } else if (isbracketsActive === true) {
+        } else if (isBracketsActive === true) {
             // if (isLeftBracket === true && isDigit === false && isOperator === true) {
                 // if (nextOperator === '/' || nextOperator === '*') {
                 //     this.setState({ displayValue });
@@ -351,7 +360,7 @@ class ScientificCalculator extends Component {
         {
             this.setState({
                 displayValue: '(',
-                isbracketsActive: true,
+                isBracketsActive: true,
                 isLeftBracket: true,
                 isOperator: true,
                 countBracket: countBracket +1,
@@ -361,7 +370,7 @@ class ScientificCalculator extends Component {
         else if ( isOperator === false || checkLeftBracket === true){
             this.setState({
                 displayValue: displayValue + '(',
-                isbracketsActive: true,
+                isBracketsActive: true,
                 isLeftBracket: true,
                 isOperator: true,
                 countBracket: countBracket +1,
@@ -372,7 +381,7 @@ class ScientificCalculator extends Component {
         else{
             this.setState({
                 displayValue: displayValue + '*(',
-                isbracketsActive: true,
+                isBracketsActive: true,
                 isLeftBracket: true,
                 isOperator: true,
                 countBracket: countBracket +1,
