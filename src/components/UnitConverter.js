@@ -264,6 +264,10 @@ class SimpleCalculator extends Component {
 
         return (
             <div id='unit-converter'>
+                <h1 className='blue-color align-center scope-title'>
+                    <span className='yellow-color'>{'[ '}</span>Unit Converter
+                    <span className='yellow-color'>{' ]'}</span>
+                </h1>
                 <div id='measurement'>
                     <button onClick={this.changeSelectOptionHandler} value='area'>
                         Area
