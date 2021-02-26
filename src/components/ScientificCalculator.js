@@ -848,7 +848,7 @@ class ScientificCalculator extends Component {
     return (
       <div id="scientific-calculator">
         <h1 className="blue-color align-center scope-title">
-          <span className="yellow-color">{"[ "}</span>Scientific Claculator
+          <span className="yellow-color">{"[ "}</span>Scientific Calculator
           <span className="yellow-color">{" ]"}</span>
         </h1>
         <div className="calculator-body">
