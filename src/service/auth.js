@@ -52,8 +52,7 @@ export const login = async (form) => {
   const res = await tryCatch(axios.post("/auth/login", form));
 
   if (!hasError(res)) setToken(res);
-
-  handleSuccess("Welcome back!");
+  else handleSuccess("Welcome back!");
 
   return res;
 };
