@@ -64,14 +64,16 @@
 }
 
 #measurement {
-    max-width: 90%;
+    /* max-width: 90%; */
+    width:100%;
     text-align: center;
     overflow: auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 #measurement button {
+    flex:1;
     background-color: #ffc857;
     color: #1b3b6f;
     font-weight: 600;
