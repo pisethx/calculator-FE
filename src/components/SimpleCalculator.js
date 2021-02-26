@@ -139,6 +139,7 @@ class SimpleCalculator extends Component {
             this.setState({
                 displayValue: temp,
                 isMemoryActive: true,
+                done: true,
             });
         } else {
             this.setState({
