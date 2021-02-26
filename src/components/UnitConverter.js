@@ -60,7 +60,10 @@ class CalculatorDisplay extends Component {
             maximumFractionDigits: 10,
         });
 
-        if (value.endsWith('.')) formattedValue += '.';
+        const match = value.match(/\.\d*?(0*)$/);
+
+        if (match) formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
+        // if (value.endsWith('.')) formattedValue += '.';
 
         return (
             <div {...props}>
@@ -105,6 +108,7 @@ class SimpleCalculator extends Component {
                 speed: ['m/s', 'km/h', 'm/h', 'knot', 'ft/s'],
                 time: ['ms', 's', 'h', 'd', 'week', 'month', 'year'],
             },
+            active: 'area',
         };
         this.changeSelectOptionHandler = this.changeSelectOptionHandler.bind(this);
     }
@@ -116,7 +120,9 @@ class SimpleCalculator extends Component {
             unit2: this.state.types[event.target.value][0],
             displayValue1: '0',
             displayValue2: '0',
+            active: event.target.value,
         });
+        console.log(event.target.value);
         event.preventDefault();
     }
 
@@ -154,9 +160,11 @@ class SimpleCalculator extends Component {
     }
 
     inputDot() {
-        const { displayValue1 } = this.state;
-
-        if (!/\./.test(displayValue1)) {
+        const { displayValue1, waitingForOperand } = this.state;
+        
+        if (waitingForOperand === true) {
+            this.setState({ displayValue: '0.', waitingForOperand: false });
+        } else if (!/\./.test(displayValue1)) {
             this.setState({
                 displayValue1: displayValue1 + '.',
                 waitingForOperand: false,
@@ -222,6 +230,7 @@ class SimpleCalculator extends Component {
             this.setState({
                 unit1: event.target.value,
                 displayValue2: '0',
+                displayValue1: '0',
             });
             event.preventDefault();
         };
@@ -245,7 +254,16 @@ class SimpleCalculator extends Component {
                     });
                 });
         };
-
+        const buttons = ['area', 'length', 'temperature', 'volume', 'mass', 'data', 'speed', 'time'];
+        const formatted_buttons = buttons.map((name) => (
+            <button
+                key={name}
+                onClick={this.changeSelectOptionHandler}
+                value={name}
+                className={this.state.active === name ? 'active' : ''}>
+                {name.charAt(0).toUpperCase() + name.slice(1)}
+            </button>
+        ));
         const getSwitch = () => {
             var displayTmp = displayValue1;
             var unitTmp = unit1;
@@ -269,32 +287,7 @@ class SimpleCalculator extends Component {
                     <span className='yellow-color'>{'[ '}</span>Unit Converter
                     <span className='yellow-color'>{' ]'}</span>
                 </h1>
-                <div id='measurement'>
-                    <button onClick={this.changeSelectOptionHandler} value='area'>
-                        Area
-                    </button>
-                    <button onClick={this.changeSelectOptionHandler} value='length'>
-                        Length
-                    </button>
-                    <button onClick={this.changeSelectOptionHandler} value='temperature'>
-                        Temperature
-                    </button>
-                    <button onClick={this.changeSelectOptionHandler} value='volume'>
-                        Volume
-                    </button>
-                    <button onClick={this.changeSelectOptionHandler} value='mass'>
-                        Mass
-                    </button>
-                    <button onClick={this.changeSelectOptionHandler} value='data'>
-                        Data
-                    </button>
-                    <button onClick={this.changeSelectOptionHandler} value='speed'>
-                        Speed
-                    </button>
-                    <button onClick={this.changeSelectOptionHandler} value='time'>
-                        Time
-                    </button>
-                </div>
+                <div id='measurement'>{formatted_buttons}</div>
                 <div className='calculator-body'>
                     <div className='resultContainer'>
                         <div className='first-input'>

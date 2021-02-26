@@ -7,6 +7,11 @@
     margin: 50px 0;
 }
 
+#measurement .active{
+    background-color: #1d3557;
+    color: #FFC857;
+}
+
 #unit-converter .resultContainer {
     width: 65%;
     height: 400px;
