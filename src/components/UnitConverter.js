@@ -4,6 +4,7 @@ import PointTarget from "react-point";
 import axios from "axios";
 import { HiSwitchVertical } from "react-icons/hi";
 import { IoMdReturnLeft } from "react-icons/io";
+import { CgBackspace } from "react-icons/cg";
 
 class AutoScalingText extends Component {
   state = {
@@ -162,6 +163,7 @@ class SimpleCalculator extends Component {
 
   inputDot() {
     const { displayValue1, waitingForOperand } = this.state;
+
     if (waitingForOperand === true) {
       this.setState({ displayValue: "0.", waitingForOperand: false });
     } else if (!/\./.test(displayValue1)) {
@@ -341,7 +343,7 @@ class SimpleCalculator extends Component {
               className="blue-light-background"
               onPress={() => this.clearLastChar()}
             >
-              <i class="fas fa-backspace"></i>
+              <CgBackspace />
             </CalculatorKey>
             <CalculatorKey
               className="blue-background"
