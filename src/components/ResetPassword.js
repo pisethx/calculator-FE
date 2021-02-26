@@ -34,7 +34,6 @@ const ResetPassword = (props) => {
           <input
             type="password"
             name="password"
-            defaultValue="password1"
             placeholder="New Password"
             ref={register({
               required: "This is required",
@@ -69,7 +68,6 @@ const ResetPassword = (props) => {
           <input
             type="password"
             name="confirmPassword"
-            defaultValue="password1"
             placeholder="Confirm New Password"
             ref={register({
               required: "This is required",
@@ -81,7 +79,6 @@ const ResetPassword = (props) => {
           <ErrorMessage
             errors={errors}
             name="confirmPassword"
-            defaultValue="password1"
             render={({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (

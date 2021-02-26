@@ -21,7 +21,6 @@ const ResetPasswordLink = () => {
           <input
             type="email"
             name="email"
-            defaultValue="piseth_lee@yahoo.com"
             placeholder="Email"
             ref={register({
               required: "This is required",

@@ -43,7 +43,6 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Email"
-            defaultValue="piseth_lee@yahoo.com"
             ref={register({
               required: "This is required",
               pattern: {
@@ -73,7 +72,6 @@ const Login = () => {
           <input
             type="password"
             name="password"
-            defaultValue="password1"
             placeholder="Password"
             ref={register({
               required: "This is required",

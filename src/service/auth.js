@@ -44,15 +44,16 @@ export const getUser = async () => {
   if (!token) return;
 
   const res = await tryCatch(axios.get("/users/me"));
-
-  return res;
+  if (!hasError(res)) return res;
 };
 
 export const login = async (form) => {
   const res = await tryCatch(axios.post("/auth/login", form));
 
-  if (!hasError(res)) setToken(res);
-  else handleSuccess("Welcome back!");
+  if (!hasError(res)) {
+    setToken(res);
+    handleSuccess("Welcome back!");
+  }
 
   return res;
 };

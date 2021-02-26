@@ -31,7 +31,6 @@ const Registration = () => {
             type="text"
             name="name"
             placeholder="Username"
-            defaultValue="test"
             ref={register({
               required: "This is required",
               pattern: {
@@ -62,7 +61,6 @@ const Registration = () => {
             type="email"
             name="email"
             placeholder="Email"
-            defaultValue="piseth_lee1@yahoo.com"
             ref={register({
               required: "This is required",
               pattern: {
@@ -93,7 +91,6 @@ const Registration = () => {
             type="password"
             name="password"
             placeholder="Password"
-            defaultValue="password1"
             ref={register({
               required: "This is required",
               minLength: {
@@ -128,7 +125,6 @@ const Registration = () => {
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
-            defaultValue="password1"
             ref={register({
               required: "This is required",
               validate: (value) => {
