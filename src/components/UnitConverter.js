@@ -108,7 +108,7 @@ class SimpleCalculator extends Component {
                 speed: ['m/s', 'km/h', 'm/h', 'knot', 'ft/s'],
                 time: ['ms', 's', 'h', 'd', 'week', 'month', 'year'],
             },
-            active: '',
+            active: 'area',
         };
         this.changeSelectOptionHandler = this.changeSelectOptionHandler.bind(this);
     }
