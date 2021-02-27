@@ -6,8 +6,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    /* height: 100%;
-    position: relative; */
+    height: 100%;
+    position: relative;
 }
 
 hr {
@@ -16,13 +16,13 @@ hr {
     margin: auto;
 }
 
-/* .main-container {
-    min-height: 93vh;
+.main-container {
+    min-height: 100vh;
     overflow: hidden;
     display: block;
     position: relative;
     padding-bottom: 100px;
-} */
+}
 
 .dark-blue-background {
     background-color: #385070;

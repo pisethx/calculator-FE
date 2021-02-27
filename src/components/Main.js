@@ -26,9 +26,8 @@ const Main = () => {
   return (
       <AuthContext.Consumer>
           {({ state, dispatch }) => (
-              <div>
+              <div className='main-container'>
                   <Header user={state} />
-                  <div className='main-conatiner'>
                       <Switch>
                           <Route exact path='/' component={SimpleCalculator} />
                           <Route exact path='/unit-converter' component={UnitConverter} />
@@ -54,7 +53,6 @@ const Main = () => {
             <Route path="/random-picker" component={RandomPicker} />
             <Route path="/custom-list" component={CustomList} />{" "} */}
                       </Switch>
-                  </div>
                   <Footer />
               </div>
           )}
