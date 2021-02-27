@@ -100,6 +100,9 @@ const Picker = ({ name, label = "Items", quantityLabel, type = 1 }) => {
               name="dataset"
               rows="10"
               cols="70"
+              defaultValue={
+                name === "yes-or-no" ? ["Yes", "No"].join("\n") : ""
+              }
               ref={register({
                 required: "This is required",
               })}

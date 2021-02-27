@@ -12,7 +12,7 @@ const SaveList = () => {
     if (list) setRandomizerList(list);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     init();
   }, []);
 
