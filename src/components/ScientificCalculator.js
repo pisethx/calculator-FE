@@ -66,6 +66,9 @@ class CalculatorDisplay extends Component {
 
     // if (value.endsWith('.')) formattedValue += '.';
 
+    if (formattedValue == "∞" || formattedValue == "NaN")
+      formattedValue = "Error";
+
     return (
       <div {...props}>
         <AutoScalingText>{formattedValue}</AutoScalingText>
