@@ -66,7 +66,11 @@ class CalculatorDisplay extends Component {
 
     // if (value.endsWith('.')) formattedValue += '.';
 
-    if (formattedValue == "∞" || formattedValue == "NaN")
+    if (
+      formattedValue == "∞" ||
+      formattedValue == "NaN" ||
+      Object.is(formattedValue, NaN)
+    )
       formattedValue = "Error";
 
     return (
