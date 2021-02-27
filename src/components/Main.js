@@ -15,16 +15,18 @@ const Main = () => {
     return (
         <div>
             <Header />
-            <Switch>
-                {/* <Route exact path='/' component={SimpleCalculator} />
+            {/* <div className='main-container'> */}
+                <Switch>
+                    {/* <Route exact path='/' component={SimpleCalculator} />
                 <Route path='/simple-calculator' component={SimpleCalculator} />
                 <Route path='/scientific-calculator' component={ScientificCalculator} /> */}
-                <Route path='/login' component={Login} />
-                <Route path='/registration' component={Registration} />
-                <Route path='/reset-password-link' component={ResetPasswordLink} />
-                <Route path='/reset-password' component={ResetPassword} />
-                <Route path='/save-list' component={SaveList} />
-            </Switch>
+                    <Route path='/login' component={Login} />
+                    <Route path='/registration' component={Registration} />
+                    <Route path='/reset-password-link' component={ResetPasswordLink} />
+                    <Route path='/reset-password' component={ResetPassword} />
+                    <Route path='/save-list' component={SaveList} />
+                </Switch>
+            {/* </div> */}
             <Footer />
         </div>
     );
