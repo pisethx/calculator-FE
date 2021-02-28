@@ -1,11 +1,11 @@
-button:hover {
+#scientific-calculator button:hover {
     outline: none;
     border: none;
     filter: grayscale(0.5);
     color: white;
 }
 
-button:focus {
+#scientific-calculator  button:focus {
     outline: none;
     border: none;
 }

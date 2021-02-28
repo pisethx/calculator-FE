@@ -136,7 +136,12 @@
 }
 
 .account-icon {
-    font-size: 35px;
+    font-size: 35px; 
+}
+
+
+.account-icon:hover {
+    background-color: transparent;
 }
 
 .menu-icon,
