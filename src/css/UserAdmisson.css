@@ -8,7 +8,7 @@
 
 .user-admisson {
     width: 35%;
-    margin: 100px auto 130px;
+    margin: 100px auto;
 }
 
 .user-admisson h1 {
@@ -70,6 +70,10 @@
     top: -3px;
 }
 
+.user-admisson a:hover {
+    cursor: pointer;
+}
+
 .user-admisson .flex-container a {
     font-size: 15px;
 }
@@ -81,6 +85,7 @@
 .user-admisson .flex-container a:hover {
     text-decoration: none;
     color: #ffc857;
+    cursor: pointer;
 }
 
 input[type='checkbox'] {

@@ -106,10 +106,6 @@ const TeamGenerator = () => {
             >
               <MdSave className="save-icon" />
             </button>
-            {/* Download All in Saved List */}
-            {/* <button type="submit">
-              <MdFileDownload className="export-icon" />
-            </button> */}
           </div>
         </div>
       </div>

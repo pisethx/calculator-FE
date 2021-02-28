@@ -21,7 +21,7 @@ const Main = () => {
   return (
     <AuthContext.Consumer>
       {({ state, dispatch }) => (
-        <div>
+        <div className="main-container">
           <Header user={state} />
           <Switch>
             <Route exact path="/" component={SimpleCalculator} />
@@ -40,7 +40,7 @@ const Main = () => {
             {<Route path="/reset-password" component={ResetPassword} />}
 
             {state.isAuthenticated && (
-              <Route path="/save-list" component={SaveList} />
+              <Route path="/saved-list" component={SaveList} />
             )}
 
             {state.isAuthenticated &&

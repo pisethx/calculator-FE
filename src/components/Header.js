@@ -109,8 +109,8 @@ const Header = ({ user }) => {
                 <div className="account-content">
                   <div className="dropdown-link">{user.name}</div>
                   <hr />
-                  <Link to="/save-list" className="dropdown-link">
-                    Save List
+                  <Link to="/saved-list" className="dropdown-link">
+                    Saved List
                   </Link>
                   <hr />
                   <div onClick={onLogout} className="dropdown-link">

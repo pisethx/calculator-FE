@@ -19,7 +19,7 @@ const SaveList = () => {
   return (
     <div id="save-list">
       <h1 className="blue-color align-center scope-title">
-        <span className="yellow-color">{"[ "}</span>Save List
+        <span className="yellow-color">{"[ "}</span>Saved List
         <span className="yellow-color">{" ]"}</span>
       </h1>
       <div id="wrapper">
