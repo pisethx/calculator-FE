@@ -128,6 +128,7 @@
 .account-content .dropdown-link:hover {
     background-color: #1b3b6f;
     color: #ffc857;
+    cursor: pointer;
 }
 
 .dropdown:hover .dropdown-content,
