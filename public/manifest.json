@@ -1,6 +1,6 @@
 {
-    "name": "PWA demo",
-    "short_name": "demo",
+    "name": "Kashio",
+    "short_name": "Kashio",
     "start_url": "index.html",
     "icons": [
         {
