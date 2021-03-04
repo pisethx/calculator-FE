@@ -64,11 +64,11 @@ class CalculatorDisplay extends Component {
     // formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
     // }
 
-    // if (value.endsWith('.')) formattedValue += '.';
+    if (value.endsWith('.')) formattedValue += '.';
 
     if (
-      formattedValue == "∞" ||
-      formattedValue == "NaN" ||
+      formattedValue === "∞" ||
+      formattedValue === "NaN" ||
       Object.is(formattedValue, NaN)
     )
       formattedValue = "Error";
@@ -238,7 +238,10 @@ class ScientificCalculator extends Component {
       displayValue,
       waitingForOperand,
       done,
+      isBracketsActive,
       isRightBracket,
+      countBracket,
+      isOperator,
     } = this.state;
 
     if (waitingForOperand) {
@@ -253,6 +256,15 @@ class ScientificCalculator extends Component {
 
       if (!hasDot && integer.length >= 10) return;
 
+      if (digit === Math.PI || digit === Math.exp(1)) {
+          this.clearDisplay();
+          return this.setState({
+              displayValue: String(digit),
+              isDigit: true,
+              isOperator: false,
+          });
+      }
+
       if (done === true) {
         this.clearAll();
         this.setState({
@@ -260,22 +272,20 @@ class ScientificCalculator extends Component {
           isDigit: true,
           isOperator: false,
         });
-      }
-      // else if (isRightBracket === true) {
-      //     this.setState({
-      //         displayValue: displayValue + '*' + digit,
-      //         isRightBracket: false,
-      //         isDigit: true,
-      //         isOperator: false,
-      //     });
-      else {
-        this.setState({
-          displayValue:
-            displayValue === "0" ? String(digit) : displayValue + digit,
-          isDigit: true,
-          isOperator: true,
-          checkLeftBracket: false,
-        });
+      } else if (isBracketsActive === true && isOperator === true && countBracket === 0) {
+           this.setState({
+              displayValue: displayValue + '*' + digit,
+              isRightBracket: false,
+              isDigit: true,
+              isOperator: false,
+          });
+      } else {
+          this.setState({
+              displayValue: displayValue === '0' ? String(digit) : displayValue + digit,
+              isDigit: true,
+              isOperator: true,
+              checkLeftBracket: false,
+          });
       }
     }
   }

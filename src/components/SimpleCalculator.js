@@ -54,7 +54,7 @@ class CalculatorDisplay extends Component {
 
     if (match) formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
 
-    if (formattedValue == "∞" || formattedValue == "NaN")
+    if (formattedValue === "∞" || formattedValue === "NaN")
       formattedValue = "Error";
 
     return (
