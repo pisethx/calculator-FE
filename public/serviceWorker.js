@@ -1,4 +1,4 @@
-let CACHE_NAME = "my-site-cache-v1";
+let CACHE_NAME = "kashio";
 const urlsToCache = ["/", "/scientific-calculator"];
 
 // Install a service worker
@@ -6,7 +6,6 @@ self.addEventListener("install", (event) => {
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log("Opened cache");
       return cache.addAll(urlsToCache);
     })
   );
