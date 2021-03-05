@@ -98,6 +98,7 @@ class SimpleCalculator extends Component {
       memory_minus: 0,
       memory_recall: null,
     },
+    isDot: false,
   };
 
   memoryClear() {
@@ -121,9 +122,9 @@ class SimpleCalculator extends Component {
         ...prevState.memory,
         memory_plus: temp,
       },
+      isMemoryActive: true,
+      // done: true,
     }));
-
-    console.log(this.state.memory.memory_plus);
   }
 
   memoryMinus() {
@@ -134,38 +135,45 @@ class SimpleCalculator extends Component {
         ...prevState.memory,
         memory_minus: temp,
       },
+      isMemoryActive: true,
+      // done: true,
     }));
   }
 
   memoryRecall() {
-    const { displayValue } = this.state;
+    const { displayValue, isMemoryActive, done } = this.state;
     let temp = (
       this.state.memory.memory_plus - this.state.memory.memory_minus
     ).toString();
 
-    if (displayValue !== "0") {
+    if (isMemoryActive === true) {
       this.setState({
-        displayValue: temp,
-        isMemoryActive: true,
-        done: true,
+          displayValue: temp,
+          isMemoryActive: true,
+          // done: true,
       });
     } else {
       this.setState({
-        displayValue: temp,
-        isMemoryActive: false,
-        done: true,
+          displayValue: temp,
+          isMemoryActive: false,
+          // done: false,
       });
     }
+
+
+    console.log('memory: ' + isMemoryActive)
+    console.log('done: ' + done)
   }
 
   clearAll() {
     this.setState({
-      value: null,
-      displayValue: "0",
-      operator: null,
-      waitingForOperand: false,
-      done: false,
-      isMemoryActive: false,
+        value: null,
+        displayValue: '0',
+        operator: null,
+        waitingForOperand: false,
+        done: false,
+        isMemoryActive: false,
+        isDot: false,
     });
   }
 
@@ -208,20 +216,33 @@ class SimpleCalculator extends Component {
   }
 
   inputDot() {
-    const { displayValue, waitingForOperand } = this.state;
+    const { displayValue, waitingForOperand, done, isMemoryActive, isDot } = this.state;
 
-    if (waitingForOperand === true) {
-      this.setState({ displayValue: "0.", waitingForOperand: false });
+    this.setState({ isDot: true });
+
+    if (waitingForOperand === true || isMemoryActive === true) {
+      this.setState({ displayValue: "0.", waitingForOperand: false});
+    } else if (isDot === true) {
+      this.setState({
+          displayValue: displayValue + '.',
+          waitingForOperand: false,
+          isDot: true,
+      });
+    } else if (isMemoryActive === true) {
+      this.setState({ displayValue: '0.', waitingForOperand: false, isDot: true });
     } else if (!/\./.test(displayValue)) {
       this.setState({
         displayValue: displayValue + ".",
         waitingForOperand: false,
+        isDot: true,
       });
     }
+
+    console.log(isDot)
   }
 
   inputDigit(digit) {
-    const { displayValue, waitingForOperand, done } = this.state;
+    const { displayValue, waitingForOperand, done, isDot } = this.state;
 
     if (waitingForOperand) {
       this.setState({
@@ -237,6 +258,8 @@ class SimpleCalculator extends Component {
       if (done === true) {
         this.clearAll();
         this.setState({ displayValue: String(digit) });
+      } else if (isDot === true) {
+        this.setState({ displayValue: displayValue + digit, });
       } else {
         this.setState({
           displayValue:
@@ -270,7 +293,6 @@ class SimpleCalculator extends Component {
       this.setState({
         value: newValue,
         displayValue: String(newValue),
-        isMemoryActive: false,
       });
     }
 

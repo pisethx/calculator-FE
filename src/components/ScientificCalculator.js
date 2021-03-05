@@ -128,6 +128,7 @@ class ScientificCalculator extends Component {
       memory_minus: 0,
       memory_recall: null,
     },
+    isDot: false,
   };
 
   handleShiftClick = () => {
@@ -162,6 +163,7 @@ class ScientificCalculator extends Component {
       isOperator: false,
       countBracket: 0,
       checkLeftBracket: false,
+      isDot: false,
     });
   }
 
@@ -214,6 +216,8 @@ class ScientificCalculator extends Component {
       isRightBracket,
       isBracketsActive,
       countBracket,
+      isMemoryActive,
+      isDot,
     } = this.state;
 
     if (isBracketsActive === true && countBracket === 0) {
@@ -224,12 +228,25 @@ class ScientificCalculator extends Component {
     }
 
     if (waitingForOperand === true) {
-      this.setState({ displayValue: "0.", waitingForOperand: false });
+        this.setState({ displayValue: '0.', waitingForOperand: false });
+    } else if (isDot === true) {
+        this.setState({
+            displayValue: displayValue + '.',
+            waitingForOperand: false,
+            isDot: true,
+        });
+    } else if (isMemoryActive === true) {
+        this.setState({
+            displayValue: '0.',
+            waitingForOperand: false,
+            isDot: true,
+        });
     } else if (!/\./.test(displayValue)) {
-      this.setState({
-        displayValue: displayValue + ".",
-        waitingForOperand: false,
-      });
+        this.setState({
+            displayValue: displayValue + '.',
+            waitingForOperand: false,
+            isDot: true,
+        });
     }
   }
 
@@ -242,6 +259,7 @@ class ScientificCalculator extends Component {
       isRightBracket,
       countBracket,
       isOperator,
+      isDot,
     } = this.state;
 
     if (waitingForOperand) {
@@ -272,6 +290,8 @@ class ScientificCalculator extends Component {
           isDigit: true,
           isOperator: false,
         });
+      } else if (isDot === true) {
+        this.setState({ displayValue: displayValue + digit })
       } else if (isBracketsActive === true && isOperator === true && countBracket === 0) {
            this.setState({
               displayValue: displayValue + '*' + digit,
@@ -377,7 +397,6 @@ class ScientificCalculator extends Component {
         this.setState({
           value: newValue,
           displayValue: String(newValue),
-          isMemoryActive: false,
           // isRightBracket: false,
         });
       }
@@ -713,6 +732,7 @@ class ScientificCalculator extends Component {
         ...prevState.memory,
         memory_plus: temp,
       },
+      isMemoryActive: true,
     }));
   }
 
@@ -720,30 +740,30 @@ class ScientificCalculator extends Component {
     let temp =
       parseInt(this.state.displayValue) + this.state.memory.memory_minus;
     this.setState((prevState) => ({
-      memory: {
-        ...prevState.memory,
-        memory_minus: temp,
-      },
+        memory: {
+            ...prevState.memory,
+            memory_minus: temp,
+        },
+        isMemoryActive: true,
     }));
   }
 
   memoryRecall() {
-    const { displayValue } = this.state;
+    const { isMemoryActive } = this.state;
     let temp = (
       this.state.memory.memory_plus - this.state.memory.memory_minus
     ).toString();
 
-    if (displayValue !== "0") {
-      this.setState({
-        displayValue: temp,
-        isMemoryActive: true,
-      });
+    if (isMemoryActive === true) {
+        this.setState({
+            displayValue: temp,
+            isMemoryActive: true,
+        });
     } else {
-      this.setState({
-        displayValue: temp,
-        isMemoryActive: false,
-        done: true,
-      });
+        this.setState({
+            displayValue: temp,
+            isMemoryActive: false,
+        });
     }
   }
 
