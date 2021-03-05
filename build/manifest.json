@@ -1,7 +1,6 @@
 {
     "name": "Kashio",
     "short_name": "Kashio",
-    "start_url": "index.html",
     "icons": [
         {
             "src": "/favicon.ico",
@@ -10,6 +9,8 @@
         }
     ],
     "background-color": "#1b3b6f",
+    "start_url": "/",
     "display": "standalone",
+    "orientation": "portrait",
     "theme-color": "#1b3b6f"
 }
