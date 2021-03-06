@@ -46,7 +46,7 @@ class CalculatorDisplay extends Component {
 
     let formattedValue = parseFloat(value).toLocaleString(language, {
       useGrouping: true,
-      maximumFractionDigits: 6,
+      maximumFractionDigits: 7,
     });
 
     // Add back missing .0 in e.g. 12.0
@@ -159,10 +159,6 @@ class SimpleCalculator extends Component {
           // done: false,
       });
     }
-
-
-    console.log('memory: ' + isMemoryActive)
-    console.log('done: ' + done)
   }
 
   clearAll() {
@@ -253,7 +249,7 @@ class SimpleCalculator extends Component {
       const hasDot = displayValue.includes(".");
       const integer = displayValue.split(".")[0];
 
-      if (!hasDot && integer.length >= 10) return;
+      if (!hasDot && integer.length >= 8) return;
 
       if (done === true) {
         this.clearAll();
@@ -309,7 +305,7 @@ class SimpleCalculator extends Component {
 
     if (/\d/.test(key)) {
       event.preventDefault();
-      this.inputDigit(parseInt(key, 10));
+      this.inputDigit(parseInt(key, 8));
     } else if (key in CalculatorOperations) {
       event.preventDefault();
       this.performOperation(key);

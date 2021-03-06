@@ -40,7 +40,7 @@ const Header = ({ user }) => {
       <div id="header">
         <div id="left-navbar" className="navbar blue">
           <Link to="/" className="brand">
-            KASHIO
+            KASH.I.O.
           </Link>
           <div className="dropdown">
             <button type="button" className="dropdown-btn">

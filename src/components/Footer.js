@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div id="footer">
       <p className="blue-color">
-        Created By <span className="yellow-color">Kashio</span>
+        Created By <span className="yellow-color">Team-3</span>
       </p>
     </div>
   );

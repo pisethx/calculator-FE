@@ -54,7 +54,7 @@ class CalculatorDisplay extends Component {
 
     let formattedValue = parsedValue.toLocaleString(language, {
       useGrouping: true,
-      maximumFractionDigits: 10,
+      maximumFractionDigits: 7,
     });
 
     // if (this.isBracketsActive === false) {
@@ -272,7 +272,7 @@ class ScientificCalculator extends Component {
       const hasDot = displayValue.includes(".");
       const integer = displayValue.split(".")[0];
 
-      if (!hasDot && integer.length >= 10) return;
+      if (!hasDot && integer.length >= 8) return;
 
       if (digit === Math.PI || digit === Math.exp(1)) {
           this.clearDisplay();
@@ -680,7 +680,7 @@ class ScientificCalculator extends Component {
 
     if (/\d/.test(key)) {
       event.preventDefault();
-      this.inputDigit(parseInt(key, 10));
+      this.inputDigit(parseInt(key, 8));
     } else if (key in CalculatorOperations) {
       event.preventDefault();
       this.performOperation(key);

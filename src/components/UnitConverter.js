@@ -58,7 +58,7 @@ class CalculatorDisplay extends Component {
 
     let formattedValue = parsedValue.toLocaleString(language, {
       useGrouping: true,
-      maximumFractionDigits: 10,
+      maximumFractionDigits: 7,
     });
 
     const match = value.match(/\.\d*?(0*)$/);
@@ -185,7 +185,7 @@ class SimpleCalculator extends Component {
       const hasDot = displayValue1.includes(".");
       const integer = displayValue1.split(".")[0];
 
-      if (!hasDot && integer.length >= 10) return;
+      if (!hasDot && integer.length >= 8) return;
 
       this.setState({
         displayValue1:
@@ -199,7 +199,7 @@ class SimpleCalculator extends Component {
 
     if (/\d/.test(key)) {
       event.preventDefault();
-      this.inputDigit(parseInt(key, 10));
+      this.inputDigit(parseInt(key, 8));
     } else if (key === ".") {
       event.preventDefault();
       this.inputDot();
